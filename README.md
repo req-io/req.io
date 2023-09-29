@@ -1,6 +1,6 @@
 ## Reqio
 
-Reqio is a simple native desktop HTTP client created with Electron, Webpack, and Yarn. It is a great tool for testing APIs locally and experimenting with different HTTP requests.
+Reqio is a simple native desktop HTTP client created with Electron, Vite, and React for testing APIs locally and experimenting with different HTTP requests.
 
 ### Getting started with Reqio
 
@@ -14,13 +14,13 @@ cd reqio
 Install dependencies:
 
 ```bash
-yarn install
+yarn install --dev
 ```
 
 Once the dependencies are installed, you can start Reqio by running the following command:
 
 ```bash
-yarn start
+yarn dev
 ```
 
 This will start the Reqio application in a new window.
@@ -34,3 +34,15 @@ yarn build
 ```
 
 This will create a new directory called `dist` which contains the built Reqio application.
+
+### Preview built version in browser
+
+To preview the built version of the application and debug in browser by running the following command:
+
+```bash
+yarn preview
+```
+
+Once the preview server started press `o` to open the preview
+
+Note: This only works after the build command
