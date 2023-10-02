@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: yarn.lock
-  checksum: 8c095323288c0d8f2ce95e8f25f05f02e92a2bfa31479a03f2ed396b9ec0edcb
+  checksum: 05a6670685c45a4cdcaf73144bdedfeaa57d5a04c35f9c8479e622ce24f6a1f5
 - filename: electron/electron-env.d.ts
   checksum: 1ff2862343ae981ad25d61fb272a97a866000861c736fb26ef78bcc5a4a3eee5
 - filename: src/vite-env.d.ts
