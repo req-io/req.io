@@ -22,4 +22,11 @@ export default defineConfig({
       renderer: {},
     }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Additional SCSS options here if needed
+      },
+    },
+  },
 })
