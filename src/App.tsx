@@ -1,12 +1,10 @@
 import './App.scss'
+import Home from "./pages/Home";
 
 const App = () => {
   return (
     <>
-      <div>
-        <h1>Reqio</h1>
-        <p>A simple native desktop HTTP client</p>
-      </div>
+      <Home/>
     </>
   )
 };
