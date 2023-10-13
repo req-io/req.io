@@ -1,0 +1,20 @@
+.editor {
+  width: 100% !important;
+  height: 100% !important;
+
+  .ace_gutter {
+    background: #0a0a0a !important;
+  }
+
+  .ace_gutter-active-line {
+    background: #2a2a2a !important;
+  }
+
+  .ace_active-line {
+    background: #1a1a1a !important;
+  }
+
+  .ace_marker-layer .ace_bracket {
+    background: #213547 !important;
+  }
+}
