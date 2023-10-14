@@ -8,8 +8,8 @@
     padding: 0;
     .item, .active {
       padding: 0.8rem 1rem;
-      margin: 0.5rem 0;
       list-style-type: none;
+      cursor: pointer;
     }
 
     .item {
@@ -19,8 +19,14 @@
       }
     }
 
+    .item:hover {
+      color: $secondary-dark-color;
+      background-color: $primary-dark-color;
+    }
+
     .active {
       color: $secondary-dark-color;
+      background-color: $primary-dark-color;
       border-left: $accent-color 0.2rem solid;
     }
   }
