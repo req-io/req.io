@@ -1,14 +1,18 @@
 import './index.scss';
 
+const MethodSelect = ({methods}: { methods: string[] }) => {
+    const items = methods.map((method: string) => <option>{method}</option>);
+    return (
+        <select className='method-select'>
+            {items}
+        </select>
+    );
+}
+
 const UrlPanel = () => {
     return (
         <div className='url-panel'>
-            <select className='method-select'>
-                <option>GET</option>
-                <option>POST</option>
-                <option>PUT</option>
-                <option>DELETE</option>
-            </select>
+            <MethodSelect methods={['GET', 'POST', 'PATCH', 'PUT', 'DELETE']}/>
             <input type='text' className='url-input' placeholder='https://example.com'/>
             <button className='send-button'>Send</button>
         </div>
