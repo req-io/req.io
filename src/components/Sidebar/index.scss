@@ -2,21 +2,26 @@
 
 .sidebar {
   height: 100%;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0;
   .items {
     margin: 0;
     padding: 0;
     .item, .active {
-      margin: 1rem;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem 0;
       list-style-type: none;
     }
 
     .item {
       color: $secondary-light-color;
+      .icon {
+        font-size: 1.2rem;
+      }
     }
 
     .active {
       color: $secondary-dark-color;
+      border-left: $accent-color 0.2rem solid;
     }
   }
 }

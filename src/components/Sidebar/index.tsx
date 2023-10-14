@@ -5,13 +5,13 @@ import DataObjectRoundedIcon from '@mui/icons-material/DataObjectRounded';
 const Sidebar = () => {
   const itemsConfig = [
     {
-      icon: <CollectionsBookmarkRoundedIcon />,
+      icon: <CollectionsBookmarkRoundedIcon className='icon'/>,
       label: 'Collections',
       action: () => {},
       active: true
     },
     {
-      icon: <DataObjectRoundedIcon />,
+      icon: <DataObjectRoundedIcon className='icon'/>,
       label: 'Environments',
       action: () => {},
       active: false
