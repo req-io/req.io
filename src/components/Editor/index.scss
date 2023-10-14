@@ -3,23 +3,23 @@
 .editor {
   width: 100% !important;
   height: 100% !important;
-  background-color: $background-color !important;
+  background-color: $primary-color !important;
   box-sizing: border-box;
 
   .ace_gutter {
-    background: $background-color !important;
-    border-right: 0.25px solid $border-color !important;
+    background: $primary-color !important;
+    border-right: 0.25px solid $divider-color !important;
   }
 
   .ace_gutter-active-line {
-    background: $highlight-color !important;
+    background: $primary-light-color !important;
   }
 
   .ace_active-line {
-    background: $highlight-color !important;
+    background: $primary-light-color !important;
   }
 
   .ace_marker-layer .ace_bracket {
-    background: $cursor-color !important;
+    background: $primary-dark-color !important;
   }
 }
