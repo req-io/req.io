@@ -8,7 +8,6 @@ import UrlPanel from "../UrlPanel";
 const Container = () => {
     return <div className='container'>
         <UrlPanel/>
-        <PaneSplitter direction='vertical'/>
         <div className='sub-container'>
             <RequestPanel/>
             <PaneSplitter direction='horizontal'/>
