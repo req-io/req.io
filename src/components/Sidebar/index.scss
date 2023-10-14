@@ -6,10 +6,17 @@
   .items {
     margin: 0;
     padding: 0;
-    .item {
+    .item, .active {
       margin: 1rem;
       list-style-type: none;
-      color: $primary-color;
+    }
+
+    .item {
+      color: $secondary-light-color;
+    }
+
+    .active {
+      color: $secondary-dark-color;
     }
   }
 }

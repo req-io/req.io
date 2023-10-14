@@ -7,18 +7,24 @@ const Sidebar = () => {
     {
       icon: <CollectionsBookmarkRoundedIcon />,
       label: 'Collections',
-      action: () => {}
+      action: () => {},
+      active: true
     },
     {
       icon: <DataObjectRoundedIcon />,
       label: 'Environments',
-      action: () => {}
+      action: () => {},
+      active: false
     },
   ];
 
-  const items = itemsConfig.map((itemConfig) =>
-    <li className='item' key={itemConfig.label} onClick={itemConfig.action}>{itemConfig.icon}</li>
-  )
+  const items = itemsConfig.map((itemConfig) => {
+    return (
+        <li className={itemConfig.active ? 'item active' : 'item'} key={itemConfig.label} onClick={itemConfig.action}>
+          {itemConfig.icon}
+        </li>
+    )
+  })
 
   return (
     <div className='sidebar'>
