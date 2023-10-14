@@ -1,3 +1,5 @@
+@import "../../styles/variables/colors";
+
 .sidebar {
   height: 100%;
   padding: 1rem 0.5rem;
@@ -7,6 +9,7 @@
     .item {
       margin: 1rem;
       list-style-type: none;
+      color: $primary-color;
     }
   }
 }

@@ -1,13 +1,15 @@
+@import "../../styles/variables/colors";
+
 .pane-splitter-horizontal {
-  width: 1px;
+  width: 0.25px;
   height: 100%;
   cursor: col-resize;
-  background-color: gray;
+  background-color: $border-color;
 }
 
 .pane-splitter-vertical {
   width: 100%;
-  height: 1px;
+  height: 0.25px;
   cursor: row-resize;
-  background-color: gray;
+  background-color: $border-color;
 }
