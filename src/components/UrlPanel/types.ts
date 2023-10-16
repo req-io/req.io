@@ -5,5 +5,7 @@ type methodSelectProps = {
 }
 
 type UrlPanelProps = {
-  onResponse: (response: string) => void
+  method: string,
+  onResponse: (response: string) => void,
+  onMethodChange: (response: string) => void
 }

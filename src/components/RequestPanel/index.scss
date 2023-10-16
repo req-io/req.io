@@ -1,3 +1,13 @@
+@import "../../styles/variables/colors";
+
 .request-panel {
   width: 50%;
+
+  .empty-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: $secondary-light-color;
+  }
 }

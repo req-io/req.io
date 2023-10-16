@@ -10,24 +10,18 @@ const MethodSelect = ({ methods, onSelect }: methodSelectProps) => {
   return <select className='method-select' onChange={ onChange }>{ items }</select>;
 }
 
-const UrlPanel = ({ onResponse }: UrlPanelProps) => {
-  const [ method, setMethod ] = React.useState('GET');
+const UrlPanel = ({ method, onResponse, onMethodChange }: UrlPanelProps) => {
   const [ url, setUrl ] = React.useState('');
 
-  const onMethodSelect = (method: string) => {
-    setMethod(method);
-  }
+  const onMethodSelect = (method: string) => onMethodChange(method);
 
-  const onUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(event.target.value);
-  }
+  const onUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => setUrl(event.target.value);
 
   const onSend = () => {
     if (method === 'GET' && url !== '') {
       get(url)
-        .then((response: object) => {
-          onResponse(JSON.stringify(response, null, 2));
-        });
+        .then((response: object) => onResponse(JSON.stringify(response, null, 2)))
+        .catch((error: Error) => console.log('error', error));
     }
   }
 

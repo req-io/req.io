@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 
 
 const Container = () => {
+  const [ method, setMethod ] = React.useState('GET');
   const [ response, setResponse ] = React.useState('');
 
   useEffect(() => {
@@ -15,9 +16,9 @@ const Container = () => {
 
   return (
     <div className='container'>
-      <UrlPanel onResponse={ setResponse }/>
+      <UrlPanel method={ method } onResponse={ setResponse } onMethodChange={ setMethod }/>
       <div className='sub-container'>
-        <RequestPanel/>
+        <RequestPanel method={ method }/>
         <PaneSplitter direction='horizontal'/>
         <ResponsePanel response={ response }/>
       </div>
