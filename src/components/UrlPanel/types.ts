@@ -3,3 +3,7 @@ type methodSelectProps = {
   methods: string[],
   onSelect: (method: string) => void
 }
+
+type UrlPanelProps = {
+  onResponse: (response: string) => void
+}

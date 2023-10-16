@@ -7,14 +7,10 @@ const MethodSelect = ({ methods, onSelect }: methodSelectProps) => {
     onSelect(event.target.value);
   }
   const items = methods.map((method: string) => <option>{ method }</option>);
-  return (
-    <select className='method-select' onChange={ onChange }>
-      { items }
-    </select>
-  );
+  return <select className='method-select' onChange={ onChange }>{ items }</select>;
 }
 
-const UrlPanel = () => {
+const UrlPanel = ({ onResponse }: UrlPanelProps) => {
   const [ method, setMethod ] = React.useState('GET');
   const [ url, setUrl ] = React.useState('');
 
@@ -30,7 +26,7 @@ const UrlPanel = () => {
     if (method === 'GET' && url !== '') {
       get(url)
         .then((response: object) => {
-          console.log(response);
+          onResponse(JSON.stringify(response, null, 2));
         });
     }
   }
