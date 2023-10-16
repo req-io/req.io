@@ -1,12 +1,14 @@
 import './index.scss'
 import Editor from "../Editor";
 
+const EmptyPlaceholder = () => <div className='empty-placeholder'>No response yet!</div>;
+
 const ResponsePanel = (props: ResponsePanelProps) => {
   return (
     <div className='response-panel'>
       {
         props.response === ''
-          ? <div className='response-placeholder'>Response will be shown here</div>
+          ? <EmptyPlaceholder/>
           : <Editor initialValue={ props.response } readonly={ true }/>
       }
     </div>
