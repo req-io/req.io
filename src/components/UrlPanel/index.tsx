@@ -1,6 +1,7 @@
 import './index.scss';
 import React from "react";
 import { get } from "../../api/rest.ts";
+import { AxiosResponse } from "axios";
 
 const MethodSelect = ({ methods, onSelect }: methodSelectProps) => {
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -20,7 +21,7 @@ const UrlPanel = ({ method, onResponse, onMethodChange }: UrlPanelProps) => {
   const onSend = () => {
     if (method === 'GET' && url !== '') {
       get(url)
-        .then((response: object) => onResponse(JSON.stringify(response, null, 2)))
+        .then((response: AxiosResponse) => onResponse(JSON.stringify(response.data, null, 2)))
         .catch((error: Error) => console.log('error', error));
     }
   }
