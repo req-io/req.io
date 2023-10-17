@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'node:path'
 import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
+import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
       // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
       renderer: {},
     }),
+    svgr()
   ],
   css: {
     preprocessorOptions: {
