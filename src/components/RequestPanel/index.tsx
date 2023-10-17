@@ -1,5 +1,5 @@
-import Editor from "../Editor";
 import './index.scss';
+import Editor from "../Editor";
 
 const EmptyPlaceholder = () => <div className='empty-placeholder'>No body required for GET requests!</div>;
 
@@ -9,7 +9,7 @@ const RequestPanel = ({ method }: RequestPanelProps) => {
       {
         method === 'GET'
           ? <EmptyPlaceholder/>
-          : <Editor initialValue='{}' readonly={ false }/>
+          : <Editor readOnly={false} initialValue='{}'/>
       }
     </div>
   );

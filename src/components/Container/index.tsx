@@ -3,16 +3,12 @@ import RequestPanel from "../RequestPanel";
 import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
-import React, { useEffect } from "react";
+import { useState } from "react";
 
 
 const Container = () => {
-  const [ method, setMethod ] = React.useState('GET');
-  const [ response, setResponse ] = React.useState('');
-
-  useEffect(() => {
-    console.log('response updated!', response)
-  }, [ response ]);
+  const [ method, setMethod ] = useState('GET');
+  const [ response, setResponse ] = useState('');
 
   return (
     <div className='container'>

@@ -7,14 +7,38 @@ import "ace-builds/src-noconflict/ext-language_tools"
 
 import './index.scss';
 
-const Editor = (props: EditorProps) => {
+const JsonViewer = (props: JsonEditorProps) => {
+  return (
+    <AceEditor
+      className='editor'
+      onLoad={ () => console.log('Read only Editor loaded!') }
+      value={ props.initialValue }
+      readOnly={ true }
+      { ...props.options }
+    />
+  );
+};
+
+const JsonEditor = (props: JsonViewerProps) => {
   const [ json, setJson ] = useState(props.initialValue);
 
   const handleChange = (event: string) => {
     setJson(event);
   }
 
-  const options = {
+  return (
+    <AceEditor
+      className='editor'
+      onLoad={ () => console.log('Editor loaded!') }
+      onChange={ handleChange }
+      value={ json }
+      { ...props.options }
+    />
+  );
+}
+
+const Editor = (props: EditorProps) => {
+  const options: EditorOptions = {
     mode: "json",
     theme: "terminal",
     placeholder: "",
@@ -23,7 +47,6 @@ const Editor = (props: EditorProps) => {
     showPrintMargin: false,
     showGutter: true,
     highlightActiveLine: true,
-    readOnly: props.readonly,
     setOptions: {
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
@@ -33,16 +56,9 @@ const Editor = (props: EditorProps) => {
     }
   };
 
-  return (
-    <AceEditor
-      className='editor'
-      onLoad={ () => console.log('Editor loaded!') }
-      onChange={ handleChange }
-      value={ json }
-      { ...options }
-    />
-
-  );
+  return props.readOnly
+    ? <JsonViewer options={ options } initialValue={ props.initialValue }/>
+    : <JsonEditor options={ options } initialValue={ props.initialValue }/>
 };
 
 export default Editor;
