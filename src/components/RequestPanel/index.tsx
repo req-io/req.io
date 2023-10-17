@@ -3,13 +3,13 @@ import Editor from "../Editor";
 
 const EmptyPlaceholder = () => <div className='empty-placeholder'>No body required for GET requests!</div>;
 
-const RequestPanel = ({ method }: RequestPanelProps) => {
+const RequestPanel = (props: RequestPanelProps) => {
   return (
     <div className='request-panel'>
       {
-        method === 'GET'
+        props.method === 'GET'
           ? <EmptyPlaceholder/>
-          : <Editor readOnly={false} initialValue='{}'/>
+          : <Editor readOnly={ false } initialValue='{}' onValueChange={ props.onBodyChange }/>
       }
     </div>
   );

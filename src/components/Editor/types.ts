@@ -1,6 +1,7 @@
 type EditorProps = {
   readOnly: boolean,
-  initialValue: string
+  initialValue: string,
+  onValueChange?: (value: string) => void
 }
 
 type EditorOptions = {
@@ -24,6 +25,7 @@ type EditorOptions = {
 type JsonEditorProps = {
   options: EditorOptions,
   initialValue: string
+  onValueChange?: (content: string) => void
 }
 
 type JsonViewerProps = {

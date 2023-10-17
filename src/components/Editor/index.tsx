@@ -7,7 +7,7 @@ import "ace-builds/src-noconflict/ext-language_tools"
 
 import './index.scss';
 
-const JsonViewer = (props: JsonEditorProps) => {
+const JsonViewer = (props: JsonViewerProps) => {
   return (
     <AceEditor
       className='editor'
@@ -19,11 +19,12 @@ const JsonViewer = (props: JsonEditorProps) => {
   );
 };
 
-const JsonEditor = (props: JsonViewerProps) => {
+const JsonEditor = (props: JsonEditorProps) => {
   const [ json, setJson ] = useState(props.initialValue);
 
-  const handleChange = (event: string) => {
-    setJson(event);
+  const handleChange = (value: string) => {
+    setJson(value);
+    props.onValueChange && props.onValueChange(value);
   }
 
   return (
@@ -58,7 +59,7 @@ const Editor = (props: EditorProps) => {
 
   return props.readOnly
     ? <JsonViewer options={ options } initialValue={ props.initialValue }/>
-    : <JsonEditor options={ options } initialValue={ props.initialValue }/>
+    : <JsonEditor options={ options } initialValue={ props.initialValue } onValueChange={props.onValueChange}/>
 };
 
 export default Editor;
