@@ -1,5 +1,7 @@
 import './index.scss'
 import Editor from "../Editor";
+import Spinner from "../Spinner";
+
 
 const EmptyPlaceholder = () => <div className='empty-placeholder'>No response yet!</div>;
 
@@ -8,9 +10,13 @@ const ResponsePanel = (props: ResponsePanelProps) => {
   return (
     <div className='response-panel'>
       {
-        props.response === ''
-          ? <EmptyPlaceholder/>
-          : <Editor readOnly={true} initialValue={ props.response }/>
+        props.isLoading
+          ? <Spinner/>
+          : (
+            props.response === ''
+              ? <EmptyPlaceholder/>
+              : <Editor readOnly={ true } initialValue={ props.response }/>
+          )
       }
     </div>
   )

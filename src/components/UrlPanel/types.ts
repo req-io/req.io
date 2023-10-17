@@ -1,11 +1,15 @@
-type methodSelectProps = {
-  value: string,
-  methods: string[],
+
+
+type MethodSelectProps = {
+  value: string
+  methods: string[]
   onSelect: (method: string) => void
 }
 
 type UrlPanelProps = {
-  method: string,
-  onResponse: (response: string) => void,
-  onMethodChange: (response: string) => void
+  method: string
+  url: string
+  onMethodChange: (method: string) => void
+  onUrlChange: (url: string) => void
+  onSend: () => void
 }

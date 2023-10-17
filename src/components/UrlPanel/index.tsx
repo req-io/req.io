@@ -1,9 +1,7 @@
 import './index.scss';
 import React from "react";
-import { get } from "../../api/rest.ts";
-import { AxiosResponse } from "axios";
 
-const MethodSelect = ({ methods, onSelect }: methodSelectProps) => {
+const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onSelect(event.target.value);
   }
@@ -11,20 +9,12 @@ const MethodSelect = ({ methods, onSelect }: methodSelectProps) => {
   return <select className='method-select' onChange={ onChange }>{ items }</select>;
 }
 
-const UrlPanel = ({ method, onResponse, onMethodChange }: UrlPanelProps) => {
-  const [ url, setUrl ] = React.useState('');
-
+const UrlPanel = ({ method, url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) => {
   const onMethodSelect = (method: string) => onMethodChange(method);
 
-  const onUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => setUrl(event.target.value);
+  const onSendButtonClick = () => onSend();
 
-  const onSend = () => {
-    if (method === 'GET' && url !== '') {
-      get(url)
-        .then((response: AxiosResponse) => onResponse(JSON.stringify(response.data, null, 2)))
-        .catch((error: Error) => console.log('error', error));
-    }
-  }
+  const onUrlUpdate = (event: React.ChangeEvent<HTMLInputElement>) => onUrlChange(event.target.value);
 
   return (
     <div className='url-panel'>
@@ -36,9 +26,9 @@ const UrlPanel = ({ method, onResponse, onMethodChange }: UrlPanelProps) => {
       <input
         type='text' className='url-input'
         placeholder='https://example.com'
-        value={ url } onChange={ onUrlChange }
+        value={ url } onChange={ onUrlUpdate }
       />
-      <button className='send-button' onClick={ onSend }>Send</button>
+      <button className='send-button' onClick={ onSendButtonClick }>Send</button>
     </div>
   );
 };
