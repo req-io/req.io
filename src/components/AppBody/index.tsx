@@ -8,7 +8,7 @@ import { get, post } from "../../api/rest.ts";
 import { AxiosResponse } from "axios";
 
 
-const Container = () => {
+const AppBody = () => {
   const [ method, setMethod ] = useState('GET');
   const [ url, setUrl ] = useState('');
   const [ body, setBody ] = useState('');
@@ -37,7 +37,7 @@ const Container = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='app-body'>
       <UrlPanel method={ method } url={ url } onMethodChange={ setMethod } onUrlChange={ setUrl } onSend={ onSend }/>
       <div className='sub-container'>
         <RequestPanel method={ method } onBodyChange={ setBody }/>
@@ -48,4 +48,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default AppBody;
