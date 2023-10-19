@@ -1,6 +1,7 @@
 @import "../../styles/variables/colors";
 
 .url-panel {
+    font-family: Roboto Condensed, sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -10,6 +11,7 @@
     padding: 15px 0;
 
     .method-select, .send-button {
+        font-family: Roboto Condensed, sans-serif;
         width: 125px;
         height: 100%;
         font-size: 14px;
@@ -31,6 +33,7 @@
     }
 
     .url-input {
+        font-family: Roboto Condensed, sans-serif;
         flex: 1;
         height: 100%;
         font-size: 14px;
