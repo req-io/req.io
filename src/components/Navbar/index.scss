@@ -1,0 +1,32 @@
+@import "../../styles/variables/colors";
+
+.navbar {
+  font-family: Roboto Condensed, sans-serif;
+  width: 100%;
+  padding: 1rem 0;
+  .items {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    .item, .active {
+      padding: 0.3rem 0.6rem;
+      margin: 0.2rem 0.5rem;
+      list-style-type: none;
+      cursor: pointer;
+    }
+
+    .item {
+      color: $secondary-light-color;
+    }
+
+    .item:hover {
+      color: $secondary-dark-color;
+    }
+
+    .active {
+      color: $secondary-dark-color;
+      border-bottom: $accent-color 0.1rem solid;
+    }
+  }
+}
