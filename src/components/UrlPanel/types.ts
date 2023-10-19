@@ -1,5 +1,3 @@
-
-
 type MethodSelectProps = {
   value: string
   methods: string[]
@@ -13,3 +11,8 @@ type UrlPanelProps = {
   onUrlChange: (url: string) => void
   onSend: () => void
 }
+
+type Option = {
+  value: string;
+  label: string;
+};

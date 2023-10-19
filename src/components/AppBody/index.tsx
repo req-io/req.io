@@ -11,6 +11,7 @@ import { AxiosResponse } from "axios";
 const AppBody = () => {
   const [ method, setMethod ] = useState('GET');
   const [ url, setUrl ] = useState('');
+  const [ headers, setHeaders ] = useState({})
   const [ body, setBody ] = useState('');
   const [ isLoading, setIsLoading ] = useState(false);
   const [ response, setResponse ] = useState('');
