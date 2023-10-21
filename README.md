@@ -1,14 +1,14 @@
-## Reqio
+## REQ.IO
 
-Reqio is a simple native desktop HTTP client created with Electron, Vite, and React for testing APIs locally and experimenting with different HTTP requests.
+REQ.IO is a simple native desktop HTTP client created with Electron, Vite, and React for testing APIs locally and experimenting with different HTTP requests.
 
-### Getting started with Reqio
+### Getting started with REQ.IO
 
-To start Reqio locally, clone the repository:
+To start REQ.IO locally, clone the repository:
 
 ```bash
-git clone https://github.com/kannananil/reqio.git
-cd reqio
+git clone https://github.com/kannananil/req.io.git
+cd req.io
 ```
 
 Install dependencies:
@@ -17,23 +17,23 @@ Install dependencies:
 yarn install --dev
 ```
 
-Once the dependencies are installed, you can start Reqio by running the following command:
+Once the dependencies are installed, you can start REQ.IO by running the following command:
 
 ```bash
 yarn dev
 ```
 
-This will start the Reqio application in a new window.
+This will start the REQ.IO application in a new window.
 
-### Building Reqio
+### Building REQ.IO
 
-To build Reqio for production, run the following command:
+To build REQ.IO for production, run the following command:
 
 ```bash
 yarn build
 ```
 
-This will create a new directory called `dist` which contains the built Reqio application.
+This will create a new directory called `dist` which contains the built REQ.IO application.
 
 ### Preview built version in browser
 
