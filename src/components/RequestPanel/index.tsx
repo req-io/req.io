@@ -1,32 +1,46 @@
 import './index.scss';
 import Editor from "../Editor";
 import Navbar from '../Navbar';
+import { useState } from "react";
+import RequestHeadersPanel from "../RequestHeadersPanel";
 
-const EmptyPlaceholder = () => <div className='empty-placeholder'>No body required for GET requests!</div>;
+const EmptyRequestBodyPlaceholder = () => <div className='empty-placeholder'>No body required for GET requests!</div>;
 
 const RequestPanel = (props: RequestPanelProps) => {
-  const itemsConfig = [
-    {
-      name: 'body',
-      label: 'Body',
-      action: () => {},
-      active: true
-    },
-    {
-      name: 'headers',
-      label: 'Headers',
-      action: () => {},
-      active: false
-    },
+  const [ activeItem, setActiveItem ] = useState('body');
+
+  const items = [
+    { name: 'body', label: 'Body' },
+    { name: 'headers', label: 'Headers' },
   ];
+
+  const itemsConfig = items.map((item) => ({
+      ...item,
+      isActive: item.name === activeItem,
+      onClick: () => setActiveItem(item.name),
+    })
+  );
+
+  const requestBody = props.method === 'GET'
+    ? <EmptyRequestBodyPlaceholder/>
+    : <Editor readOnly={ false } initialValue='{}' onValueChange={ props.onBodyChange }/>
+
+  const headerPanel = (
+    <RequestHeadersPanel
+      headers={ props.headers }
+      onNewHeaderAddition={ props.onNewHeaderAddition }
+    />
+  );
+
+  const navbarItemComponentMap: any = {
+    body: requestBody,
+    headers: headerPanel,
+  };
+
   return (
     <div className='request-panel'>
-      <Navbar items={itemsConfig}/>
-      {
-        props.method === 'GET'
-          ? <EmptyPlaceholder/>
-          : <Editor readOnly={ false } initialValue='{}' onValueChange={ props.onBodyChange }/>
-      }
+      <Navbar items={ itemsConfig }/>
+      { navbarItemComponentMap[activeItem] }
     </div>
   );
 };

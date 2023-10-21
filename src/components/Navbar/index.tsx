@@ -2,9 +2,9 @@ import './index.scss';
 
 const Navbar = ({ items }: NavbarProps) => {
   const navbarItems = items.map((itemConfig) => {
-    let className = itemConfig.active ? 'item active' : 'item';
+    let className = itemConfig.isActive ? 'item active' : 'item';
     return (
-      <li className={ className } key={ itemConfig.label } onClick={ itemConfig.action }>
+      <li className={ className } key={ itemConfig.label } onClick={ itemConfig.onClick }>
         { itemConfig.label }
       </li>
     )

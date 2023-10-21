@@ -1,8 +1,8 @@
 type NavBarItemConfig = {
   name: string;
   label: string;
-  action: () => void;
-  active: boolean;
+  onClick: () => void;
+  isActive: boolean;
 }
 
 type NavBarItemsConfig = NavBarItemConfig[];

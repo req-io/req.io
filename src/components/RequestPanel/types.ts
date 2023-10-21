@@ -1,4 +1,11 @@
+type Header = {
+  key: string;
+  value: string;
+}
+
 type RequestPanelProps = {
-  onBodyChange: (value: string) => void;
   method: string;
+  headers: Header[];
+  onNewHeaderAddition: (header: Header) => void;
+  onBodyChange: (value: string) => void;
 }
