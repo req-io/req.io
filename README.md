@@ -46,3 +46,6 @@ yarn preview
 Once the preview server started press `o` to open the preview
 
 Note: This only works after the build command
+
+### Interested to contribute?
+Please see our  [Contribution Guide](./CONTRIBUTING.md) on how you can get started.
