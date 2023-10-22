@@ -8,6 +8,10 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
     props.onHeadersChange(updatedHeaders)
   }
 
+  const onNewHeaderAddition = () => {
+    props.onNewHeaderAddition({ key: '', value: '' })
+  }
+
   const headerRows = props.headers.map((header: Header, index) => {
     const onHeaderKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onHeadersChange(index, { ...header, key: e.target.value })
@@ -16,6 +20,7 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
     const onHeaderValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onHeadersChange(index, { ...header, value: e.target.value })
     }
+
     return (
       <tr>
         <td><input type='text' value={ header.key } onChange={ onHeaderKeyChange }/></td>
@@ -32,6 +37,7 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
         </tr>
         { ...headerRows }
       </table>
+      <button className='button' onClick={ onNewHeaderAddition }>Add Header</button>
     </div>
   )
 }
