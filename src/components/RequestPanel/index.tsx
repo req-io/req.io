@@ -28,6 +28,7 @@ const RequestPanel = (props: RequestPanelProps) => {
   const headerPanel = (
     <RequestHeadersPanel
       headers={ props.headers }
+      onHeadersChange={ props.onHeadersChange }
       onNewHeaderAddition={ props.onNewHeaderAddition }
     />
   );

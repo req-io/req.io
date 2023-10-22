@@ -38,15 +38,18 @@ const AppBody = () => {
   }
 
   const onNewHeaderAddition = (header: Header) => {
-    // @ts-ignore
     setHeaders([ ...headers, header ])
+  }
+
+  const onHeadersChange = (updatedHeaders: Header[]) => {
+    setHeaders(updatedHeaders)
   }
 
   return (
     <div className='app-body'>
       <UrlPanel method={ method } url={ url } onMethodChange={ setMethod } onUrlChange={ setUrl } onSend={ onSend }/>
       <div className='sub-container'>
-        <RequestPanel method={ method } headers={headers} onNewHeaderAddition={onNewHeaderAddition} onBodyChange={ setBody }/>
+        <RequestPanel method={ method } headers={headers} onHeadersChange={onHeadersChange} onNewHeaderAddition={onNewHeaderAddition} onBodyChange={ setBody }/>
         <PaneSplitter direction='horizontal'/>
         <ResponsePanel isLoading={ isLoading } response={ response }/>
       </div>
