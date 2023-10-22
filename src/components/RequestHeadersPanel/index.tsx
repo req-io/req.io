@@ -23,8 +23,8 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
 
     return (
       <tr>
-        <td><input type='text' value={ header.key } onChange={ onHeaderKeyChange }/></td>
-        <td><input type='text' value={ header.value } onChange={ onHeaderValueChange }/></td>
+        <td><input type='text' placeholder='Header Key' value={ header.key } onChange={ onHeaderKeyChange }/></td>
+        <td><input type='text' placeholder='Header Value' value={ header.value } onChange={ onHeaderValueChange }/></td>
       </tr>
     )
   })
