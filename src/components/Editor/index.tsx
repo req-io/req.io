@@ -4,8 +4,13 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/ext-language_tools"
+import ace from 'ace-builds/src-noconflict/ace';
+import jsonWorkerUrl from 'ace-builds/src-noconflict/worker-json?url';
 
 import './index.scss';
+
+ace.config.setModuleUrl('ace/mode/json_worker', jsonWorkerUrl);
+
 
 const JsonViewer = (props: JsonViewerProps) => {
   return (
@@ -59,7 +64,7 @@ const Editor = (props: EditorProps) => {
 
   return props.readOnly
     ? <JsonViewer options={ options } initialValue={ props.initialValue }/>
-    : <JsonEditor options={ options } initialValue={ props.initialValue } onValueChange={props.onValueChange}/>
+    : <JsonEditor options={ options } initialValue={ props.initialValue } onValueChange={ props.onValueChange }/>
 };
 
 export default Editor;
