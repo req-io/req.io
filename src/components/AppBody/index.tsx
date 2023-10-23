@@ -4,7 +4,7 @@ import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
 import { get, post } from "../../api/rest.ts";
-import { getStatusText } from "../../api/statusCodes.ts";
+import { getHttpStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
@@ -25,7 +25,7 @@ const AppBody = () => {
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
     setStatusCode(response.status);
-    setStatusText(response.statusText || getStatusText(response.status));
+    setStatusText(response.statusText || getHttpStatusText(response.status));
   }
 
   const onFailureResponse = (error: AxiosError) => {
@@ -33,7 +33,7 @@ const AppBody = () => {
     if (error.response) {
       setResponse(JSON.stringify(error.response?.data || {}, null, 2));
       setStatusCode(error.response?.status || 0);
-      setStatusText(error.response?.statusText || getStatusText(statusCode));
+      setStatusText(error.response?.statusText || getHttpStatusText(statusCode));
     } else {
       setResponse(`Error: ${ error.message }`);
       setStatusText('Error');
