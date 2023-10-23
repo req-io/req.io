@@ -31,19 +31,19 @@
     }
 
     .success {
-      color: #4CAF50
+      color: $status-success-color
     }
 
     .redirect {
-      color: #FFD600
+      color: $status-redirect-color
     }
 
     .client-error {
-      color: #FF5722
+      color: $status-client-error-color
     }
 
     .server-error {
-      color: #FFA726
+      color: $status-server-error-color
     }
   }
 }
