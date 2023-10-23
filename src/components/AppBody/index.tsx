@@ -4,7 +4,7 @@ import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
 import { get, post } from "../../api/rest.ts";
-import { getHttpStatusText } from "../../api/statusCodes.ts";
+import { getErrorCode, getHttpStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
@@ -36,7 +36,7 @@ const AppBody = () => {
       setStatusText(error.response?.statusText || getHttpStatusText(statusCode));
     } else {
       setResponse(`Error: ${ error.message }`);
-      setStatusText('Error');
+      setStatusText(`ERROR: ${ getErrorCode(error?.code || '') }`);
       setStatusCode(0);
     }
   }

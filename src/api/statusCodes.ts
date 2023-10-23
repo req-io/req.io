@@ -82,3 +82,7 @@ const axiosErrorCodes: AxiosErrorCodes = {
 export const getHttpStatusText = (statusCode: number) => {
   return httpStatusCodes[statusCode] || 'Unknown';
 }
+
+export const getErrorCode = (axiosErrorCode: string) => {
+  return axiosErrorCodes[axiosErrorCode] || 'UNKNOWN';
+}
