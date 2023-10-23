@@ -19,11 +19,31 @@
   .response-panel-header {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+
+    .navbar {
+      width: 70%;
+    }
 
     .status {
-      font-weight: bold;
       display: flex;
       align-items: center;
+    }
+
+    .success {
+      color: #4CAF50
+    }
+
+    .redirect {
+      color: #FFD600
+    }
+
+    .client-error {
+      color: #FF5722
+    }
+
+    .server-error {
+      color: #FFA726
     }
   }
 }

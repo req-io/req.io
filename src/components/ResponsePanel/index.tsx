@@ -11,6 +11,21 @@ const RawResponseViewer = (props: RawResponseViewerProps) => {
   return <div className='raw-response'>{ props.response }</div>
 }
 
+const getStatusClassName = (statusCode: number) => {
+  if (statusCode >= 200 && statusCode < 300) {
+    return 'success';
+  }
+  if (statusCode >= 300 && statusCode < 400) {
+    return 'redirect';
+  }
+  if (statusCode >= 400 && statusCode < 500) {
+    return 'client-error';
+  }
+  if (statusCode >= 500 && statusCode < 600) {
+    return 'server-error';
+  }
+}
+
 const ResponsePanel = (props: ResponsePanelProps) => {
   const [ activeItem, setActiveItem ] = useState('preview');
 
@@ -31,12 +46,14 @@ const ResponsePanel = (props: ResponsePanelProps) => {
     raw: <RawResponseViewer response={ props.response }/>
   };
 
+  const statusClassName = `status ${ getStatusClassName(props.statusCode) }`
+
   return (
     <div className='response-panel'>
       <div className='response-panel-header'>
         <Navbar items={ itemsConfig }/>
         { !(props.isNoRequestTriggered || props.isLoading) &&
-            <div className='status'>{ props.statusCode } { props.statusText }</div> }
+            <div className={ statusClassName }>{ props.statusCode } { props.statusText }</div> }
       </div>
       {
         props.isLoading
