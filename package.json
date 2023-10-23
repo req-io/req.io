@@ -12,8 +12,7 @@
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-ace": "^10.1.0",
-    "react-dom": "^18.2.0",
-    "vite-plugin-svgr": "^4.1.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.1",
@@ -35,7 +34,8 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-electron": "^0.14.0",
-    "vite-plugin-electron-renderer": "^0.14.5"
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vite-plugin-svgr": "^4.1.0"
   },
   "main": "dist-electron/main.js"
 }
