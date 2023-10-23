@@ -3,37 +3,53 @@ import RequestPanel from "../RequestPanel";
 import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
-import { useState } from "react";
 import { get, post } from "../../api/rest.ts";
-import { AxiosResponse } from "axios";
+import { getStatusText } from "../../api/statusCodes.ts";
+
+import { useState } from "react";
+import { AxiosError, AxiosResponse } from "axios";
 
 
 const AppBody = () => {
   const [ method, setMethod ] = useState('GET');
   const [ url, setUrl ] = useState('');
-  const [ headers, setHeaders ] = useState([{ key: 'Content-Type', value: 'application/json' }]);
+  const [ headers, setHeaders ] = useState([ { key: 'Content-Type', value: 'application/json' } ]);
   const [ body, setBody ] = useState('');
+  const [ isNoRequestTriggered, setIsNoRequestTriggered ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ response, setResponse ] = useState('');
+  const [ statusCode, setStatusCode ] = useState(0);
+  const [ statusText, setStatusText ] = useState('');
+
+  const onSuccessResponse = (response: AxiosResponse) => {
+    setIsLoading(false);
+    setResponse(JSON.stringify(response.data, null, 2));
+    setStatusCode(response.status);
+    setStatusText(response.statusText || getStatusText(response.status));
+  }
+
+  const onFailureResponse = (error: AxiosError) => {
+    setIsLoading(false);
+    setResponse(JSON.stringify(error.response?.data || {}, null, 2));
+    const status = error.response?.status || 404;
+    setStatusCode(status);
+    setStatusText(error.response?.statusText || getStatusText(status));
+  }
 
   const onSend = () => {
     if (method === 'GET' && url !== '') {
+      setIsNoRequestTriggered(false);
       setIsLoading(true);
       get(url, headers)
-        .then((response: AxiosResponse) => {
-          setIsLoading(false);
-          setResponse(JSON.stringify(response.data, null, 2));
-        })
-        .catch((error: Error) => console.log('error', error));
+        .then(onSuccessResponse)
+        .catch(onFailureResponse);
     }
     if (method === 'POST' && url !== '') {
+      setIsNoRequestTriggered(false);
       setIsLoading(true);
       post(url, JSON.parse(body), headers)
-        .then((response: AxiosResponse) => {
-          setIsLoading(false);
-          setResponse(JSON.stringify(response.data, null, 2));
-        })
-        .catch((error: Error) => console.log('error', error));
+        .then(onSuccessResponse)
+        .catch(onFailureResponse);
     }
   }
 
@@ -49,9 +65,11 @@ const AppBody = () => {
     <div className='app-body'>
       <UrlPanel method={ method } url={ url } onMethodChange={ setMethod } onUrlChange={ setUrl } onSend={ onSend }/>
       <div className='sub-container'>
-        <RequestPanel method={ method } headers={headers} onHeadersChange={onHeadersChange} onNewHeaderAddition={onNewHeaderAddition} onBodyChange={ setBody }/>
+        <RequestPanel method={ method } headers={ headers } onHeadersChange={ onHeadersChange }
+                      onNewHeaderAddition={ onNewHeaderAddition } onBodyChange={ setBody }/>
         <PaneSplitter direction='horizontal'/>
-        <ResponsePanel isLoading={ isLoading } response={ response }/>
+        <ResponsePanel isNoRequestTriggered={ isNoRequestTriggered } isLoading={ isLoading } response={ response }
+                       statusCode={ statusCode } statusText={ statusText }/>
       </div>
     </div>
   );

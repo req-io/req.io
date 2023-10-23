@@ -15,4 +15,35 @@
     text-align: left;
     padding: 0 20px;
   }
+
+  .response-panel-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .navbar {
+      width: 70%;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+    }
+
+    .success {
+      color: $status-success-color
+    }
+
+    .redirect {
+      color: $status-redirect-color
+    }
+
+    .client-error {
+      color: $status-client-error-color
+    }
+
+    .server-error {
+      color: $status-server-error-color
+    }
+  }
 }

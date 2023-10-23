@@ -1,15 +1,7 @@
 import axios from "axios";
 
-type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: JSONValue }
-  | Array<JSONValue>;
-
 const restructureHeaders = (headers: Header[]) => {
-  const formattedHeaders: any = {};
+  const formattedHeaders: HeadersMapping = {};
   headers.forEach((header: Header) => {
     formattedHeaders[header.key] = header.value;
   });
