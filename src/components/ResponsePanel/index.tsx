@@ -31,18 +31,17 @@ const ResponsePanel = (props: ResponsePanelProps) => {
     raw: <RawResponseViewer response={ props.response }/>
   };
 
-
   return (
     <div className='response-panel'>
-      <Navbar items={ itemsConfig }/>
+      <div className='response-panel-header'>
+        <Navbar items={ itemsConfig }/>
+        { !(props.isNoRequestTriggered || props.isLoading) &&
+            <div className='status'>{ props.statusCode } { props.statusText }</div> }
+      </div>
       {
         props.isLoading
           ? <Spinner/>
-          : (
-            props.response === ''
-              ? <EmptyPlaceholder/>
-              : navbarItemComponentMap[activeItem]
-          )
+          : (props.isNoRequestTriggered ? <EmptyPlaceholder/> : navbarItemComponentMap[activeItem])
       }
     </div>
   )
