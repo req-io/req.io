@@ -7,7 +7,7 @@ import { get, post } from "../../api/rest.ts";
 import { getStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 
 const AppBody = () => {
@@ -21,30 +21,35 @@ const AppBody = () => {
   const [ statusCode, setStatusCode ] = useState(0);
   const [ statusText, setStatusText ] = useState('');
 
+  const onSuccessResponse = (response: AxiosResponse) => {
+    setIsLoading(false);
+    setResponse(JSON.stringify(response.data, null, 2));
+    setStatusCode(response.status);
+    setStatusText(response.statusText || getStatusText(response.status));
+  }
+
+  const onFailureResponse = (error: AxiosError) => {
+    setIsLoading(false);
+    setResponse(JSON.stringify(error.response?.data || {}, null, 2));
+    const status = error.response?.status || 404;
+    setStatusCode(status);
+    setStatusText(error.response?.statusText || getStatusText(status));
+  }
+
   const onSend = () => {
     if (method === 'GET' && url !== '') {
+      setIsNoRequestTriggered(false);
       setIsLoading(true);
       get(url, headers)
-        .then((response: AxiosResponse) => {
-          setIsNoRequestTriggered(false);
-          setIsLoading(false);
-          setResponse(JSON.stringify(response.data, null, 2));
-          setStatusCode(response.status);
-          setStatusText(response.statusText || getStatusText(response.status));
-        })
-        .catch((error: Error) => console.log('error', error));
+        .then(onSuccessResponse)
+        .catch(onFailureResponse);
     }
     if (method === 'POST' && url !== '') {
+      setIsNoRequestTriggered(false);
       setIsLoading(true);
       post(url, JSON.parse(body), headers)
-        .then((response: AxiosResponse) => {
-          setIsNoRequestTriggered(false);
-          setIsLoading(false);
-          setResponse(JSON.stringify(response.data, null, 2));
-          setStatusCode(response.status);
-          setStatusText(response.statusText || getStatusText(response.status));
-        })
-        .catch((error: Error) => console.log('error', error));
+        .then(onSuccessResponse)
+        .catch(onFailureResponse);
     }
   }
 
