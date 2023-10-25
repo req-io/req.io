@@ -9,3 +9,8 @@ type ResponsePanelProps = {
 type RawResponseViewerProps = {
   response: string
 }
+
+type StatusProps = {
+  statusCode: number
+  statusText: string
+}

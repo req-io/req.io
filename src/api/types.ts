@@ -10,6 +10,10 @@ type HeadersMapping = {
   [key: string]: string;
 }
 
-type StatusCodes = {
+type HttpStatusCodes = {
   [key: number]: string;
 };
+
+type AxiosErrorCodes = {
+  [key: string]: string;
+}
