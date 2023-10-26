@@ -7,6 +7,6 @@ fileignoreconfig:
   checksum: 9c2ae9b11db645629df3b350633cdc6fac8a281a806f39c9c4b817373de19fa2
 - filename: electron/preload.ts
   checksum: 5c8b46d74b4d6b6cd5b76476c39ca91c463f617f2f6aad8777ae5b06f4077ed9
-- filename: src/components/Sidebar/index.tsx
-  checksum: e5ff314bf2094bcd594bffb68df724032ed7418598b48306e0a64d30789054ed
+- filename: src/components/AppBody/index.tsx
+  checksum: 0de9b0ec11207c07caff55506a0d36aefb32727825ce6a273104ffcd844cea41
 version: "1.0.0"
