@@ -3,7 +3,7 @@ import RequestPanel from "../RequestPanel";
 import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
-import { get, patch, post, put } from "../../api/rest.ts";
+import { delete_req, get, patch, post, put } from "../../api/rest.ts";
 import { getErrorCode, getHttpStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
@@ -67,6 +67,13 @@ const AppBody = () => {
       setIsNoRequestTriggered(false);
       setIsLoading(true);
       put(url, JSON.parse(body), headers)
+        .then(onSuccessResponse)
+        .catch(onFailureResponse);
+    }
+    if (method === 'DELETE' && url !== '') {
+      setIsNoRequestTriggered(false);
+      setIsLoading(true);
+      delete_req(url, headers)
         .then(onSuccessResponse)
         .catch(onFailureResponse);
     }
