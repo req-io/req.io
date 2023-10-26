@@ -3,7 +3,7 @@ import RequestPanel from "../RequestPanel";
 import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
-import {get, patch, post} from "../../api/rest.ts";
+import { get, patch, post } from "../../api/rest.ts";
 import { getStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
@@ -25,15 +25,20 @@ const AppBody = () => {
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
     setStatusCode(response.status);
-    setStatusText(response.statusText || getStatusText(response.status));
+    setStatusText(response.statusText || getHttpStatusText(response.status));
   }
 
   const onFailureResponse = (error: AxiosError) => {
     setIsLoading(false);
-    setResponse(JSON.stringify(error.response?.data || {}, null, 2));
-    const status = error.response?.status || 404;
-    setStatusCode(status);
-    setStatusText(error.response?.statusText || getStatusText(status));
+    if (error.response) {
+      setResponse(JSON.stringify(error.response?.data || {}, null, 2));
+      setStatusCode(error.response?.status || 0);
+      setStatusText(error.response?.statusText || getHttpStatusText(statusCode));
+    } else {
+      setResponse(`Error: ${ error.message }`);
+      setStatusText(`ERROR: ${ getErrorCode(error?.code || '') }`);
+      setStatusCode(0);
+    }
   }
 
   const onSend = () => {
@@ -70,13 +75,25 @@ const AppBody = () => {
 
   return (
     <div className='app-body'>
-      <UrlPanel method={ method } url={ url } onMethodChange={ setMethod } onUrlChange={ setUrl } onSend={ onSend }/>
+      <UrlPanel
+        method={ method } url={ url }
+        onMethodChange={ setMethod }
+        onUrlChange={ setUrl }
+        onSend={ onSend }
+      />
       <div className='sub-container'>
-        <RequestPanel method={ method } headers={ headers } onHeadersChange={ onHeadersChange }
-                      onNewHeaderAddition={ onNewHeaderAddition } onBodyChange={ setBody }/>
+        <RequestPanel
+          method={ method } headers={ headers }
+          onHeadersChange={ onHeadersChange }
+          onNewHeaderAddition={ onNewHeaderAddition }
+          onBodyChange={ setBody }
+        />
         <PaneSplitter direction='horizontal'/>
-        <ResponsePanel isNoRequestTriggered={ isNoRequestTriggered } isLoading={ isLoading } response={ response }
-                       statusCode={ statusCode } statusText={ statusText }/>
+        <ResponsePanel
+          isNoRequestTriggered={ isNoRequestTriggered }
+          isLoading={ isLoading } response={ response }
+          statusCode={ statusCode } statusText={ statusText }
+        />
       </div>
     </div>
   );

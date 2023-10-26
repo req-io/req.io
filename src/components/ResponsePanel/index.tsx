@@ -5,12 +5,6 @@ import { useState } from "react";
 import Navbar from "../Navbar";
 
 
-const EmptyPlaceholder = () => <div className='empty-placeholder'>No response yet!</div>;
-
-const RawResponseViewer = (props: RawResponseViewerProps) => {
-  return <div className='raw-response'>{ props.response }</div>
-}
-
 const getStatusClassName = (statusCode: number) => {
   if (statusCode >= 200 && statusCode < 300) {
     return 'success';
@@ -18,12 +12,28 @@ const getStatusClassName = (statusCode: number) => {
   if (statusCode >= 300 && statusCode < 400) {
     return 'redirect';
   }
-  if (statusCode >= 400 && statusCode < 500) {
+  if ((statusCode >= 400 && statusCode < 500) || statusCode === 0) {
     return 'client-error';
   }
   if (statusCode >= 500 && statusCode < 600) {
     return 'server-error';
   }
+}
+
+const EmptyPlaceholder = () => <div className='empty-placeholder'>No response yet!</div>;
+
+const RawResponseViewer = (props: RawResponseViewerProps) => {
+  return <div className='raw-response'>{ props.response }</div>
+}
+
+const Status = (props: StatusProps) => {
+  const statusClassName = `status ${ getStatusClassName(props.statusCode) }`
+  let statusMessage;
+
+  if (props.statusCode === 0) statusMessage = props.statusText
+  else statusMessage = `${ props.statusCode } ${ props.statusText }`
+
+  return (<div className={ statusClassName }>{ statusMessage }</div>)
 }
 
 const ResponsePanel = (props: ResponsePanelProps) => {
@@ -46,14 +56,12 @@ const ResponsePanel = (props: ResponsePanelProps) => {
     raw: <RawResponseViewer response={ props.response }/>
   };
 
-  const statusClassName = `status ${ getStatusClassName(props.statusCode) }`
-
+  const isRequestCompleted = !(props.isNoRequestTriggered || props.isLoading);
   return (
     <div className='response-panel'>
       <div className='response-panel-header'>
         <Navbar items={ itemsConfig }/>
-        { !(props.isNoRequestTriggered || props.isLoading) &&
-            <div className={ statusClassName }>{ props.statusCode } { props.statusText }</div> }
+        { isRequestCompleted && <Status statusCode={ props.statusCode } statusText={ props.statusText }/> }
       </div>
       {
         props.isLoading
