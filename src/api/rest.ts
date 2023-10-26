@@ -31,3 +31,8 @@ export const put = async (url: string, body: JSONValue, headers: Header[] = []) 
     headers: restructureHeaders(headers),
   });
 }
+export const delete_req = async (url: string, headers: Header[] = []) => {
+  return axios.delete(url, {
+    headers: restructureHeaders(headers),
+  });
+}
