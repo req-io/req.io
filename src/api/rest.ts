@@ -20,3 +20,8 @@ export const post = async (url: string, body: JSONValue, headers: Header[] = [])
   });
 }
 
+export const patch = async (url: string, body: JSONValue, headers: Header[] = []) => {
+  return axios.patch(url, body, {
+    headers: restructureHeaders(headers),
+  });
+}

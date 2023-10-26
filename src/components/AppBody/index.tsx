@@ -3,8 +3,8 @@ import RequestPanel from "../RequestPanel";
 import ResponsePanel from "../ResponsePanel";
 import PaneSplitter from "../PaneSplitter";
 import UrlPanel from "../UrlPanel";
-import { get, post } from "../../api/rest.ts";
-import { getErrorCode, getHttpStatusText } from "../../api/statusCodes.ts";
+import { get, patch, post } from "../../api/rest.ts";
+import { getStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
@@ -55,6 +55,13 @@ const AppBody = () => {
       post(url, JSON.parse(body), headers)
         .then(onSuccessResponse)
         .catch(onFailureResponse);
+    }
+    if (method === 'PATCH' && url !== '') {
+      setIsNoRequestTriggered(false);
+      setIsLoading(true);
+      patch(url, JSON.parse(body), headers)
+          .then(onSuccessResponse)
+          .catch(onFailureResponse);
     }
   }
 
