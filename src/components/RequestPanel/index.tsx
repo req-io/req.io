@@ -23,7 +23,7 @@ const RequestPanel = (props: RequestPanelProps) => {
 
   const requestBody = props.method === 'GET'
     ? <EmptyRequestBodyPlaceholder/>
-    : <Editor readOnly={ false } initialValue='{}' onValueChange={ props.onBodyChange }/>
+    : <Editor readOnly={ false } initialValue={ props.body } onValueChange={ props.onBodyChange }/>
 
   const headerPanel = (
     <RequestHeadersPanel

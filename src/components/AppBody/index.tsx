@@ -14,7 +14,7 @@ const AppBody = () => {
   const [ method, setMethod ] = useState('GET');
   const [ url, setUrl ] = useState('');
   const [ headers, setHeaders ] = useState([ {key: 'Content-Type', value: 'application/json'} ]);
-  const [ body, setBody ] = useState('');
+  const [ body, setBody ] = useState('{}');
   const [ isNoRequestTriggered, setIsNoRequestTriggered ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ response, setResponse ] = useState('');
@@ -98,9 +98,9 @@ const AppBody = () => {
       <div className='sub-container'>
         <RequestPanel
           method={ method } headers={ headers }
+          body = { body } onBodyChange={ setBody }
           onHeadersChange={ onHeadersChange }
           onNewHeaderAddition={ onNewHeaderAddition }
-          onBodyChange={ setBody }
         />
         <PaneSplitter direction='horizontal'/>
         <ResponsePanel
