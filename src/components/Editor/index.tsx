@@ -1,9 +1,9 @@
-import { useState } from "react";
-import AceEditor from "react-ace";
+import { useState } from 'react';
+import AceEditor from 'react-ace';
 
-import "ace-builds/src-noconflict/mode-json";
-import "ace-builds/src-noconflict/theme-terminal";
-import "ace-builds/src-noconflict/ext-language_tools"
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/theme-terminal';
+import 'ace-builds/src-noconflict/ext-language_tools'
 import ace from 'ace-builds/src-noconflict/ace';
 import jsonWorkerUrl from 'ace-builds/src-noconflict/worker-json?url';
 
@@ -45,10 +45,10 @@ const JsonEditor = (props: JsonEditorProps) => {
 
 const Editor = (props: EditorProps) => {
   const options: EditorOptions = {
-    mode: "json",
-    theme: "terminal",
-    placeholder: "",
-    name: "editor",
+    mode: 'json',
+    theme: 'terminal',
+    placeholder: '',
+    name: 'editor',
     fontSize: 14,
     showPrintMargin: false,
     showGutter: true,
