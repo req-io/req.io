@@ -53,6 +53,7 @@ const Editor = (props: EditorProps) => {
     showPrintMargin: false,
     showGutter: true,
     highlightActiveLine: true,
+    wrapEnabled: true,
     setOptions: {
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
