@@ -15,6 +15,7 @@ type EditorOptions = {
     enableSnippets: boolean;
     enableLiveAutocompletion: boolean
   };
+  wrapEnabled: boolean;
   theme: string;
   fontSize: number;
   showGutter: boolean;
