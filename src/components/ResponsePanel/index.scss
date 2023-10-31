@@ -14,6 +14,11 @@
   .raw-response {
     text-align: left;
     padding: 0 20px;
+    overflow: scroll;
+    height: 85%;
+    font-size: 14px;
+    line-height: 19px;
+    font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, "Source Code Pro", source-code-pro, monospace;
   }
 
   .response-panel-header {
