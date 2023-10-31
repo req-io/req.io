@@ -10,6 +10,12 @@ const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
 }
 
 const UrlPanel = ({ method, url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) => {
+  const onUrlKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSend();
+    }
+  };
+
   const onMethodSelect = (method: string) => onMethodChange(method);
 
   const onSendButtonClick = () => onSend();
@@ -26,7 +32,7 @@ const UrlPanel = ({ method, url, onMethodChange, onSend, onUrlChange }: UrlPanel
       <input
         type='text' className='url-input'
         placeholder='https://example.com'
-        value={ url } onChange={ onUrlUpdate }
+        value={ url } onChange={ onUrlUpdate } onKeyDown={ onUrlKeyDown }
       />
       <button className='send-button' onClick={ onSendButtonClick }>Send</button>
     </div>
