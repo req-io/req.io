@@ -1,12 +1,14 @@
 fileignoreconfig:
-- filename: yarn.lock
-  checksum: 05a6670685c45a4cdcaf73144bdedfeaa57d5a04c35f9c8479e622ce24f6a1f5
 - filename: electron/electron-env.d.ts
   checksum: 1ff2862343ae981ad25d61fb272a97a866000861c736fb26ef78bcc5a4a3eee5
-- filename: src/vite-env.d.ts
-  checksum: 9c2ae9b11db645629df3b350633cdc6fac8a281a806f39c9c4b817373de19fa2
 - filename: electron/preload.ts
   checksum: 5c8b46d74b4d6b6cd5b76476c39ca91c463f617f2f6aad8777ae5b06f4077ed9
 - filename: src/components/AppBody/index.tsx
   checksum: e542098100be34548943dc2eeb629d10dc28a8d5cbb6dc635cbc47ab915f47c8
-version: "1.0.0"
+- filename: src/components/UrlPanel/index.tsx
+  checksum: 7d29aa79b8f86e7ff163c01de2cadd6948e15e10bd2b758e89a1260b3a60521a
+- filename: src/vite-env.d.ts
+  checksum: 9c2ae9b11db645629df3b350633cdc6fac8a281a806f39c9c4b817373de19fa2
+- filename: yarn.lock
+  checksum: 05a6670685c45a4cdcaf73144bdedfeaa57d5a04c35f9c8479e622ce24f6a1f5
+version: 1.0.0
