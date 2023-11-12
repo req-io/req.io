@@ -8,6 +8,7 @@ import ace from 'ace-builds/src-noconflict/ace';
 import jsonWorkerUrl from 'ace-builds/src-noconflict/worker-json?url';
 
 import './index.scss';
+import { EditorOptions, EditorProps, JsonEditorProps, JsonViewerProps } from "./types.ts";
 
 ace.config.setModuleUrl('ace/mode/json_worker', jsonWorkerUrl);
 

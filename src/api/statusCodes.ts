@@ -1,3 +1,5 @@
+import { AxiosErrorCodes, HttpStatusCodes } from "./types.ts";
+
 const httpStatusCodes: HttpStatusCodes = {
   100: 'Continue',
   101: 'Switching Protocols',

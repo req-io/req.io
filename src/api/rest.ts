@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Header } from "../components/RequestPanel/types.ts";
+import { HeadersMapping, JSONValue } from "./types.ts";
 
 const restructureHeaders = (headers: Header[]) => {
   const formattedHeaders: HeadersMapping = {};

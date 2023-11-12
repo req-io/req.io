@@ -1,4 +1,4 @@
-type ResponsePanelProps = {
+export type ResponsePanelProps = {
   isNoRequestTriggered: boolean
   isLoading: boolean
   response: string
@@ -6,11 +6,11 @@ type ResponsePanelProps = {
   statusText: string
 }
 
-type RawResponseViewerProps = {
+export type RawResponseViewerProps = {
   response: string
 }
 
-type StatusProps = {
+export type StatusProps = {
   statusCode: number
   statusText: string
 }

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 type NavBarItemConfig = {
   name: string;
   label: string;
@@ -7,6 +9,10 @@ type NavBarItemConfig = {
 
 type NavBarItemsConfig = NavBarItemConfig[];
 
-type NavbarProps = {
+export type NavbarProps = {
   items: NavBarItemsConfig;
+}
+
+export type NavbarItemComponentMap = {
+  [key: string]: ReactNode;
 }

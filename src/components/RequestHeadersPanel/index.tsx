@@ -1,5 +1,7 @@
 import './index.scss'
 import React from "react";
+import { RequestHeaderPanelProps } from "./types.ts";
+import { Header } from "../RequestPanel/types.ts";
 
 const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
   const onHeadersChange = (id: number, updatedHeader: Header) => {
