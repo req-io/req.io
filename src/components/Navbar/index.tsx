@@ -1,8 +1,9 @@
 import './index.scss';
+import { NavbarProps } from "./types.ts";
 
 const Navbar = ({ items }: NavbarProps) => {
   const navbarItems = items.map((itemConfig) => {
-    let className = itemConfig.isActive ? 'item active' : 'item';
+    const className = itemConfig.isActive ? 'item active' : 'item';
     return (
       <li className={ className } key={ itemConfig.label } onClick={ itemConfig.onClick }>
         { itemConfig.label }

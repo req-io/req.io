@@ -3,6 +3,8 @@ import Editor from "../Editor";
 import Spinner from "../Spinner";
 import { useState } from "react";
 import Navbar from "../Navbar";
+import { RawResponseViewerProps, ResponsePanelProps, StatusProps } from "./types.ts";
+import { NavbarItemComponentMap } from "../Navbar/types.ts";
 
 
 const getStatusClassName = (statusCode: number) => {
@@ -51,7 +53,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
     })
   );
 
-  const navbarItemComponentMap: any = {
+  const navbarItemComponentMap: NavbarItemComponentMap = {
     preview: <Editor readOnly={ true } initialValue={ props.response }/>,
     raw: <RawResponseViewer response={ props.response }/>
   };

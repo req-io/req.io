@@ -8,6 +8,7 @@ import { getErrorCode, getHttpStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
+import { Header } from "../RequestPanel/types.ts";
 
 
 const AppBody = () => {

@@ -1,4 +1,4 @@
-type JSONValue =
+export type JSONValue =
   | string
   | number
   | boolean
@@ -6,14 +6,14 @@ type JSONValue =
   | { [key: string]: JSONValue }
   | Array<JSONValue>;
 
-type HeadersMapping = {
+export type HeadersMapping = {
   [key: string]: string;
 }
 
-type HttpStatusCodes = {
+export type HttpStatusCodes = {
   [key: number]: string;
 };
 
-type AxiosErrorCodes = {
+export type AxiosErrorCodes = {
   [key: string]: string;
 }

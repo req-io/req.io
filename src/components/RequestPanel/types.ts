@@ -1,9 +1,9 @@
-type Header = {
+export type Header = {
   key: string;
   value: string;
 }
 
-type RequestPanelProps = {
+export type RequestPanelProps = {
   method: string;
   headers: Header[];
   body: string;

@@ -1,5 +1,6 @@
 import './index.scss';
 import React from "react";
+import { MethodSelectProps, UrlPanelProps } from "./types.ts";
 
 const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

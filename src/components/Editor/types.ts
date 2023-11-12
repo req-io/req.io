@@ -1,10 +1,10 @@
-type EditorProps = {
+export type EditorProps = {
   readOnly: boolean,
   initialValue: string,
   onValueChange?: (value: string) => void
 }
 
-type EditorOptions = {
+export type EditorOptions = {
   mode: string;
   name: string;
   highlightActiveLine: boolean;
@@ -23,13 +23,13 @@ type EditorOptions = {
   showPrintMargin: boolean
 }
 
-type JsonEditorProps = {
+export type JsonEditorProps = {
   options: EditorOptions,
   initialValue: string
   onValueChange?: (content: string) => void
 }
 
-type JsonViewerProps = {
+export type JsonViewerProps = {
   options: EditorOptions,
   initialValue: string
 }
