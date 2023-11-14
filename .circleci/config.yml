@@ -17,9 +17,18 @@ jobs:
       - run: npm install --dev
       - run: npm run typecheck
 
+  test:
+    docker:
+      - image: circleci/node:16
+    steps:
+      - checkout
+      - run: npm install --dev
+      - run: npm run test
+
 workflows:
   version: 2
   main:
     jobs:
       - lint
       - typecheck
+      - test
