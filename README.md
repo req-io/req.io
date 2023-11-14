@@ -47,6 +47,12 @@ Once the preview server started press `o` to open the preview
 
 Note: This only works after the build command
 
+### Unit testing REQ.IO
+To run the unit tests for the application, run the following command:
+```
+yarn test
+```
+
 ### Interested to contribute?
 Please see our  [Contribution Guide](./CONTRIBUTING.md) on how you can get started. Thank you for your valuable time and interest to contribute to this project.
 

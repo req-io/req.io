@@ -7,7 +7,8 @@
     "build": "tsc && vite build && electron-builder",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test": "vitest"
   },
   "dependencies": {
     "axios": "^1.6.0",
@@ -20,6 +21,8 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.14.11",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.0",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
@@ -30,13 +33,15 @@
     "eslint": "^8.48.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "jsdom": "^22.1.0",
     "node-sass": "^9.0.0",
     "sass": "^1.68.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-electron": "^0.14.0",
     "vite-plugin-electron-renderer": "^0.14.5",
-    "vite-plugin-svgr": "^4.1.0"
+    "vite-plugin-svgr": "^4.1.0",
+    "vitest": "^0.34.6"
   },
   "main": "dist-electron/main.js"
 }
