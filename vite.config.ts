@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import path from 'node:path'
 import electron from 'vite-plugin-electron/simple'
@@ -30,5 +31,10 @@ export default defineConfig({
         // Additional SCSS options here if needed
       },
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./tests/vitest.setup.ts'],
   },
 })
