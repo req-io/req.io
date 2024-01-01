@@ -1,0 +1,43 @@
+@import "../../styles/variables/colors";
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  tr:nth-child(even) {
+    background-color: $primary-light-color;
+
+    td {
+      input {
+        background-color: $primary-light-color;
+      }
+    }
+  }
+
+  tr {
+    td, th {
+      border: 1px solid $divider-dark-color;
+      text-align: left;
+    }
+
+    th {
+      padding: 8px;
+    }
+
+    td {
+      padding: 0 8px;
+
+      input {
+        font-family: Roboto Condensed, sans-serif;
+        flex: 1;
+        height: 100%;
+        width: 100%;
+        font-size: 14px;
+        padding: 10px 0;
+        outline: none;
+        background-color: $primary-color;
+        border: none;
+      }
+    }
+  }
+}

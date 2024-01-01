@@ -1,12 +1,14 @@
 import './index.scss'
-import React from "react";
 import { RequestHeaderPanelProps } from "./types.ts";
 import { Header } from "../RequestPanel/types.ts";
+import EditableTable from "../EditableTable";
+import { Column } from "../EditableTable/types.ts";
+
 
 const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
-  const onHeadersChange = (id: number, updatedHeader: Header) => {
+  const onHeadersChange = (id: number, updatedEntry: Header) => {
     const updatedHeaders = [ ...props.headers ]
-    updatedHeaders[id] = updatedHeader
+    updatedHeaders[id] = updatedEntry
     props.onHeadersChange(updatedHeaders)
   }
 
@@ -14,32 +16,15 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
     props.onNewHeaderAddition({ key: '', value: '' })
   }
 
-  const headerRows = props.headers.map((header: Header, index) => {
-    const onHeaderKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onHeadersChange(index, { ...header, key: e.target.value })
-    }
+  const columns: Column[] = [
+    { name: 'Key', selector: 'key', onChange: onHeadersChange, placeholder: 'Header Key' },
+    { name: 'Value', selector: 'value', onChange: onHeadersChange, placeholder: 'Header Value' }
+  ]
 
-    const onHeaderValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onHeadersChange(index, { ...header, value: e.target.value })
-    }
-
-    return (
-      <tr>
-        <td><input type='text' placeholder='Header Key' value={ header.key } onChange={ onHeaderKeyChange }/></td>
-        <td><input type='text' placeholder='Header Value' value={ header.value } onChange={ onHeaderValueChange }/></td>
-      </tr>
-    )
-  })
   return (
     <div className='request-headers-panel'>
-      <table className='headers-table'>
-        <tr>
-          <th>Key</th>
-          <th>Value</th>
-        </tr>
-        { ...headerRows }
-      </table>
-      <button className='button' onClick={ onNewHeaderAddition }>Add Header</button>
+      <EditableTable columns={columns} data={props.headers}/>
+      <button className='button' onClick={onNewHeaderAddition}>Add Header</button>
     </div>
   )
 }
