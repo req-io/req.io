@@ -8,14 +8,14 @@ import { getErrorCode, getHttpStatusText } from "../../api/statusCodes.ts";
 
 import { useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
-import { Header, Param } from "../RequestPanel/types.ts";
+import { Header, Query } from "../RequestPanel/types.ts";
 
 
 const AppBody = () => {
   const [ method, setMethod ] = useState('GET');
   const [ url, setUrl ] = useState('');
   const [ headers, setHeaders ] = useState([ {key: 'Content-Type', value: 'application/json'} ]);
-  const [ params, setParams ] = useState([ {key: '', value: ''} ]);
+  const [ queries, setQueries ] = useState([ {key: '', value: ''} ]);
   const [ body, setBody ] = useState('{}');
   const [ isNoRequestTriggered, setIsNoRequestTriggered ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(false);
@@ -89,12 +89,12 @@ const AppBody = () => {
     setHeaders(updatedHeaders)
   }
 
-  const onNewParamAddition = (param: Param) => {
-    setParams([ ...params, param ])
+  const onNewQueryAddition = (query: Query) => {
+    setQueries([ ...queries, query ])
   }
 
-  const onParamsChange = (updatedParams: Param[]) => {
-    setParams(updatedParams)
+  const onQueriesChange = (updatedQueries: Query[]) => {
+    setQueries(updatedQueries)
   }
 
   return (
@@ -107,10 +107,10 @@ const AppBody = () => {
       />
       <div className='sub-container'>
         <RequestPanel
-          method={ method } headers={ headers } params={params}
+          method={ method } headers={ headers } queries={queries}
           body = { body } onBodyChange={ setBody }
           onHeadersChange={ onHeadersChange } onNewHeaderAddition={ onNewHeaderAddition }
-          onParamsChange={onParamsChange} onNewParamAddition={onNewParamAddition}
+          onQueryChange={onQueriesChange} onNewQueryAddition={onNewQueryAddition}
         />
         <PaneSplitter direction='horizontal'/>
         <ResponsePanel

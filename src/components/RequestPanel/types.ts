@@ -3,7 +3,7 @@ export type Header = {
   value: string;
 }
 
-export type Param = {
+export type Query = {
   key: string;
   value: string;
 }
@@ -11,11 +11,11 @@ export type Param = {
 export type RequestPanelProps = {
   method: string;
   headers: Header[];
-  params: Param[];
+  queries: Query[];
   body: string;
   onHeadersChange: (headers: Header[]) => void;
   onNewHeaderAddition: (header: Header) => void;
-  onParamsChange: (params: Param[]) => void;
-  onNewParamAddition: (param: Param) => void;
+  onQueryChange: (queries: Query[]) => void;
+  onNewQueryAddition: (query: Query) => void;
   onBodyChange: (value: string) => void;
 }
