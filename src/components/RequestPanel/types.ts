@@ -8,6 +8,5 @@ export type RequestPanelProps = {
   headers: Header[];
   body: string;
   onHeadersChange: (headers: Header[]) => void;
-  onNewHeaderAddition: (header: Header) => void;
   onBodyChange: (value: string) => void;
 }

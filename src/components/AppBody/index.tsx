@@ -80,10 +80,6 @@ const AppBody = () => {
     }
   }
 
-  const onNewHeaderAddition = (header: Header) => {
-    setHeaders([ ...headers, header ])
-  }
-
   const onHeadersChange = (updatedHeaders: Header[]) => {
     setHeaders(updatedHeaders)
   }
@@ -101,7 +97,6 @@ const AppBody = () => {
           method={ method } headers={ headers }
           body = { body } onBodyChange={ setBody }
           onHeadersChange={ onHeadersChange }
-          onNewHeaderAddition={ onNewHeaderAddition }
         />
         <PaneSplitter direction='horizontal'/>
         <ResponsePanel
