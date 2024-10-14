@@ -41,6 +41,10 @@
           background-color: $primary-color;
           border: none;
         }
+        &:last-child {
+          width: 60px;
+          padding: 0;
+        }
       }
     }
   }
@@ -59,5 +63,22 @@
 
   .button:hover {
     background-color: $accent-dark-color
+  }
+
+  .delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    svg {
+      color: $accent-dark-color;
+    }
   }
 }
