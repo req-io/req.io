@@ -8,7 +8,9 @@
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "typecheck": "tsc",
-    "test": "vitest"
+    "test": "vitest",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "dependencies": {
     "axios": "^1.6.0",
@@ -35,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^22.1.0",
     "node-sass": "^9.0.0",
+    "prettier": "3.3.3",
     "sass": "^1.68.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
