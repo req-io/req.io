@@ -5,30 +5,34 @@ import DataObjectRoundedIcon from '@mui/icons-material/DataObjectRounded';
 const Sidebar = () => {
   const itemsConfig = [
     {
-      icon: <CollectionsBookmarkRoundedIcon className='icon'/>,
+      icon: <CollectionsBookmarkRoundedIcon className="icon" />,
       label: 'Collections',
       action: () => {},
-      active: true
+      active: true,
     },
     {
-      icon: <DataObjectRoundedIcon className='icon'/>,
+      icon: <DataObjectRoundedIcon className="icon" />,
       label: 'Environments',
       action: () => {},
-      active: false
+      active: false,
     },
   ];
 
   const items = itemsConfig.map((itemConfig) => {
     return (
-        <li className={itemConfig.active ? 'item active' : 'item'} key={itemConfig.label} onClick={itemConfig.action}>
-          {itemConfig.icon}
-        </li>
-    )
-  })
+      <li
+        className={itemConfig.active ? 'item active' : 'item'}
+        key={itemConfig.label}
+        onClick={itemConfig.action}
+      >
+        {itemConfig.icon}
+      </li>
+    );
+  });
 
   return (
-    <div className='sidebar'>
-      <ul className='items'>{items}</ul>
+    <div className="sidebar">
+      <ul className="items">{items}</ul>
     </div>
   );
 };

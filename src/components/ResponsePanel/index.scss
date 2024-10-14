@@ -1,4 +1,4 @@
-@import "../../styles/variables/colors";
+@import '../../styles/variables/colors';
 
 .response-panel {
   width: 50%;
@@ -18,7 +18,8 @@
     height: 85%;
     font-size: 14px;
     line-height: 19px;
-    font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, "Source Code Pro", source-code-pro, monospace;
+    font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, 'Source Code Pro', source-code-pro,
+      monospace;
   }
 
   .response-panel-header {
@@ -36,19 +37,19 @@
     }
 
     .success {
-      color: $status-success-color
+      color: $status-success-color;
     }
 
     .redirect {
-      color: $status-redirect-color
+      color: $status-redirect-color;
     }
 
     .client-error {
-      color: $status-client-error-color
+      color: $status-client-error-color;
     }
 
     .server-error {
-      color: $status-server-error-color
+      color: $status-server-error-color;
     }
   }
 }

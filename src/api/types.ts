@@ -8,7 +8,7 @@ export type JSONValue =
 
 export type HeadersMapping = {
   [key: string]: string;
-}
+};
 
 export type HttpStatusCodes = {
   [key: number]: string;
@@ -16,4 +16,4 @@ export type HttpStatusCodes = {
 
 export type AxiosErrorCodes = {
   [key: string]: string;
-}
+};

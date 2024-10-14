@@ -1,15 +1,17 @@
 import './index.scss';
-import Editor from "../Editor";
+import Editor from '../Editor';
 import Navbar from '../Navbar';
-import { useState } from "react";
-import RequestHeadersPanel from "../RequestHeadersPanel";
-import { RequestPanelProps } from "./types.ts";
-import { NavbarItemComponentMap } from "../Navbar/types.ts";
+import { useState } from 'react';
+import RequestHeadersPanel from '../RequestHeadersPanel';
+import { RequestPanelProps } from './types.ts';
+import { NavbarItemComponentMap } from '../Navbar/types.ts';
 
-const EmptyRequestBodyPlaceholder = () => <div className='empty-placeholder'>No body required for GET requests!</div>;
+const EmptyRequestBodyPlaceholder = () => (
+  <div className="empty-placeholder">No body required for GET requests!</div>
+);
 
 const RequestPanel = (props: RequestPanelProps) => {
-  const [ activeItem, setActiveItem ] = useState('body');
+  const [activeItem, setActiveItem] = useState('body');
 
   const items = [
     { name: 'body', label: 'Body' },
@@ -17,21 +19,23 @@ const RequestPanel = (props: RequestPanelProps) => {
   ];
 
   const itemsConfig = items.map((item) => ({
-      ...item,
-      isActive: item.name === activeItem,
-      onClick: () => setActiveItem(item.name),
-    })
-  );
+    ...item,
+    isActive: item.name === activeItem,
+    onClick: () => setActiveItem(item.name),
+  }));
 
-  const requestBody = props.method === 'GET'
-    ? <EmptyRequestBodyPlaceholder/>
-    : <Editor readOnly={ false } initialValue={ props.body } onValueChange={ props.onBodyChange }/>
+  const requestBody =
+    props.method === 'GET' ? (
+      <EmptyRequestBodyPlaceholder />
+    ) : (
+      <Editor readOnly={false} initialValue={props.body} onValueChange={props.onBodyChange} />
+    );
 
   const headerPanel = (
     <RequestHeadersPanel
-      headers={ props.headers }
-      onHeadersChange={ props.onHeadersChange }
-      onNewHeaderAddition={ props.onNewHeaderAddition }
+      headers={props.headers}
+      onHeadersChange={props.onHeadersChange}
+      onNewHeaderAddition={props.onNewHeaderAddition}
     />
   );
 
@@ -41,9 +45,9 @@ const RequestPanel = (props: RequestPanelProps) => {
   };
 
   return (
-    <div className='request-panel'>
-      <Navbar items={ itemsConfig }/>
-      { navbarItemComponentMap[activeItem] }
+    <div className="request-panel">
+      <Navbar items={itemsConfig} />
+      {navbarItemComponentMap[activeItem]}
     </div>
   );
 };
