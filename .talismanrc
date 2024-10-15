@@ -5,6 +5,8 @@ fileignoreconfig:
   checksum: 5c8b46d74b4d6b6cd5b76476c39ca91c463f617f2f6aad8777ae5b06f4077ed9
 - filename: src/components/AppBody/index.tsx
   checksum: e542098100be34548943dc2eeb629d10dc28a8d5cbb6dc635cbc47ab915f47c8
+- filename: src/components/RequestHeadersPanel/index.tsx
+  checksum: 8ee710c63dd139e3a611d6743e430b2bdb4b88ca3bbd7c261d16e7ba51b12b2a
 - filename: src/components/UrlPanel/index.tsx
   checksum: 7d29aa79b8f86e7ff163c01de2cadd6948e15e10bd2b758e89a1260b3a60521a
 - filename: src/vite-env.d.ts
