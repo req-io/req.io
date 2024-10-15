@@ -1,11 +1,10 @@
-import './index.scss'
-import Editor from "../Editor";
-import Spinner from "../Spinner";
-import { useState } from "react";
-import Navbar from "../Navbar";
-import { RawResponseViewerProps, ResponsePanelProps, StatusProps } from "./types.ts";
-import { NavbarItemComponentMap } from "../Navbar/types.ts";
-
+import './index.scss';
+import Editor from '../Editor';
+import Spinner from '../Spinner';
+import { useState } from 'react';
+import Navbar from '../Navbar';
+import { RawResponseViewerProps, ResponsePanelProps, StatusProps } from './types.ts';
+import { NavbarItemComponentMap } from '../Navbar/types.ts';
 
 const getStatusClassName = (statusCode: number) => {
   if (statusCode >= 200 && statusCode < 300) {
@@ -20,26 +19,26 @@ const getStatusClassName = (statusCode: number) => {
   if (statusCode >= 500 && statusCode < 600) {
     return 'server-error';
   }
-}
+};
 
-const EmptyPlaceholder = () => <div className='empty-placeholder'>No response yet!</div>;
+const EmptyPlaceholder = () => <div className="empty-placeholder">No response yet!</div>;
 
 const RawResponseViewer = (props: RawResponseViewerProps) => {
-  return <div className='raw-response'>{ props.response }</div>
-}
+  return <div className="raw-response">{props.response}</div>;
+};
 
 const Status = (props: StatusProps) => {
-  const statusClassName = `status ${ getStatusClassName(props.statusCode) }`
+  const statusClassName = `status ${getStatusClassName(props.statusCode)}`;
   let statusMessage;
 
-  if (props.statusCode === 0) statusMessage = props.statusText
-  else statusMessage = `${ props.statusCode } ${ props.statusText }`
+  if (props.statusCode === 0) statusMessage = props.statusText;
+  else statusMessage = `${props.statusCode} ${props.statusText}`;
 
-  return (<div className={ statusClassName }>{ statusMessage }</div>)
-}
+  return <div className={statusClassName}>{statusMessage}</div>;
+};
 
 const ResponsePanel = (props: ResponsePanelProps) => {
-  const [ activeItem, setActiveItem ] = useState('preview');
+  const [activeItem, setActiveItem] = useState('preview');
 
   const items = [
     { name: 'preview', label: 'Preview' },
@@ -47,31 +46,34 @@ const ResponsePanel = (props: ResponsePanelProps) => {
   ];
 
   const itemsConfig = items.map((item) => ({
-      ...item,
-      isActive: item.name === activeItem,
-      onClick: () => setActiveItem(item.name),
-    })
-  );
+    ...item,
+    isActive: item.name === activeItem,
+    onClick: () => setActiveItem(item.name),
+  }));
 
   const navbarItemComponentMap: NavbarItemComponentMap = {
-    preview: <Editor readOnly={ true } initialValue={ props.response }/>,
-    raw: <RawResponseViewer response={ props.response }/>
+    preview: <Editor readOnly={true} initialValue={props.response} />,
+    raw: <RawResponseViewer response={props.response} />,
   };
 
   const isRequestCompleted = !(props.isNoRequestTriggered || props.isLoading);
   return (
-    <div className='response-panel'>
-      <div className='response-panel-header'>
-        <Navbar items={ itemsConfig }/>
-        { isRequestCompleted && <Status statusCode={ props.statusCode } statusText={ props.statusText }/> }
+    <div className="response-panel">
+      <div className="response-panel-header">
+        <Navbar items={itemsConfig} />
+        {isRequestCompleted && (
+          <Status statusCode={props.statusCode} statusText={props.statusText} />
+        )}
       </div>
-      {
-        props.isLoading
-          ? <Spinner/>
-          : (props.isNoRequestTriggered ? <EmptyPlaceholder/> : navbarItemComponentMap[activeItem])
-      }
+      {props.isLoading ? (
+        <Spinner />
+      ) : props.isNoRequestTriggered ? (
+        <EmptyPlaceholder />
+      ) : (
+        navbarItemComponentMap[activeItem]
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ResponsePanel
+export default ResponsePanel;

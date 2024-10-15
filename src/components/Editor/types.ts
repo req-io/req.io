@@ -1,8 +1,8 @@
 export type EditorProps = {
-  readOnly: boolean,
-  initialValue: string,
-  onValueChange?: (value: string) => void
-}
+  readOnly: boolean;
+  initialValue: string;
+  onValueChange?: (value: string) => void;
+};
 
 export type EditorOptions = {
   mode: string;
@@ -13,23 +13,23 @@ export type EditorOptions = {
     showLineNumbers: boolean;
     enableBasicAutocompletion: boolean;
     enableSnippets: boolean;
-    enableLiveAutocompletion: boolean
+    enableLiveAutocompletion: boolean;
   };
   wrapEnabled: boolean;
   theme: string;
   fontSize: number;
   showGutter: boolean;
   placeholder: string;
-  showPrintMargin: boolean
-}
+  showPrintMargin: boolean;
+};
 
 export type JsonEditorProps = {
-  options: EditorOptions,
-  initialValue: string
-  onValueChange?: (content: string) => void
-}
+  options: EditorOptions;
+  initialValue: string;
+  onValueChange?: (content: string) => void;
+};
 
 export type JsonViewerProps = {
-  options: EditorOptions,
-  initialValue: string
-}
+  options: EditorOptions;
+  initialValue: string;
+};

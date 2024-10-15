@@ -1,7 +1,7 @@
 export type Header = {
   key: string;
   value: string;
-}
+};
 
 export type RequestPanelProps = {
   method: string;
@@ -10,4 +10,4 @@ export type RequestPanelProps = {
   onHeadersChange: (headers: Header[]) => void;
   onNewHeaderAddition: (header: Header) => void;
   onBodyChange: (value: string) => void;
-}
+};

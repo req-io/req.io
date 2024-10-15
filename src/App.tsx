@@ -1,12 +1,12 @@
-import './App.scss'
-import Home from "./pages/Home";
+import './App.scss';
+import Home from './pages/Home';
 
 const App = () => {
   return (
     <>
-      <Home/>
+      <Home />
     </>
-  )
+  );
 };
 
-export default App
+export default App;

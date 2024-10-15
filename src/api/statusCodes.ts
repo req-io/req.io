@@ -1,4 +1,4 @@
-import { AxiosErrorCodes, HttpStatusCodes } from "./types.ts";
+import { AxiosErrorCodes, HttpStatusCodes } from './types.ts';
 
 const httpStatusCodes: HttpStatusCodes = {
   100: 'Continue',
@@ -63,28 +63,28 @@ const httpStatusCodes: HttpStatusCodes = {
   507: 'Insufficient Storage',
   508: 'Loop Detected',
   510: 'Not Extended (OBSOLETED)',
-  511: 'Network Authentication Required [RFC6585]'
-}
+  511: 'Network Authentication Required [RFC6585]',
+};
 
 const axiosErrorCodes: AxiosErrorCodes = {
-  'ERR_FR_TOO_MANY_REDIRECTS': 'TOO_MANY_REDIRECTS',
-  'ERR_BAD_OPTION_VALUE': 'BAD_OPTION_VALUE',
-  'ERR_BAD_OPTION': 'BAD_OPTION',
-  'ERR_NETWORK': 'NETWORK_FAILURE',
-  'ERR_DEPRECATED': 'DEPRECATED',
-  'ERR_BAD_RESPONSE': 'BAD_RESPONSE',
-  'ERR_BAD_REQUEST': 'BAD_REQUEST',
-  'ERR_NOT_SUPPORT': 'NOT_SUPPORT',
-  'ERR_INVALID_URL': 'INVALID_URL',
-  'ERR_CANCELED': 'CANCELED',
-  'ECONNABORTED': 'CONNECTION_ABORTED',
-  'ETIMEDOUT': 'TIMEOUT',
-}
+  ERR_FR_TOO_MANY_REDIRECTS: 'TOO_MANY_REDIRECTS',
+  ERR_BAD_OPTION_VALUE: 'BAD_OPTION_VALUE',
+  ERR_BAD_OPTION: 'BAD_OPTION',
+  ERR_NETWORK: 'NETWORK_FAILURE',
+  ERR_DEPRECATED: 'DEPRECATED',
+  ERR_BAD_RESPONSE: 'BAD_RESPONSE',
+  ERR_BAD_REQUEST: 'BAD_REQUEST',
+  ERR_NOT_SUPPORT: 'NOT_SUPPORT',
+  ERR_INVALID_URL: 'INVALID_URL',
+  ERR_CANCELED: 'CANCELED',
+  ECONNABORTED: 'CONNECTION_ABORTED',
+  ETIMEDOUT: 'TIMEOUT',
+};
 
 export const getHttpStatusText = (statusCode: number) => {
   return httpStatusCodes[statusCode] || 'Unknown';
-}
+};
 
 export const getErrorCode = (axiosErrorCode: string) => {
   return axiosErrorCodes[axiosErrorCode] || 'UNKNOWN';
-}
+};

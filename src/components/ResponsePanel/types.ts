@@ -1,16 +1,16 @@
 export type ResponsePanelProps = {
-  isNoRequestTriggered: boolean
-  isLoading: boolean
-  response: string
-  statusCode: number
-  statusText: string
-}
+  isNoRequestTriggered: boolean;
+  isLoading: boolean;
+  response: string;
+  statusCode: number;
+  statusText: string;
+};
 
 export type RawResponseViewerProps = {
-  response: string
-}
+  response: string;
+};
 
 export type StatusProps = {
-  statusCode: number
-  statusText: string
-}
+  statusCode: number;
+  statusText: string;
+};

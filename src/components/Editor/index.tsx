@@ -3,46 +3,45 @@ import AceEditor from 'react-ace';
 
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/theme-terminal';
-import 'ace-builds/src-noconflict/ext-language_tools'
+import 'ace-builds/src-noconflict/ext-language_tools';
 import ace from 'ace-builds/src-noconflict/ace';
 import jsonWorkerUrl from 'ace-builds/src-noconflict/worker-json?url';
 
 import './index.scss';
-import { EditorOptions, EditorProps, JsonEditorProps, JsonViewerProps } from "./types.ts";
+import { EditorOptions, EditorProps, JsonEditorProps, JsonViewerProps } from './types.ts';
 
 ace.config.setModuleUrl('ace/mode/json_worker', jsonWorkerUrl);
-
 
 const JsonViewer = (props: JsonViewerProps) => {
   return (
     <AceEditor
-      className='editor'
-      onLoad={ () => console.log('Read only Editor loaded!') }
-      value={ props.initialValue }
-      readOnly={ true }
-      { ...props.options }
+      className="editor"
+      onLoad={() => console.log('Read only Editor loaded!')}
+      value={props.initialValue}
+      readOnly={true}
+      {...props.options}
     />
   );
 };
 
 const JsonEditor = (props: JsonEditorProps) => {
-  const [ json, setJson ] = useState(props.initialValue);
+  const [json, setJson] = useState(props.initialValue);
 
   const handleChange = (value: string) => {
     setJson(value);
     props.onValueChange && props.onValueChange(value);
-  }
+  };
 
   return (
     <AceEditor
-      className='editor'
-      onLoad={ () => console.log('Editor loaded!') }
-      onChange={ handleChange }
-      value={ json }
-      { ...props.options }
+      className="editor"
+      onLoad={() => console.log('Editor loaded!')}
+      onChange={handleChange}
+      value={json}
+      {...props.options}
     />
   );
-}
+};
 
 const Editor = (props: EditorProps) => {
   const options: EditorOptions = {
@@ -60,13 +59,19 @@ const Editor = (props: EditorProps) => {
       enableLiveAutocompletion: true,
       enableSnippets: true,
       showLineNumbers: true,
-      tabSize: 2
-    }
+      tabSize: 2,
+    },
   };
 
-  return props.readOnly
-    ? <JsonViewer options={ options } initialValue={ props.initialValue }/>
-    : <JsonEditor options={ options } initialValue={ props.initialValue } onValueChange={ props.onValueChange }/>
+  return props.readOnly ? (
+    <JsonViewer options={options} initialValue={props.initialValue} />
+  ) : (
+    <JsonEditor
+      options={options}
+      initialValue={props.initialValue}
+      onValueChange={props.onValueChange}
+    />
+  );
 };
 
 export default Editor;

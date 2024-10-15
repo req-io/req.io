@@ -1,9 +1,9 @@
-import './index.scss'
+import './index.scss';
 
 const Spinner = () => {
   return (
-    <div className='spinner-container'>
-      <div className='spinner'></div>
+    <div className="spinner-container">
+      <div className="spinner"></div>
     </div>
   );
 };
