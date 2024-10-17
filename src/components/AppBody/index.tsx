@@ -8,7 +8,7 @@ import { getErrorCode, getHttpStatusText } from '../../api/statusCodes.ts';
 
 import { useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { Header, Param } from '../RequestPanel/types.ts';
+import { Header, QueryParam } from '../RequestPanel/types.ts';
 
 const AppBody = () => {
   const [method, setMethod] = useState('GET');
@@ -16,7 +16,7 @@ const AppBody = () => {
   const [headers, setHeaders] = useState<Header[]>([
     { key: 'Content-Type', value: 'application/json' },
   ]);
-  const [params, setParams] = useState<Param[]>([]);
+  const [queryParams, setQueryParams] = useState<QueryParam[]>([]);
   const [body, setBody] = useState('{}');
   const [isNoRequestTriggered, setIsNoRequestTriggered] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,31 +44,49 @@ const AppBody = () => {
     }
   };
 
+  const constructUrlWithQueryParams = () => {
+    if (queryParams.length == 0) {
+      return url;
+    }
+    const queryParamStrings = queryParams.map(
+      (queryParam: QueryParam) => `${queryParam.key}=${queryParam.value}`
+    );
+    const combinedQuery = queryParamStrings.join('&');
+    return `${url}?${combinedQuery}`;
+  };
+
   const onSend = () => {
     if (method === 'GET' && url !== '') {
       setIsNoRequestTriggered(false);
       setIsLoading(true);
-      get(url, headers).then(onSuccessResponse).catch(onFailureResponse);
+      const combinedUrl = constructUrlWithQueryParams();
+      get(combinedUrl, headers).then(onSuccessResponse).catch(onFailureResponse);
     }
     if (method === 'POST' && url !== '') {
       setIsNoRequestTriggered(false);
       setIsLoading(true);
-      post(url, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
+      const combinedUrl = constructUrlWithQueryParams();
+      post(combinedUrl, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
     }
     if (method === 'PATCH' && url !== '') {
       setIsNoRequestTriggered(false);
       setIsLoading(true);
-      patch(url, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
+      const combinedUrl = constructUrlWithQueryParams();
+      patch(combinedUrl, JSON.parse(body), headers)
+        .then(onSuccessResponse)
+        .catch(onFailureResponse);
     }
     if (method === 'PUT' && url !== '') {
       setIsNoRequestTriggered(false);
       setIsLoading(true);
-      put(url, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
+      const combinedUrl = constructUrlWithQueryParams();
+      put(combinedUrl, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
     }
     if (method === 'DELETE' && url !== '') {
       setIsNoRequestTriggered(false);
       setIsLoading(true);
-      delete_req(url, headers).then(onSuccessResponse).catch(onFailureResponse);
+      const combinedUrl = constructUrlWithQueryParams();
+      delete_req(combinedUrl, headers).then(onSuccessResponse).catch(onFailureResponse);
     }
   };
 
@@ -80,12 +98,12 @@ const AppBody = () => {
     setHeaders(updatedHeaders);
   };
 
-  const onNewParamAddition = (param: Param) => {
-    setParams([...params, param]);
+  const onNewParamAddition = (param: QueryParam) => {
+    setQueryParams([...queryParams, param]);
   };
 
-  const onParamsChange = (updatedParams: Param[]) => {
-    setParams(updatedParams);
+  const onParamsChange = (updatedParams: QueryParam[]) => {
+    setQueryParams(updatedParams);
   };
 
   return (
@@ -101,7 +119,7 @@ const AppBody = () => {
         <RequestPanel
           method={method}
           headers={headers}
-          params={params}
+          params={queryParams}
           body={body}
           onBodyChange={setBody}
           onHeadersChange={onHeadersChange}

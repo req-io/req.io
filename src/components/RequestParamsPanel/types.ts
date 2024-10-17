@@ -1,7 +1,7 @@
-import { Param } from '../RequestPanel/types.ts';
+import { QueryParam } from '../RequestPanel/types.ts';
 
 export type RequestParamPanelProps = {
-  params: Param[];
-  onParamsChange: (params: Param[]) => void;
-  onNewParamAddition: (param: Param) => void;
+  params: QueryParam[];
+  onParamsChange: (params: QueryParam[]) => void;
+  onNewParamAddition: (param: QueryParam) => void;
 };

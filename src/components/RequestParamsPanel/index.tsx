@@ -1,11 +1,11 @@
 import './index.scss';
 import React from 'react';
 import { RequestParamPanelProps } from './types.ts';
-import { Param } from '../RequestPanel/types.ts';
+import { QueryParam } from '../RequestPanel/types.ts';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const RequestParamsPanel = (props: RequestParamPanelProps) => {
-  const onParamsChange = (id: number, updatedParam: Param) => {
+  const onParamsChange = (id: number, updatedParam: QueryParam) => {
     const updatedParams = [...props.params];
     updatedParams[id] = updatedParam;
     props.onParamsChange(updatedParams);
@@ -20,7 +20,7 @@ const RequestParamsPanel = (props: RequestParamPanelProps) => {
     props.onParamsChange(updatedParams);
   };
 
-  const paramRows = props.params.map((param: Param, index) => {
+  const paramRows = props.params.map((param: QueryParam, index) => {
     const onParamKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onParamsChange(index, { ...param, key: e.target.value });
     };
