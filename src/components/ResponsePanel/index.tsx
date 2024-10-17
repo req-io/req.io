@@ -5,6 +5,8 @@ import { useState } from 'react';
 import Navbar from '../Navbar';
 import { RawResponseViewerProps, ResponsePanelProps, StatusProps } from './types.ts';
 import { NavbarItemComponentMap } from '../Navbar/types.ts';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import SnackBar from '../Snackbar';
 
 const getStatusClassName = (statusCode: number) => {
   if (statusCode >= 200 && statusCode < 300) {
@@ -39,7 +41,7 @@ const Status = (props: StatusProps) => {
 
 const ResponsePanel = (props: ResponsePanelProps) => {
   const [activeItem, setActiveItem] = useState('preview');
-
+  const [isTextCopied, setIsTextCopied] = useState(false);
   const items = [
     { name: 'preview', label: 'Preview' },
     { name: 'raw', label: 'Raw' },
@@ -56,13 +58,29 @@ const ResponsePanel = (props: ResponsePanelProps) => {
     raw: <RawResponseViewer response={props.response} />,
   };
 
+  const copyToClipboard = () => {
+    props.response &&
+      navigator.clipboard
+        .writeText(props.response)
+        .then(() => {
+          setIsTextCopied(true);
+          setTimeout(() => setIsTextCopied(false), 5000);
+        })
+        .catch((err) => {
+          console.error('Failed to copy text: ', err);
+        });
+  };
+
   const isRequestCompleted = !(props.isNoRequestTriggered || props.isLoading);
   return (
     <div className="response-panel">
       <div className="response-panel-header">
         <Navbar items={itemsConfig} />
         {isRequestCompleted && (
-          <Status statusCode={props.statusCode} statusText={props.statusText} />
+          <div className="response-header-right">
+            <Status statusCode={props.statusCode} statusText={props.statusText} />
+            <ContentCopyIcon fontSize="small" onClick={copyToClipboard} />
+          </div>
         )}
       </div>
       {props.isLoading ? (
@@ -71,6 +89,14 @@ const ResponsePanel = (props: ResponsePanelProps) => {
         <EmptyPlaceholder />
       ) : (
         navbarItemComponentMap[activeItem]
+      )}
+      {isTextCopied && (
+        <SnackBar
+          message={'Copied to clipboard'}
+          vertical={'bottom'}
+          horizontal={'right'}
+          open={true}
+        />
       )}
     </div>
   );

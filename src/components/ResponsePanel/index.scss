@@ -36,6 +36,12 @@
       align-items: center;
     }
 
+    .response-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .success {
       color: $status-success-color;
     }
