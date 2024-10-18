@@ -5,6 +5,7 @@ import { useState } from 'react';
 import RequestHeadersPanel from '../RequestHeadersPanel';
 import { RequestPanelProps } from './types.ts';
 import { NavbarItemComponentMap } from '../Navbar/types.ts';
+import RequestParamsPanel from '../RequestParamsPanel/index.tsx';
 
 const EmptyRequestBodyPlaceholder = () => (
   <div className="empty-placeholder">No body required for GET requests!</div>
@@ -16,6 +17,7 @@ const RequestPanel = (props: RequestPanelProps) => {
   const items = [
     { name: 'body', label: 'Body' },
     { name: 'headers', label: 'Headers' },
+    { name: 'params', label: 'Params' },
   ];
 
   const itemsConfig = items.map((item) => ({
@@ -39,9 +41,18 @@ const RequestPanel = (props: RequestPanelProps) => {
     />
   );
 
+  const paramsPanel = (
+    <RequestParamsPanel
+      params={props.params}
+      onParamsChange={props.onParamsChange}
+      onNewParamAddition={props.onNewParamAddition}
+    />
+  );
+
   const navbarItemComponentMap: NavbarItemComponentMap = {
     body: requestBody,
     headers: headerPanel,
+    params: paramsPanel,
   };
 
   return (
