@@ -56,36 +56,24 @@ const AppBody = () => {
   };
 
   const onSend = () => {
+    setIsNoRequestTriggered(false);
+    setIsLoading(true);
+    const combinedUrl = constructUrlWithQueryParams();
     if (method === 'GET' && url !== '') {
-      setIsNoRequestTriggered(false);
-      setIsLoading(true);
-      const combinedUrl = constructUrlWithQueryParams();
       get(combinedUrl, headers).then(onSuccessResponse).catch(onFailureResponse);
     }
     if (method === 'POST' && url !== '') {
-      setIsNoRequestTriggered(false);
-      setIsLoading(true);
-      const combinedUrl = constructUrlWithQueryParams();
       post(combinedUrl, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
     }
     if (method === 'PATCH' && url !== '') {
-      setIsNoRequestTriggered(false);
-      setIsLoading(true);
-      const combinedUrl = constructUrlWithQueryParams();
       patch(combinedUrl, JSON.parse(body), headers)
         .then(onSuccessResponse)
         .catch(onFailureResponse);
     }
     if (method === 'PUT' && url !== '') {
-      setIsNoRequestTriggered(false);
-      setIsLoading(true);
-      const combinedUrl = constructUrlWithQueryParams();
       put(combinedUrl, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
     }
     if (method === 'DELETE' && url !== '') {
-      setIsNoRequestTriggered(false);
-      setIsLoading(true);
-      const combinedUrl = constructUrlWithQueryParams();
       delete_req(combinedUrl, headers).then(onSuccessResponse).catch(onFailureResponse);
     }
   };
