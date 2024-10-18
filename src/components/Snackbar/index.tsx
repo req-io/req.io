@@ -1,4 +1,3 @@
-import './index.scss';
 import Snackbar from '@mui/material/Snackbar';
 import { SnackbarProps } from './types';
 

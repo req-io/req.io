@@ -79,7 +79,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
         {isRequestCompleted && (
           <div className="response-header-right">
             <Status statusCode={props.statusCode} statusText={props.statusText} />
-            <ContentCopyIcon fontSize="small" onClick={copyToClipboard} />
+            <ContentCopyIcon fontSize="small" onClick={copyToClipboard} className="copyIcon" />
           </div>
         )}
       </div>

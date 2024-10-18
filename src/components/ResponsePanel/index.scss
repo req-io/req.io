@@ -39,7 +39,12 @@
     .response-header-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      padding-right: 4%;
+    }
+
+    .copyIcon {
+      cursor: pointer;
     }
 
     .success {
