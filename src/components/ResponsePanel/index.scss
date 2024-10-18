@@ -36,6 +36,17 @@
       align-items: center;
     }
 
+    .response-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 4%;
+    }
+
+    .copyIcon {
+      cursor: pointer;
+    }
+
     .success {
       color: $status-success-color;
     }
