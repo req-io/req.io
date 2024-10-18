@@ -59,5 +59,5 @@ Please see our  [Contribution Guide](./CONTRIBUTING.md) on how you can get start
 ### Contributors
 
 <a href="https://github.com/req-io/req.io/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=req-io/req.io" />
+  <img src="https://contrib.rocks/image?repo=req-io/req.io&max=50" />
 </a>
