@@ -1,5 +1,4 @@
 import './index.scss';
-import React from 'react';
 import { MethodSelectProps, UrlPanelProps } from './types.ts';
 
 const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
@@ -16,7 +15,7 @@ const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
 
 const UrlPanel = ({ method, url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) => {
   const onUrlKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
       onSend();
     }
   };
