@@ -6,6 +6,7 @@ import RequestHeadersPanel from '../RequestHeadersPanel';
 import { RequestPanelProps } from './types.ts';
 import { NavbarItemComponentMap } from '../Navbar/types.ts';
 import RequestParamsPanel from '../RequestParamsPanel/index.tsx';
+import Dropdown from '../Dropdown/index.tsx';
 
 const EmptyRequestBodyPlaceholder = () => (
   <div className="empty-placeholder">No body required for GET requests!</div>
@@ -18,6 +19,7 @@ const RequestPanel = (props: RequestPanelProps) => {
     { name: 'body', label: 'Body' },
     { name: 'headers', label: 'Headers' },
     { name: 'params', label: 'Params' },
+    { name: 'authorization', label: 'Auth' },
   ];
 
   const itemsConfig = items.map((item) => ({
@@ -49,10 +51,20 @@ const RequestPanel = (props: RequestPanelProps) => {
     />
   );
 
+  const onMethodSelect = () => {};
+
+  const authPanel = (
+    <div className="auth-panel">
+      <div className="auth-placeholder">Select authentication type!</div>
+      <Dropdown methods={['No Auth', 'Basic Auth', 'API Key']} onSelect={onMethodSelect} />
+    </div>
+  );
+
   const navbarItemComponentMap: NavbarItemComponentMap = {
     body: requestBody,
     headers: headerPanel,
     params: paramsPanel,
+    authorization: authPanel,
   };
 
   return (
