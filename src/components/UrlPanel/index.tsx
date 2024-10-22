@@ -15,7 +15,7 @@ const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
 
 const UrlPanel = ({ method, url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) => {
   const onUrlKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
+    if (event.key === 'Enter') {
       onSend();
     }
   };
