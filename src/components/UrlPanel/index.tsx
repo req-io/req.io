@@ -6,7 +6,6 @@ const MethodSelect = ({ methods, onSelect, value }: MethodSelectProps) => {
     onSelect(event.target.value);
   };
 
-  // Mapping method names to CSS variable names
   const methodColors: Record<string, string> = {
     GET: 'var(--color-get)',
     POST: 'var(--color-post)',
@@ -19,8 +18,8 @@ const MethodSelect = ({ methods, onSelect, value }: MethodSelectProps) => {
     <select
       className="method-select"
       onChange={onChange}
-      value={value}  // Controlled value
-      style={{ color: methodColors[value], backgroundColor: 'transparent' }} // Set text color based on selected value
+      value={value}
+      style={{ color: methodColors[value], backgroundColor: 'transparent' }}
     >
       {methods.map((method: string) => (
         <option key={method} value={method} style={{ color: methodColors[method] }}>
