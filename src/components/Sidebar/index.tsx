@@ -1,28 +1,22 @@
 import './index.scss';
-import CollectionsBookmarkRoundedIcon from '@mui/icons-material/CollectionsBookmarkRounded';
-import DataObjectRoundedIcon from '@mui/icons-material/DataObjectRounded';
 
-const Sidebar = () => {
-  const itemsConfig = [
-    {
-      icon: <CollectionsBookmarkRoundedIcon className="icon" />,
-      label: 'Collections',
-      action: () => {},
-      active: true,
-    },
-    {
-      icon: <DataObjectRoundedIcon className="icon" />,
-      label: 'Environments',
-      action: () => {},
-      active: false,
-    },
-  ];
+interface ItemConfig {
+  icon: JSX.Element;
+  label: string;
+  action: () => void;
+  active: boolean;
+}
+interface SidebarProps {
+  items: ItemConfig[];
+}
 
-  const items = itemsConfig.map((itemConfig) => {
+const Sidebar = (props: SidebarProps) => {
+  const items = props.items.map((itemConfig) => {
     return (
       <li
         className={itemConfig.active ? 'item active' : 'item'}
         key={itemConfig.label}
+        data-testid={itemConfig.label}
         onClick={itemConfig.action}
       >
         {itemConfig.icon}
