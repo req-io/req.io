@@ -1,11 +1,12 @@
 // index.scss
-
+@import  '../../styles/variables/colors';
+;
 :root {
-  --color-get: #10B95F;     // GET color
-  --color-post: #FFC107;    // POST color
-  --color-put: #007BFF;     // PUT color
-  --color-patch: #6366F1;   // PATCH color
-  --color-delete: #DC3545;   // DELETE color
+  --color-get: #10B95F; // GET color
+  --color-post: #FFC107; // POST color
+  --color-put: #007BFF; // PUT color
+  --color-patch: #6366F1; // PATCH color
+  --color-delete: #DC3545; // DELETE color
 }
 
 .url-panel {
