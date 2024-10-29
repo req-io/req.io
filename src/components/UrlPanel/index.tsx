@@ -1,15 +1,31 @@
 import './index.scss';
-import React from 'react';
 import { MethodSelectProps, UrlPanelProps } from './types.ts';
 
-const MethodSelect = ({ methods, onSelect }: MethodSelectProps) => {
+const MethodSelect = ({ methods, onSelect, value }: MethodSelectProps) => {
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onSelect(event.target.value);
   };
-  const items = methods.map((method: string) => <option>{method}</option>);
+
+  const methodColors: Record<string, string> = {
+    GET: 'var(--color-get)',
+    POST: 'var(--color-post)',
+    PUT: 'var(--color-put)',
+    PATCH: 'var(--color-patch)',
+    DELETE: 'var(--color-delete)',
+  };
+
   return (
-    <select className="method-select" onChange={onChange}>
-      {items}
+    <select
+      className="method-select"
+      onChange={onChange}
+      value={value}
+      style={{ color: methodColors[value], backgroundColor: 'transparent' }}
+    >
+      {methods.map((method: string) => (
+        <option key={method} value={method} style={{ color: methodColors[method] }}>
+          {method}
+        </option>
+      ))}
     </select>
   );
 };
