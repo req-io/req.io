@@ -23,8 +23,13 @@ const AppBody = () => {
   const [response, setResponse] = useState('');
   const [statusCode, setStatusCode] = useState(0);
   const [statusText, setStatusText] = useState('');
+  const [timeTaken, setTimeTaken] = useState(0);
 
-  const onSuccessResponse = (response: AxiosResponse) => {
+  const onSuccessResponse = (response: AxiosResponse, startTime: number) => {
+    const endTime = performance.now();
+    const duration = endTime - startTime;
+    setTimeTaken(duration);
+
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
     setStatusCode(response.status);
@@ -59,22 +64,33 @@ const AppBody = () => {
     setIsNoRequestTriggered(false);
     setIsLoading(true);
     const combinedUrl = constructUrlWithQueryParams();
+
+    const startTime = performance.now();
+
     if (method === 'GET' && url !== '') {
-      get(combinedUrl, headers).then(onSuccessResponse).catch(onFailureResponse);
+      get(combinedUrl, headers)
+        .then(response => onSuccessResponse(response, startTime))
+        .catch(onFailureResponse);
     }
     if (method === 'POST' && url !== '') {
-      post(combinedUrl, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
+      post(combinedUrl, JSON.parse(body), headers)
+        .then(response => onSuccessResponse(response, startTime))
+        .catch(onFailureResponse);
     }
     if (method === 'PATCH' && url !== '') {
       patch(combinedUrl, JSON.parse(body), headers)
-        .then(onSuccessResponse)
+        .then(response => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
     if (method === 'PUT' && url !== '') {
-      put(combinedUrl, JSON.parse(body), headers).then(onSuccessResponse).catch(onFailureResponse);
+      put(combinedUrl, JSON.parse(body), headers)
+        .then(response => onSuccessResponse(response, startTime))
+        .catch(onFailureResponse);
     }
     if (method === 'DELETE' && url !== '') {
-      delete_req(combinedUrl, headers).then(onSuccessResponse).catch(onFailureResponse);
+      delete_req(combinedUrl, headers)
+        .then(response => onSuccessResponse(response, startTime))
+        .catch(onFailureResponse);
     }
   };
 
@@ -122,6 +138,7 @@ const AppBody = () => {
           response={response}
           statusCode={statusCode}
           statusText={statusText}
+          timeTaken={timeTaken}
         />
       </div>
     </div>

@@ -32,9 +32,9 @@ const RawResponseViewer = (props: RawResponseViewerProps) => {
 const Status = (props: StatusProps) => {
   const statusClassName = `status ${getStatusClassName(props.statusCode)}`;
   let statusMessage;
-
-  if (props.statusCode === 0) statusMessage = props.statusText;
-  else statusMessage = `${props.statusCode} ${props.statusText}`;
+  const timeInSeconds = (props.statusTime / 1000).toFixed(2);
+  if (props.statusCode === 0) statusMessage = `${props.statusText}  ${timeInSeconds}s`;
+  else statusMessage = `${props.statusCode} ${props.statusText}  ${timeInSeconds}s`;
 
   return <div className={statusClassName}>{statusMessage}</div>;
 };
@@ -78,7 +78,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
         <Navbar items={itemsConfig} />
         {isRequestCompleted && (
           <div className="response-header-right">
-            <Status statusCode={props.statusCode} statusText={props.statusText} />
+            <Status statusCode={props.statusCode} statusText={props.statusText} statusTime={props.timeTaken}/>
             <ContentCopyIcon fontSize="small" onClick={copyToClipboard} className="copyIcon" />
           </div>
         )}
