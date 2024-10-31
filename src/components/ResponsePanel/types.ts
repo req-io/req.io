@@ -4,6 +4,7 @@ export type ResponsePanelProps = {
   response: string;
   statusCode: number;
   statusText: string;
+  timeTaken: number;
 };
 
 export type RawResponseViewerProps = {
@@ -13,4 +14,5 @@ export type RawResponseViewerProps = {
 export type StatusProps = {
   statusCode: number;
   statusText: string;
+  statusTime: number;
 };
