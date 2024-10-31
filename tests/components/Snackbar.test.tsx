@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import SnackBar from '../../src/components/SnackBar';
+import SnackBar from '../../src/components/Snackbar';
 import '@testing-library/jest-dom';
 
 describe('SnackBar Component', () => {
