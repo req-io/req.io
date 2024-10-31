@@ -53,7 +53,7 @@ const RequestParamsPanel = (props: RequestParamPanelProps) => {
   return (
     <div className="request-params-panel">
       {props.params.length === 0 ? (
-        <p className="empty-placeholder">No headers added yet. Click "Add Header" to create one.</p>
+        <p className="empty-placeholder">No params added yet. Click "Add Param" to create one.</p>
       ) : (
         <table className="params-table">
           <tbody>{paramRows}</tbody>
