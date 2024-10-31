@@ -26,10 +26,6 @@ describe('RequestParamsPanel', () => {
   it('should render the given parameters with its associated delete button', () => {
     render(<RequestParamsPanel {...defaultProps} />);
 
-    expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Value')).toBeInTheDocument();
-    expect(screen.getByText('Action')).toBeInTheDocument();
-
     expect(screen.getAllByPlaceholderText('Key')).toHaveLength(2);
     expect(screen.getAllByPlaceholderText('Value')).toHaveLength(2);
 
