@@ -53,13 +53,6 @@ const RequestParamsPanel = (props: RequestParamPanelProps) => {
   return (
     <div className="request-params-panel">
       <table className="params-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Value</th>
-            <th>Action</th>
-          </tr>
-        </thead>
         <tbody>{paramRows}</tbody>
       </table>
       <button className="button" onClick={onNewParamAddition}>
