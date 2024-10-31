@@ -14,14 +14,38 @@
   }
 
   .auth-panel {
-    align-items: left;
+    display: flex;
+    flex-direction: column;
 
     .auth-placeholder {
-      display: flex;
-      align-items: center;
-      height: 100%;
       color: $secondary-light-color;
-      margin: 0 20px;
+      margin: 220px 0;
+    }
+
+    .url-input {
+      font-family:
+        Roboto Condensed,
+        sans-serif;
+      flex: 1;
+      height: 40px;
+      font-size: 14px;
+      padding: 0 20px;
+      outline: none;
+      background-color: $primary-color;
+      border: 1px solid $divider-color;
+      border-radius: 5px;
+    }
+
+    .api-key-value {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .apikey {
+      height: 200px;
+      width: 50px;
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

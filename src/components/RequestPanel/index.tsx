@@ -14,6 +14,7 @@ const EmptyRequestBodyPlaceholder = () => (
 
 const RequestPanel = (props: RequestPanelProps) => {
   const [activeItem, setActiveItem] = useState('body');
+  const [authType, setAuthType] = useState('no auth');
 
   const items = [
     { name: 'body', label: 'Body' },
@@ -51,12 +52,48 @@ const RequestPanel = (props: RequestPanelProps) => {
     />
   );
 
-  const onMethodSelect = () => {};
+  const onMethodSelect = (auth: string) => {
+    setAuthType(auth.toLowerCase());
+  };
 
   const authPanel = (
     <div className="auth-panel">
-      <div className="auth-placeholder">Select authentication type!</div>
-      <Dropdown methods={['No Auth', 'Basic Auth', 'API Key']} onSelect={onMethodSelect} />
+      <Dropdown
+        methods={['No Auth', 'Basic Auth', 'API Key']}
+        onSelect={onMethodSelect}
+        height="40px"
+        width="150px"
+      />
+      {authType === 'no auth' && (
+        <div className="auth-placeholder">Select authentication type!</div>
+      )}
+      {authType === 'api key' && (
+        <div className="api-key-value">
+          <div className="apikey">
+            <p>Key</p>
+            <input
+              type="text"
+              className="url-input"
+              placeholder="Enter the key name"
+              // value={url}
+              // onChange={onUrlUpdate}
+              // onKeyDown={onUrlKeyDown}
+            />
+          </div>
+          <div>
+            <p>Value</p>
+            <input
+              type="text"
+              className="url-input"
+              placeholder="Enter the value of the key"
+              // value={url}
+              // onChange={onUrlUpdate}
+              // onKeyDown={onUrlKeyDown}
+            />
+          </div>
+        </div>
+      )}
+      {authType === 'basic auth' && <div></div>}
     </div>
   );
 
