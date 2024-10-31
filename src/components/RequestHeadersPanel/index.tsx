@@ -35,12 +35,7 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
           <input type="text" placeholder="Key" value={header.key} onChange={onHeaderKeyChange} />
         </td>
         <td>
-          <input
-            type="text"
-            placeholder="Value"
-            value={header.value}
-            onChange={onHeaderValueChange}
-          />
+          <input type="text" placeholder="Value" value={header.value} onChange={onHeaderValueChange} />
         </td>
         <td>
           <button className="delete-button" onClick={() => onHeaderDelete(index)}>
@@ -53,16 +48,9 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
   return (
     <div className="request-headers-panel">
       <table className="headers-table">
-        <tr>
-          <th>Key</th>
-          <th>Value</th>
-          <th>Action</th>
-        </tr>
         <tbody>{headerRows}</tbody>
       </table>
-      <button className="button" onClick={onNewHeaderAddition}>
-        Add Header
-      </button>
+      <button className="button" onClick={onNewHeaderAddition}>Add Header</button>
     </div>
   );
 };
