@@ -20,7 +20,7 @@ describe('SnackBar Component', () => {
   });
 
   // Test case 3: Applies default position (bottom-right) when not specified
-  it.only('should position SnackBar at bottom-right by default', () => {
+  it('should position SnackBar at bottom-right by default', () => {
     render(<SnackBar message="Position test" open={true} />);
     const snackbarElement = screen.getByText('Position test').closest('.MuiSnackbar-root');
     expect(snackbarElement).toHaveClass('MuiSnackbar-anchorOriginBottomRight');
