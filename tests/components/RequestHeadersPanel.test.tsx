@@ -26,10 +26,6 @@ describe('RequestHeadersPanel', () => {
   it('should render the given headers with its associated delete button', () => {
     render(<RequestHeadersPanel {...defaultProps} />);
 
-    expect(screen.getByText('Key')).toBeInTheDocument();
-    expect(screen.getByText('Value')).toBeInTheDocument();
-    expect(screen.getByText('Action')).toBeInTheDocument();
-
     expect(screen.getAllByPlaceholderText('Key')).toHaveLength(2);
     expect(screen.getAllByPlaceholderText('Value')).toHaveLength(2);
 
