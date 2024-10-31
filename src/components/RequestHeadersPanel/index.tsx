@@ -52,14 +52,20 @@ const RequestHeadersPanel = (props: RequestHeaderPanelProps) => {
   });
   return (
     <div className="request-headers-panel">
-      <table className="headers-table">
-        <tr>
-          <th>Key</th>
-          <th>Value</th>
-          <th>Action</th>
-        </tr>
-        <tbody>{headerRows}</tbody>
-      </table>
+      {props.headers.length > 0 ? (
+        <table className="headers-table">
+          <thead>
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>{headerRows}</tbody>
+        </table>
+      ) : (
+        <p className="placeholder-msg">No headers added yet. Click "Add Header" to create one.</p>
+      )}
       <button className="button" onClick={onNewHeaderAddition}>
         Add Header
       </button>
