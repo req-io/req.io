@@ -1,17 +1,48 @@
 @import '../../styles/variables/colors';
 
-.method-select {
-  font-family:
-    Roboto Condensed,
-    sans-serif;
-  width: 300px;
-  height: 100%;
-  font-size: 14px;
-  padding: 0 10px;
-  margin: 0 20px;
-  outline: none;
+.dropdown {
+  display: flex;
+  position: relative;
+  font-family: 'Roboto Condensed', sans-serif;
   background-color: $primary-color;
   border: 1px solid $divider-color;
   border-radius: 5px;
-  cursor: pointer;
+  padding: 0;
+  margin: 8px;
+  height: 100%;
+
+  &-selected {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: $secondary-light-color;
+    padding: 0 10px;
+  }
+
+  &-menu {
+    position: absolute;
+    top: 50px;
+    left: -1px;
+    background-color: $primary-color;
+    border: 1px solid $divider-color;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+  }
+
+  &-item {
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    justify-content: flex-start;
+
+    &:hover {
+      background-color: $primary-dark-color;
+    }
+  }
 }

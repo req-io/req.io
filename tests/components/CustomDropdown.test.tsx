@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import Dropdown from '../../src/components/Dropdown';
+import Dropdown from '../../src/components/CustomDropdown';
 import '@testing-library/jest-dom';
 
 describe('Dropdown Component', () => {

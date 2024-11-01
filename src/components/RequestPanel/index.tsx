@@ -6,7 +6,7 @@ import RequestHeadersPanel from '../RequestHeadersPanel';
 import { RequestPanelProps } from './types.ts';
 import { NavbarItemComponentMap } from '../Navbar/types.ts';
 import RequestParamsPanel from '../RequestParamsPanel/index.tsx';
-import Dropdown from '../Dropdown/index.tsx';
+import Dropdown from '../CustomDropdown/index.tsx';
 
 const EmptyRequestBodyPlaceholder = () => (
   <div className="empty-placeholder">No body required for GET requests!</div>

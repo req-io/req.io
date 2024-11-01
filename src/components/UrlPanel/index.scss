@@ -1,16 +1,9 @@
-// index.scss
-@import  '../../styles/variables/colors';
-;
-:root {
-  --color-get: #10B95F; // GET color
-  --color-post: #FFC107; // POST color
-  --color-put: #007BFF; // PUT color
-  --color-patch: #6366F1; // PATCH color
-  --color-delete: #DC3545; // DELETE color
-}
+@import '../../styles/variables/colors';
 
 .url-panel {
-  font-family: Roboto Condensed, sans-serif;
+  font-family:
+    Roboto Condensed,
+    sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,9 +12,10 @@
   height: 40px;
   padding: 15px 0;
 
-  .method-select,
   .send-button {
-    font-family: Roboto Condensed, sans-serif;
+    font-family:
+      Roboto Condensed,
+      sans-serif;
     width: 125px;
     height: 100%;
     font-size: 14px;
@@ -43,7 +37,9 @@
   }
 
   .url-input {
-    font-family: Roboto Condensed, sans-serif;
+    font-family:
+      Roboto Condensed,
+      sans-serif;
     flex: 1;
     height: 100%;
     font-size: 14px;
@@ -52,5 +48,17 @@
     background-color: $primary-color;
     border: 1px solid $divider-color;
     border-radius: 5px;
+  }
+
+  .dropdown {
+    width: 110px !important;
+
+    &-selected {
+      width: 110px !important;
+    }
+
+    &-menu {
+      width: 110px !important;
+    }
   }
 }
