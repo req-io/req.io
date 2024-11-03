@@ -5,7 +5,7 @@ import Editor from '../Editor';
 import Navbar from '../Navbar';
 import RequestHeadersPanel from '../RequestHeadersPanel';
 import RequestParamsPanel from '../RequestParamsPanel/index.tsx';
-import Dropdown from '../CustomDropdown/index.tsx';
+import RequestAuthPanel from '../RequestAuthPanel/index.tsx';
 
 import { NavbarItemComponentMap } from '../Navbar/types.ts';
 import { Method } from '../AppBody/types.ts';
@@ -55,14 +55,7 @@ const RequestPanel = (props: RequestPanelProps) => {
     />
   );
 
-  const onMethodSelect = () => {};
-
-  const authPanel = (
-    <div className="auth-panel">
-      <div className="auth-placeholder">Select authentication type!</div>
-      <Dropdown methods={['No Auth', 'Basic Auth', 'API Key']} onSelect={onMethodSelect} />
-    </div>
-  );
+  const authPanel = <RequestAuthPanel />;
 
   const navbarItemComponentMap: NavbarItemComponentMap = {
     body: requestBody,
