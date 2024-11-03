@@ -5,7 +5,6 @@ export type MethodSelectProps = {
 };
 
 export type UrlPanelProps = {
-  method: string;
   url: string;
   onMethodChange: (method: string) => void;
   onUrlChange: (url: string) => void;

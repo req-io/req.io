@@ -2,34 +2,72 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Dropdown from '../../src/components/Dropdown';
-import '@testing-library/jest-dom';
 
 describe('Dropdown Component', () => {
-  // Test case 1: Renders Dropdown with options
-  it('should render all provided options in the Dropdown', () => {
-    const methods = ['Method 1', 'Method 2', 'Method 3'];
-    render(<Dropdown methods={methods} onSelect={() => {}} />);
+  const mockItems = [
+    { name: 'Item 1', color: '#FF0000', onSelect: vi.fn() },
+    { name: 'Item 2', color: '#00FF00', onSelect: vi.fn() },
+    { name: 'Item 3', color: '#0000FF', onSelect: vi.fn() },
+  ];
 
-    methods.forEach((method) => {
-      expect(screen.getByText(method)).toBeInTheDocument();
-    });
+  it('should render the selected item by default', () => {
+    render(<Dropdown items={mockItems} />);
+    const selectedItem = screen.getByText('Item 1');
+    expect(selectedItem).toBeInTheDocument();
+    expect(selectedItem).toHaveStyle({ color: '#FF0000' });
   });
 
-  // Test case 2: Calls onSelect when an option is selected
-  it('should call onSelect with the correct value when an option is selected', () => {
-    const methods = ['Method 1', 'Method 2', 'Method 3'];
-    const mockOnSelect = vi.fn();
-    render(<Dropdown methods={methods} onSelect={mockOnSelect} />);
+  it('should toggle the dropdown menu visibility when clicked', () => {
+    render(<Dropdown items={mockItems} />);
+    const selectedItem = screen.getByText('Item 1');
 
-    // Select 'Method 2'
-    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Method 2' } });
-    expect(mockOnSelect).toHaveBeenCalledWith('Method 2');
+    // Initially, the dropdown items should not be visible
+    expect(screen.queryByText('Item 2')).not.toBeInTheDocument();
+
+    // Click to open the dropdown
+    fireEvent.click(selectedItem);
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+
+    // Click again to close the dropdown
+    fireEvent.click(selectedItem);
+    expect(screen.queryByText('Item 2')).not.toBeInTheDocument();
   });
 
-  // Test case 3: Renders Dropdown with no options when methods array is empty
-  it('should render an empty Dropdown when no methods are provided', () => {
-    render(<Dropdown methods={[]} onSelect={() => {}} />);
+  it('should select an item, call onSelect, and close the dropdown', () => {
+    render(<Dropdown items={mockItems} />);
+    const selectedItem = screen.getByText('Item 1');
 
-    expect(screen.getByRole('combobox').children).toHaveLength(0);
+    // Open the dropdown
+    fireEvent.click(selectedItem);
+
+    // Select the second item
+    const itemToSelect = screen.getByText('Item 2');
+    fireEvent.click(itemToSelect);
+
+    // Verify the selected item has changed
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+    expect(mockItems[1].onSelect).toHaveBeenCalledTimes(1);
+
+    // Dropdown menu should be closed after selection
+    expect(screen.queryByText('Item 1')).not.toBeInTheDocument();
+  });
+
+  it('should close the dropdown when clicking outside', () => {
+    render(
+      <div>
+        <Dropdown items={mockItems} />
+        <div data-testid="outside">Outside Element</div>
+      </div>
+    );
+
+    const selectedItem = screen.getByText('Item 1');
+
+    // Open the dropdown
+    fireEvent.click(selectedItem);
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+
+    // Click outside
+    fireEvent.mouseDown(screen.getByTestId('outside'));
+    expect(screen.queryByText('Item 2')).not.toBeInTheDocument();
   });
 });

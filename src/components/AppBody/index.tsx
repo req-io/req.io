@@ -69,27 +69,27 @@ const AppBody = () => {
 
     if (method === 'GET' && url !== '') {
       get(combinedUrl, headers)
-        .then(response => onSuccessResponse(response, startTime))
+        .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
     if (method === 'POST' && url !== '') {
       post(combinedUrl, JSON.parse(body), headers)
-        .then(response => onSuccessResponse(response, startTime))
+        .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
     if (method === 'PATCH' && url !== '') {
       patch(combinedUrl, JSON.parse(body), headers)
-        .then(response => onSuccessResponse(response, startTime))
+        .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
     if (method === 'PUT' && url !== '') {
       put(combinedUrl, JSON.parse(body), headers)
-        .then(response => onSuccessResponse(response, startTime))
+        .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
     if (method === 'DELETE' && url !== '') {
       delete_req(combinedUrl, headers)
-        .then(response => onSuccessResponse(response, startTime))
+        .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
   };
@@ -112,13 +112,7 @@ const AppBody = () => {
 
   return (
     <div className="app-body">
-      <UrlPanel
-        method={method}
-        url={url}
-        onMethodChange={setMethod}
-        onUrlChange={setUrl}
-        onSend={onSend}
-      />
+      <UrlPanel url={url} onMethodChange={setMethod} onUrlChange={setUrl} onSend={onSend} />
       <div className="sub-container">
         <RequestPanel
           method={method}

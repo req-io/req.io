@@ -1,56 +1,30 @@
 import './index.scss';
-import { MethodSelectProps, UrlPanelProps } from './types.ts';
+import { UrlPanelProps } from './types.ts';
+import Dropdown from '../Dropdown/index.tsx';
 
-const MethodSelect = ({ methods, onSelect, value }: MethodSelectProps) => {
-  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelect(event.target.value);
-  };
-
-  const methodColors: Record<string, string> = {
-    GET: 'var(--color-get)',
-    POST: 'var(--color-post)',
-    PUT: 'var(--color-put)',
-    PATCH: 'var(--color-patch)',
-    DELETE: 'var(--color-delete)',
-  };
-
-  return (
-    <select
-      className="method-select"
-      onChange={onChange}
-      value={value}
-      style={{ color: methodColors[value], backgroundColor: 'transparent' }}
-    >
-      {methods.map((method: string) => (
-        <option key={method} value={method} style={{ color: methodColors[method] }}>
-          {method}
-        </option>
-      ))}
-    </select>
-  );
-};
-
-const UrlPanel = ({ method, url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) => {
+const UrlPanel = ({ url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) => {
   const onUrlKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onSend();
     }
   };
 
-  const onMethodSelect = (method: string) => onMethodChange(method);
-
   const onSendButtonClick = () => onSend();
 
   const onUrlUpdate = (event: React.ChangeEvent<HTMLInputElement>) =>
     onUrlChange(event.target.value);
 
+  const items = [
+    { name: 'GET', onSelect: () => onMethodChange('GET'), color: '#10B95F' },
+    { name: 'POST', onSelect: () => onMethodChange('POST'), color: '#FFC107' },
+    { name: 'PATCH', onSelect: () => onMethodChange('PATCH'), color: '#6366F1' },
+    { name: 'PUT', onSelect: () => onMethodChange('PUT'), color: '#007BFF' },
+    { name: 'DELETE', onSelect: () => onMethodChange('DELETE'), color: '#DC3545' },
+  ];
+
   return (
     <div className="url-panel">
-      <MethodSelect
-        value={method}
-        methods={['GET', 'POST', 'PATCH', 'PUT', 'DELETE']}
-        onSelect={onMethodSelect}
-      />
+      <Dropdown items={items} />
       <input
         type="text"
         className="url-input"
