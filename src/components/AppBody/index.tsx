@@ -1,14 +1,17 @@
 import './index.scss';
+import { Method } from './types.ts';
+
+import { delete_req, get, patch, post, put } from '../../api/rest.ts';
+import { getErrorCode, getHttpStatusText } from '../../api/statusCodes.ts';
+import { Header, QueryParam } from '../RequestPanel/types.ts';
+
 import RequestPanel from '../RequestPanel';
 import ResponsePanel from '../ResponsePanel';
 import PaneSplitter from '../PaneSplitter';
 import UrlPanel from '../UrlPanel';
-import { delete_req, get, patch, post, put } from '../../api/rest.ts';
-import { getErrorCode, getHttpStatusText } from '../../api/statusCodes.ts';
 
 import { useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { Header, QueryParam } from '../RequestPanel/types.ts';
 
 const AppBody = () => {
   const [method, setMethod] = useState('GET');
@@ -67,27 +70,27 @@ const AppBody = () => {
 
     const startTime = performance.now();
 
-    if (method === 'GET' && url !== '') {
+    if (method === Method.Get && url !== '') {
       get(combinedUrl, headers)
         .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
-    if (method === 'POST' && url !== '') {
+    if (method === Method.Post && url !== '') {
       post(combinedUrl, JSON.parse(body), headers)
         .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
-    if (method === 'PATCH' && url !== '') {
+    if (method === Method.Patch && url !== '') {
       patch(combinedUrl, JSON.parse(body), headers)
         .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
-    if (method === 'PUT' && url !== '') {
+    if (method === Method.Put && url !== '') {
       put(combinedUrl, JSON.parse(body), headers)
         .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);
     }
-    if (method === 'DELETE' && url !== '') {
+    if (method === Method.Delete && url !== '') {
       delete_req(combinedUrl, headers)
         .then((response) => onSuccessResponse(response, startTime))
         .catch(onFailureResponse);

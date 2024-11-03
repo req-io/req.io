@@ -1,12 +1,16 @@
 import './index.scss';
+import { RequestPanelProps } from './types.ts';
+
 import Editor from '../Editor';
 import Navbar from '../Navbar';
-import { useState } from 'react';
 import RequestHeadersPanel from '../RequestHeadersPanel';
-import { RequestPanelProps } from './types.ts';
-import { NavbarItemComponentMap } from '../Navbar/types.ts';
 import RequestParamsPanel from '../RequestParamsPanel/index.tsx';
 import Dropdown from '../CustomDropdown/index.tsx';
+
+import { NavbarItemComponentMap } from '../Navbar/types.ts';
+import { Method } from '../AppBody/types.ts';
+
+import { useState } from 'react';
 
 const EmptyRequestBodyPlaceholder = () => (
   <div className="empty-placeholder">No body required for GET requests!</div>
@@ -29,7 +33,7 @@ const RequestPanel = (props: RequestPanelProps) => {
   }));
 
   const requestBody =
-    props.method === 'GET' ? (
+    props.method === Method.Get ? (
       <EmptyRequestBodyPlaceholder />
     ) : (
       <Editor readOnly={false} initialValue={props.body} onValueChange={props.onBodyChange} />
