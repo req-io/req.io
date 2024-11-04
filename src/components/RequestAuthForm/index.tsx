@@ -8,15 +8,14 @@ const BasicAuthForm = (props: BasicAuthFormProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-  {
+  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
-    props.onCredentialsChange({username, password})
-  }
+    props.onCredentialsChange({ username: event.target.value, password });
+  };
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    props.onCredentialsChange({username, password})
-  }
+    props.onCredentialsChange({ username, password: event.target.value });
+  };
 
   return (
     <div className="authentication-form">
@@ -41,7 +40,7 @@ const AuthenticationForm = (props: AuthenticationFormProps) => {
     return <div className="auth-placeholder">Select authentication type!</div>;
   }
   if (props.authType == AuthType.BasicAuth) {
-    return <BasicAuthForm onCredentialsChange={props.onCredentialsChange}/>;
+    return <BasicAuthForm onCredentialsChange={props.onCredentialsChange} />;
   }
   return <div className="auth-placeholder">Selected authentication type is not supported yet!</div>;
 };
