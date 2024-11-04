@@ -55,7 +55,7 @@ const RequestPanel = (props: RequestPanelProps) => {
     />
   );
 
-  const authPanel = <RequestAuthPanel />;
+  const authPanel = <RequestAuthPanel onCredentialsChange={props.onCredentialsChange} />;
 
   const navbarItemComponentMap: NavbarItemComponentMap = {
     body: requestBody,

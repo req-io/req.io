@@ -1,18 +1,46 @@
 import './index.scss';
+import { AuthType, RequestAuthProps } from './types';
 
 import Dropdown from '../Dropdown';
+import AuthenticationForm from '../RequestAuthForm';
 
-const RequestAuthPanel = () => {
+import { useState } from 'react';
+
+const RequestAuthPanel = (props: RequestAuthProps) => {
+  const [authType, setAuthType] = useState(AuthType.NoAuth);
+
   const items = [
-    { id: 'NoAuth', name: 'NO AUTH', onSelect: () => {}, color: '#a3a3a3' },
-    { id: 'BasicAuth', name: 'BASIC AUTH', onSelect: () => {}, color: '#a3a3a3' },
-    { id: 'ApiKey', name: 'API KEY', onSelect: () => {}, color: '#a3a3a3' },
+    {
+      id: 'NoAuth',
+      name: 'NO AUTH',
+      onSelect: () => setAuthType(AuthType.NoAuth),
+      color: '#a3a3a3',
+    },
+    {
+      id: 'BasicAuth',
+      name: 'BASIC AUTH',
+      onSelect: () => setAuthType(AuthType.BasicAuth),
+      color: '#a3a3a3',
+    },
+    {
+      id: 'ApiKey',
+      name: 'API KEY',
+      onSelect: () => setAuthType(AuthType.ApiKey),
+      color: '#a3a3a3',
+    },
   ];
+
+  const onCredentialsChange = (credentials: object) => {
+    props.onCredentialsChange({...credentials, authType})
+  }
 
   return (
     <div className="request-auth-panel">
       <Dropdown items={items} />
-      <div className="auth-placeholder">Select authentication type!</div>
+      <AuthenticationForm
+        authType={authType}
+        onCredentialsChange={onCredentialsChange}
+      />
     </div>
   );
 };

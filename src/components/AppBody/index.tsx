@@ -20,6 +20,7 @@ const AppBody = () => {
     { key: 'Content-Type', value: 'application/json' },
   ]);
   const [queryParams, setQueryParams] = useState<QueryParam[]>([]);
+  const [credentials, setCredentials] = useState({})
   const [body, setBody] = useState('{}');
   const [isNoRequestTriggered, setIsNoRequestTriggered] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -127,6 +128,7 @@ const AppBody = () => {
           onNewHeaderAddition={onNewHeaderAddition}
           onParamsChange={onParamsChange}
           onNewParamAddition={onNewParamAddition}
+          onCredentialsChange={setCredentials}
         />
         <PaneSplitter direction="horizontal" />
         <ResponsePanel

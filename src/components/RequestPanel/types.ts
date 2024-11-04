@@ -18,4 +18,5 @@ export type RequestPanelProps = {
   onParamsChange: (params: QueryParam[]) => void;
   onNewParamAddition: (param: QueryParam) => void;
   onBodyChange: (value: string) => void;
+  onCredentialsChange: (credentials: object) => void;
 };
