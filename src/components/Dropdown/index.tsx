@@ -4,9 +4,13 @@ import { useState, useRef, useEffect } from 'react';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const Dropdown = ({ items }: DropdownProps) => {
+const Dropdown = ({ items, activeItemId }: DropdownProps) => {
+  let activeItem = null;
+  if (activeItemId) {
+    activeItem = items.find((item) => item.id === activeItemId);
+  }
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<DropdownItem>(items[0]);
+  const [selectedItem, setSelectedItem] = useState<DropdownItem>(activeItem || items[0]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);

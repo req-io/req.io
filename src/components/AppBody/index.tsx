@@ -112,7 +112,13 @@ const AppBody = () => {
 
   return (
     <div className="app-body">
-      <UrlPanel url={url} onMethodChange={setMethod} onUrlChange={setUrl} onSend={onSend} />
+      <UrlPanel
+        url={url}
+        method={method}
+        onMethodChange={setMethod}
+        onUrlChange={setUrl}
+        onSend={onSend}
+      />
       <div className="sub-container">
         <RequestPanel
           method={method}
