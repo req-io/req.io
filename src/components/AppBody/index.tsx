@@ -5,13 +5,14 @@ import PaneSplitter from '../PaneSplitter';
 import UrlPanel from '../UrlPanel';
 import { delete_req, get, patch, post, put } from '../../api/rest.ts';
 import { getErrorCode, getHttpStatusText } from '../../api/statusCodes.ts';
-
-import { useState } from 'react';
-import { AxiosError, AxiosResponse } from 'axios';
 import { Header, QueryParam } from '../RequestPanel/types.ts';
 
+import { useEffect, useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
+import YAML from 'yaml';
+
 const AppBody = () => {
-  const [method, setMethod] = useState('GET');
+  const [method, setMethod] = useState('PATCH');
   const [url, setUrl] = useState('');
   const [headers, setHeaders] = useState<Header[]>([
     { key: 'Content-Type', value: 'application/json' },
@@ -24,6 +25,29 @@ const AppBody = () => {
   const [statusCode, setStatusCode] = useState(0);
   const [statusText, setStatusText] = useState('');
   const [timeTaken, setTimeTaken] = useState(0);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [activeRequest, setActiveRequest] = useState({
+    collectionName: 'scratchpad',
+    requestName: 'default',
+    requestPath: '~/.reqio/scratchpad/default.req',
+  });
+
+  useEffect(() => {
+    const getRequestData = async () => {
+      const data = await window.electronAPI.readFile(activeRequest.requestPath);
+      const parsedData = YAML.parse(data || '');
+      return parsedData;
+    };
+
+    getRequestData().then((requestData) => {
+      setMethod(requestData.method);
+      setUrl(requestData.url || '');
+      setHeaders(requestData.headers || []);
+      setQueryParams(requestData.queryParams || []);
+      setBody(JSON.stringify(requestData.body) || '');
+    });
+  }, [activeRequest]);
 
   const onSuccessResponse = (response: AxiosResponse, startTime: number) => {
     const endTime = performance.now();
