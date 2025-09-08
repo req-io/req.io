@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - run: npm install --dev
-      - run: npm run test
+      - run: npm run test:coverage
 
 workflows:
   version: 2
