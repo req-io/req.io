@@ -24,3 +24,8 @@ release
 *.njsproj
 *.sln
 *.sw?
+
+# Coverage reports
+coverage/
+*.lcov
+coverage.lcov

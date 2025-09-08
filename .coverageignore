@@ -1,0 +1,72 @@
+# Coverage ignore file
+# This file specifies patterns for files that should be excluded from coverage analysis
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+**/*.test-utils.ts
+**/*.test-utils.tsx
+
+# Type definition files
+**/*.d.ts
+**/vite-env.d.ts
+
+# Entry points (usually not tested directly)
+src/index.tsx
+src/App.tsx
+src/main.tsx
+
+# Electron files
+electron/**
+
+# Build outputs
+dist/**
+dist-electron/**
+release/**
+
+# Dependencies
+node_modules/**
+
+# Coverage reports
+coverage/**
+
+# Test setup files
+tests/**
+
+# Configuration files
+**/*.config.js
+**/*.config.ts
+vite.config.ts
+vitest.config.ts
+tsconfig*.json
+electron-builder.json5
+
+# Styles and assets
+**/*.scss
+**/*.css
+**/*.svg
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.ico
+
+# Documentation
+**/*.md
+README.md
+CONTRIBUTING.md
+
+# Package files
+package.json
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
