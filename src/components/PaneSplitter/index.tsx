@@ -5,7 +5,7 @@ export type PaneSplitterProps = {
 };
 
 const PaneSplitter = (props: PaneSplitterProps) => {
-  return <div className={`pane-splitter-${props.direction}`}></div>;
+  return <div className={`pane-splitter-${props.direction}`} data-testid={'pane-splitter'}></div>;
 };
 
 export default PaneSplitter;

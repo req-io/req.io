@@ -100,7 +100,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
 
   const isRequestCompleted = !(props.isNoRequestTriggered || props.isLoading);
   return (
-    <div className="response-panel">
+    <div className="response-panel" data-testid={'response-panel'}>
       <div className="response-panel-header">
         <Navbar items={itemsConfig} />
         {isRequestCompleted && (
