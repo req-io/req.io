@@ -28,7 +28,7 @@ const Dropdown = ({ items }: DropdownProps) => {
   }, []);
 
   return (
-    <div className="dropdown" ref={dropdownRef}>
+    <div className="dropdown" ref={dropdownRef} data-testid="dropdown">
       <div className="dropdown-selected" onClick={toggleDropdown}>
         <p style={{ color: selectedItem?.color || 'black' }}>{selectedItem.name}</p>
         {isOpen ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
