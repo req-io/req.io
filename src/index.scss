@@ -1,4 +1,4 @@
-@import 'styles/variables/colors';
+@use 'styles/variables/colors';
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
 :root {
@@ -10,7 +10,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: $primary-color;
+  background-color: colors.$primary-color;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

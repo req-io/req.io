@@ -1,4 +1,4 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .response-panel {
   width: 50%;
@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: $secondary-light-color;
+    color: colors.$secondary-light-color;
   }
 
   .raw-response {
@@ -66,19 +66,19 @@
     }
 
     .success {
-      color: $status-success-color;
+      color: colors.$status-success-color;
     }
 
     .redirect {
-      color: $status-redirect-color;
+      color: colors.$status-redirect-color;
     }
 
     .client-error {
-      color: $status-client-error-color;
+      color: colors.$status-client-error-color;
     }
 
     .server-error {
-      color: $status-server-error-color;
+      color: colors.$status-server-error-color;
     }
   }
 
@@ -87,5 +87,4 @@
     margin-left: 10px;
     color: #333;
   }
-
 }

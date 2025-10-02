@@ -1,4 +1,4 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .request-params-panel {
   display: flex;
@@ -10,10 +10,10 @@
     width: 100%;
 
     tr:nth-child(even) {
-      background-color: $primary-light-color;
+      background-color: colors.$primary-light-color;
       td {
         input {
-          background-color: $primary-light-color;
+          background-color: colors.$primary-light-color;
         }
       }
     }
@@ -21,7 +21,7 @@
     tr {
       td,
       th {
-        border: 1px solid $divider-dark-color;
+        border: 1px solid colors.$divider-dark-color;
         text-align: left;
       }
 
@@ -41,7 +41,7 @@
           font-size: 14px;
           padding: 10px 0;
           outline: none;
-          background-color: $primary-color;
+          background-color: colors.$primary-color;
           border: none;
         }
         &:last-child {
@@ -61,13 +61,13 @@
     padding: 10px;
     margin: 20px 0;
     outline: none;
-    background-color: $accent-color;
+    background-color: colors.$accent-color;
     border-radius: 5px;
     cursor: pointer;
   }
 
   .button:hover {
-    background-color: $accent-dark-color;
+    background-color: colors.$accent-dark-color;
   }
 
   .delete-button {
@@ -83,7 +83,7 @@
     cursor: pointer;
 
     svg {
-      color: $accent-dark-color;
+      color: colors.$accent-dark-color;
     }
   }
 }

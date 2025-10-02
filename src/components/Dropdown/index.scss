@@ -1,11 +1,11 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .dropdown {
   display: flex;
   position: relative;
   font-family: 'Roboto Condensed', sans-serif;
-  background-color: $primary-color;
-  border: 1px solid $divider-color;
+  background-color: colors.$primary-color;
+  border: 1px solid colors.$divider-color;
   border-radius: 5px;
   padding: 0;
   margin: 8px;
@@ -17,7 +17,7 @@
     align-items: center;
     cursor: pointer;
     font-size: 14px;
-    color: $secondary-light-color;
+    color: colors.$secondary-light-color;
     padding: 0 10px;
   }
 
@@ -25,8 +25,8 @@
     position: absolute;
     top: 50px;
     left: -1px;
-    background-color: $primary-color;
-    border: 1px solid $divider-color;
+    background-color: colors.$primary-color;
+    border: 1px solid colors.$divider-color;
     border-radius: 5px;
     margin-top: 5px;
     margin: 0;
@@ -42,7 +42,7 @@
     justify-content: flex-start;
 
     &:hover {
-      background-color: $primary-dark-color;
+      background-color: colors.$primary-dark-color;
     }
   }
 }
