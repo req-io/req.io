@@ -107,4 +107,85 @@ describe('UrlPanel', () => {
 
     expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
   });
+
+  it('calls onMethodChange when selecting PATCH method from dropdown', () => {
+    const { onMethodChange } = setup();
+
+    const dropdown = screen.getByTestId('dropdown');
+    const selected = dropdown.querySelector('.dropdown-selected');
+
+    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
+
+    if (selected) {
+      fireEvent.click(selected);
+    }
+
+    const patchItem = screen.getByText('PATCH');
+    fireEvent.click(patchItem);
+
+    expect(onMethodChange).toHaveBeenCalledWith('PATCH');
+  });
+
+  it('calls onMethodChange when selecting PUT method from dropdown', () => {
+    const { onMethodChange } = setup();
+
+    const dropdown = screen.getByTestId('dropdown');
+    const selected = dropdown.querySelector('.dropdown-selected');
+
+    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
+
+    if (selected) {
+      fireEvent.click(selected);
+    }
+
+    const putItem = screen.getByText('PUT');
+    fireEvent.click(putItem);
+
+    expect(onMethodChange).toHaveBeenCalledWith('PUT');
+  });
+
+  it('calls onMethodChange when selecting DELETE method from dropdown', () => {
+    const { onMethodChange } = setup();
+
+    const dropdown = screen.getByTestId('dropdown');
+    const selected = dropdown.querySelector('.dropdown-selected');
+
+    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
+
+    if (selected) {
+      fireEvent.click(selected);
+    }
+
+    const deleteItem = screen.getByText('DELETE');
+    fireEvent.click(deleteItem);
+
+    expect(onMethodChange).toHaveBeenCalledWith('DELETE');
+  });
+
+  it('calls onMethodChange when reselecting GET method after selecting any other method from dropdown', () => {
+    const { onMethodChange } = setup();
+
+    const dropdown = screen.getByTestId('dropdown');
+    const selected = dropdown.querySelector('.dropdown-selected');
+
+    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
+
+    if (selected) {
+      fireEvent.click(selected);
+    }
+
+    const postItem = screen.getByText('POST');
+    fireEvent.click(postItem);
+
+    expect(onMethodChange).toHaveBeenCalledWith('POST');
+
+    if (selected) {
+      fireEvent.click(selected);
+    }
+
+    const getItem = screen.getByText('GET');
+    fireEvent.click(getItem);
+
+    expect(onMethodChange).toHaveBeenCalledWith('GET');
+  });
 });
