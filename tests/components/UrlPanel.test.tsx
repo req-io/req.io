@@ -22,13 +22,13 @@ describe('UrlPanel', () => {
     return { onMethodChange, onSend, onUrlChange };
   };
 
-  it('renders input with correct value', () => {
+  it('should render input with correct value', () => {
     setup();
     const input = screen.getByPlaceholderText('https://example.com');
     expect(input).toHaveValue('https://test.com');
   });
 
-  it('calls onUrlChange when typing in input', () => {
+  it('should call onUrlChange when typing in input', () => {
     const { onUrlChange } = setup();
     const input = screen.getByRole('textbox');
 
@@ -36,7 +36,7 @@ describe('UrlPanel', () => {
     expect(onUrlChange).toHaveBeenCalledWith('https://new.com');
   });
 
-  it('calls onSend when pressing Enter in input', () => {
+  it('should call onSend when pressing Enter in input', () => {
     const { onSend } = setup();
     const input = screen.getByRole('textbox');
 
@@ -44,19 +44,19 @@ describe('UrlPanel', () => {
     expect(onSend).toHaveBeenCalled();
   });
 
-  it('calls onSend when clicking Send button', () => {
+  it('should call onSend when clicking Send button', () => {
     const { onSend } = setup();
     fireEvent.click(screen.getByRole('button', { name: /send/i }));
     expect(onSend).toHaveBeenCalled();
   });
 
-  it('Dropdown is rendered in the screen', () => {
+  it('should render Dropdown in the screen', () => {
     setup();
 
     expect(screen.getByTestId('dropdown')).toBeInTheDocument();  
   });
 
-  it('open the dropdown when clicking on it', () => {
+  it('should open the dropdown when clicking on it', () => {
     setup();
 
     const dropdown = screen.getByTestId('dropdown');
@@ -71,7 +71,7 @@ describe('UrlPanel', () => {
     expect(dropdown.querySelector('.dropdown-menu')).toBeInTheDocument();
   });
 
-  it('calls onMethodChange when selecting a method from dropdown', () => {
+  it('should call onMethodChange when selecting a method from dropdown', () => {
     const { onMethodChange } = setup();
 
     const dropdown = screen.getByTestId('dropdown');
@@ -89,7 +89,7 @@ describe('UrlPanel', () => {
     expect(onMethodChange).toHaveBeenCalledWith('POST');
   });
 
-  it('closes dropdown when clicking outside', () => {
+  it('should close dropdown when clicking outside', () => {
     setup();
 
     const dropdown = screen.getByTestId('dropdown');
@@ -108,7 +108,7 @@ describe('UrlPanel', () => {
     expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
   });
 
-  it('calls onMethodChange when selecting PATCH method from dropdown', () => {
+  it('should call onMethodChange when selecting PATCH method from dropdown', () => {
     const { onMethodChange } = setup();
 
     const dropdown = screen.getByTestId('dropdown');
@@ -126,7 +126,7 @@ describe('UrlPanel', () => {
     expect(onMethodChange).toHaveBeenCalledWith('PATCH');
   });
 
-  it('calls onMethodChange when selecting PUT method from dropdown', () => {
+  it('should call onMethodChange when selecting PUT method from dropdown', () => {
     const { onMethodChange } = setup();
 
     const dropdown = screen.getByTestId('dropdown');
@@ -144,7 +144,7 @@ describe('UrlPanel', () => {
     expect(onMethodChange).toHaveBeenCalledWith('PUT');
   });
 
-  it('calls onMethodChange when selecting DELETE method from dropdown', () => {
+  it('should call onMethodChange when selecting DELETE method from dropdown', () => {
     const { onMethodChange } = setup();
 
     const dropdown = screen.getByTestId('dropdown');
@@ -162,7 +162,7 @@ describe('UrlPanel', () => {
     expect(onMethodChange).toHaveBeenCalledWith('DELETE');
   });
 
-  it('calls onMethodChange when reselecting GET method after selecting any other method from dropdown', () => {
+  it('should call onMethodChange when reselecting GET method after selecting any other method from dropdown', () => {
     const { onMethodChange } = setup();
 
     const dropdown = screen.getByTestId('dropdown');
