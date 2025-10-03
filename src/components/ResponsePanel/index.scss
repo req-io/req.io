@@ -52,6 +52,7 @@
     .status {
       display: flex;
       align-items: center;
+      font-size: 15px;
     }
 
     .response-header-right {
@@ -59,6 +60,11 @@
       align-items: center;
       gap: 15px;
       padding-right: 2px;
+    }
+
+    .response-size {
+      color: $accent-contrast-color;
+      font-size: 15px;
     }
 
     .copyIcon {
