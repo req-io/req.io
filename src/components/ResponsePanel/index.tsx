@@ -81,7 +81,10 @@ const ResponsePanel = (props: ResponsePanelProps) => {
   if (props.response) {
     if (typeof props.response === 'string') {
       responseSize = new TextEncoder().encode(props.response).length;
-    } else if (props.response instanceof Blob) {
+    } else if (
+      typeof Blob !== 'undefined' &&
+      props.response instanceof Blob
+    ) {
       responseSize = props.response.size;
     } else if (typeof props.response === 'object') {
       try {
