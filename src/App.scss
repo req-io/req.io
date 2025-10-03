@@ -1,8 +1,8 @@
-@import 'styles/variables/colors';
+@use 'styles/variables/colors';
 
 #root {
   height: 100%;
   width: 100%;
   text-align: center;
-  background-color: $primary-color;
+  background-color: colors.$primary-color;
 }

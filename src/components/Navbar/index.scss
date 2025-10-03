@@ -1,4 +1,4 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .navbar {
   font-family:
@@ -20,16 +20,16 @@
     }
 
     .item {
-      color: $secondary-light-color;
+      color: colors.$secondary-light-color;
     }
 
     .item:hover {
-      color: $secondary-dark-color;
+      color: colors.$secondary-dark-color;
     }
 
     .active {
-      color: $secondary-dark-color;
-      border-bottom: $accent-color 0.1rem solid;
+      color: colors.$secondary-dark-color;
+      border-bottom: colors.$accent-color 0.1rem solid;
     }
   }
 }

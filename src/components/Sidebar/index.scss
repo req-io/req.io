@@ -1,4 +1,4 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .sidebar {
   height: 100%;
@@ -14,21 +14,21 @@
     }
 
     .item {
-      color: $secondary-light-color;
+      color: colors.$secondary-light-color;
       .icon {
         font-size: 1.2rem;
       }
     }
 
     .item:hover {
-      color: $secondary-dark-color;
-      background-color: $primary-dark-color;
+      color: colors.$secondary-dark-color;
+      background-color: colors.$primary-dark-color;
     }
 
     .active {
-      color: $secondary-dark-color;
-      background-color: $primary-dark-color;
-      border-left: $accent-color 0.2rem solid;
+      color: colors.$secondary-dark-color;
+      background-color: colors.$primary-dark-color;
+      border-left: colors.$accent-color 0.2rem solid;
     }
   }
 }
