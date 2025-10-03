@@ -18,4 +18,5 @@ describe('Spinner Component', () => {
     expect(container.querySelector('.spinner-container')?.children.length).toBe(1);
     expect(container.querySelector('.spinner')?.parentElement).toHaveClass('spinner-container');
   });
+
 });
