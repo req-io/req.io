@@ -47,9 +47,8 @@ function formatSize(bytes: number): string {
 
 function isBlob(val: unknown): val is Blob {
   return (
-    typeof Blob !== 'undefined' &&
-    val instanceof Blob
-  );
+    typeof Blob !== 'undefined' && val instanceof Blob
+    );
 }
 
 const ResponsePanel = (props: ResponsePanelProps) => {
