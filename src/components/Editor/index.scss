@@ -1,26 +1,26 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .editor {
   width: 100% !important;
   height: 100% !important;
-  background-color: $primary-color !important;
+  background-color: colors.$primary-color !important;
   box-sizing: border-box;
 
   .ace_gutter {
-    background: $primary-color !important;
-    border-right: 0.25px solid $divider-color !important;
+    background: colors.$primary-color !important;
+    border-right: 0.25px solid colors.$divider-color !important;
   }
 
   .ace_gutter-active-line {
-    background: $primary-light-color !important;
+    background: colors.$primary-light-color !important;
   }
 
   .ace_active-line {
-    background: $primary-light-color !important;
+    background: colors.$primary-light-color !important;
   }
 
   .ace_marker-layer .ace_bracket {
-    background: $primary-dark-color !important;
+    background: colors.$primary-dark-color !important;
   }
 
   .ace_scrollbar::-webkit-scrollbar {

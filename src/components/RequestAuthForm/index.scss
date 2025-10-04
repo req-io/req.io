@@ -1,4 +1,4 @@
-@import '../../styles/variables/colors';
+@use '../../styles/variables/colors';
 
 .authentication-form {
   display: flex;
@@ -8,15 +8,17 @@
   width: 300px;
 
   .input {
-    font-family: Roboto Condensed, sans-serif;
+    font-family:
+      Roboto Condensed,
+      sans-serif;
     height: 40px;
     width: 100%;
     font-size: 14px;
     padding: 0 20px;
     margin: 8px;
     outline: none;
-    background-color: $primary-color;
-    border: 1px solid $divider-color;
+    background-color: colors.$primary-color;
+    border: 1px solid colors.$divider-color;
     border-radius: 5px;
   }
 }
