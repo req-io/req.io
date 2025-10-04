@@ -39,6 +39,18 @@ const Status = (props: StatusProps) => {
   return <div className={statusClassName}>{statusMessage}</div>;
 };
 
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+}
+
+function isBlob(val: unknown): val is Blob {
+  return (
+    typeof Blob !== 'undefined' && val instanceof Blob
+    );
+}
+
 const ResponsePanel = (props: ResponsePanelProps) => {
   const [activeItem, setActiveItem] = useState('preview');
   const [isTextCopied, setIsTextCopied] = useState(false);
@@ -71,6 +83,21 @@ const ResponsePanel = (props: ResponsePanelProps) => {
         });
   };
 
+  let responseSize = 0;
+  if (props.response) {
+    if (typeof props.response === 'string') {
+      responseSize = new TextEncoder().encode(props.response).length;
+    } else if (isBlob(props.response)) {
+      responseSize = (props.response as Blob).size;
+    } else if (typeof props.response === 'object') {
+      try {
+        responseSize = new TextEncoder().encode(JSON.stringify(props.response)).length;
+      } catch {
+        responseSize = 0;
+      }
+    }
+  }
+
   const isRequestCompleted = !(props.isNoRequestTriggered || props.isLoading);
   return (
     <div className="response-panel">
@@ -79,6 +106,9 @@ const ResponsePanel = (props: ResponsePanelProps) => {
         {isRequestCompleted && (
           <div className="response-header-right">
             <Status statusCode={props.statusCode} statusText={props.statusText} statusTime={props.timeTaken}/>
+            <span className="response-size" style={{ marginLeft: 12 }}>
+              {formatSize(responseSize)}
+            </span>
             <ContentCopyIcon fontSize="small" onClick={copyToClipboard} className="copyIcon" />
           </div>
         )}
