@@ -1,0 +1,64 @@
+@use '../../styles/variables/colors';
+
+.response-headers-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.2rem 1rem;
+  .headers-table {
+    border-collapse: collapse;
+    width: 45vw;
+
+    tr:nth-child(even) {
+      background-color: colors.$primary-light-color;
+      td {
+        p {
+          background-color: colors.$primary-light-color;
+        }
+      }
+    }
+
+    tr {
+      width: 100%;
+      td,
+      th {
+        border: 1px solid colors.$divider-dark-color;
+        text-align: left;
+      }
+
+      th {
+        padding: 8px;
+      }
+
+      td {
+        padding: 0 8px;
+        width: 35%;
+        p {
+          font-family:
+            Roboto Condensed,
+            sans-serif;
+          flex: 1;
+          font-size: 14px;
+          padding: 10px 0;
+          line-height: 20px;
+          margin: 0;
+          outline: none;
+          background-color: colors.$primary-color;
+          border: none;
+        }
+      }
+
+      .header-key {
+        width: 35%;
+      }
+
+      .header-value {
+        width: 65%;
+      }
+    }
+  }
+
+  .placeholder-msg {
+    color: colors.$secondary-light-color;
+  }
+}

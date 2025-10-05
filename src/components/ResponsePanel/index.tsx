@@ -7,6 +7,7 @@ import { RawResponseViewerProps, ResponsePanelProps, StatusProps } from './types
 import { NavbarItemComponentMap } from '../Navbar/types.ts';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SnackBar from '../Snackbar';
+import ResponseHeadersPanel from '../ResponseHeadersPanel/index.tsx';
 
 const getStatusClassName = (statusCode: number) => {
   if (statusCode >= 200 && statusCode < 300) {
@@ -46,9 +47,7 @@ function formatSize(bytes: number): string {
 }
 
 function isBlob(val: unknown): val is Blob {
-  return (
-    typeof Blob !== 'undefined' && val instanceof Blob
-    );
+  return typeof Blob !== 'undefined' && val instanceof Blob;
 }
 
 const ResponsePanel = (props: ResponsePanelProps) => {
@@ -57,6 +56,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
   const items = [
     { name: 'preview', label: 'Preview' },
     { name: 'raw', label: 'Raw' },
+    { name: 'headers', label: 'Headers' },
   ];
 
   const itemsConfig = items.map((item) => ({
@@ -68,6 +68,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
   const navbarItemComponentMap: NavbarItemComponentMap = {
     preview: <Editor readOnly={true} initialValue={props.response} />,
     raw: <RawResponseViewer response={props.response} />,
+    headers: <ResponseHeadersPanel headers={props.headers} />,
   };
 
   const copyToClipboard = () => {
@@ -105,7 +106,11 @@ const ResponsePanel = (props: ResponsePanelProps) => {
         <Navbar items={itemsConfig} />
         {isRequestCompleted && (
           <div className="response-header-right">
-            <Status statusCode={props.statusCode} statusText={props.statusText} statusTime={props.timeTaken}/>
+            <Status
+              statusCode={props.statusCode}
+              statusText={props.statusText}
+              statusTime={props.timeTaken}
+            />
             <span className="response-size" style={{ marginLeft: 12 }}>
               {formatSize(responseSize)}
             </span>
