@@ -78,7 +78,6 @@ describe(`AppBody`, () => {
   });
 
   it(`should pass the required props to its sub-components`, () => {
-    // This test now checks that the props are defined on the mocked components
     expect(mockedComponents.urlPanel?.onSend).toBeInstanceOf(Function);
     expect(mockedComponents.requestPanel?.method).toBeDefined();
     expect(mockedComponents.responsePanel?.isLoading).toBeDefined();
