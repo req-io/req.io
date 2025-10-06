@@ -126,7 +126,7 @@ const AppBody = () => {
   };
 
   return (
-    <div className="app-body">
+    <div className="app-body" data-testid="app-body">
       <UrlPanel url={url} onMethodChange={setMethod} onUrlChange={setUrl} onSend={onSend} />
       <div className="sub-container">
         <RequestPanel

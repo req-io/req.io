@@ -65,7 +65,7 @@ const RequestPanel = (props: RequestPanelProps) => {
   };
 
   return (
-    <div className="request-panel">
+    <div className="request-panel" data-testid={'request-panel'}>
       <Navbar items={itemsConfig} />
       {navbarItemComponentMap[activeItem]}
     </div>

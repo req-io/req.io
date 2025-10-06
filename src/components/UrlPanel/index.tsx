@@ -23,7 +23,7 @@ const UrlPanel = ({ url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) =
   ];
 
   return (
-    <div className="url-panel">
+    <div className="url-panel" data-testid="url-panel">
       <Dropdown items={items} />
       <input
         type="text"
