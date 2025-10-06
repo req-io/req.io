@@ -26,6 +26,7 @@ const AppBody = () => {
   const [isNoRequestTriggered, setIsNoRequestTriggered] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState('');
+  const [responseHeaders, setResponseHeaders] = useState<Header[]>([]);
   const [statusCode, setStatusCode] = useState(0);
   const [statusText, setStatusText] = useState('');
   const [timeTaken, setTimeTaken] = useState(0);
@@ -37,6 +38,12 @@ const AppBody = () => {
 
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
+    setResponseHeaders(
+      Object.entries(response.headers).map(([key, value]) => ({
+        key,
+        value: Array.isArray(value) ? value.join(', ') : value,
+      }))
+    );
     setStatusCode(response.status);
     setStatusText(response.statusText || getHttpStatusText(response.status));
   };
@@ -45,6 +52,12 @@ const AppBody = () => {
     setIsLoading(false);
     if (error.response) {
       setResponse(JSON.stringify(error.response?.data || {}, null, 2));
+      setResponseHeaders(
+        Object.entries(error.response?.headers || {}).map(([key, value]) => ({
+          key,
+          value: Array.isArray(value) ? value.join(', ') : value,
+        }))
+      );
       setStatusCode(error.response?.status || 0);
       setStatusText(error.response?.statusText || getHttpStatusText(statusCode));
     } else {
@@ -146,6 +159,7 @@ const AppBody = () => {
           isNoRequestTriggered={isNoRequestTriggered}
           isLoading={isLoading}
           response={response}
+          headers={responseHeaders}
           statusCode={statusCode}
           statusText={statusText}
           timeTaken={timeTaken}

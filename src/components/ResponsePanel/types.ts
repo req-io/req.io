@@ -1,7 +1,13 @@
+export type Header = {
+  key: string;
+  value: string;
+};
+
 export type ResponsePanelProps = {
   isNoRequestTriggered: boolean;
   isLoading: boolean;
   response: string;
+  headers: Header[];
   statusCode: number;
   statusText: string;
   timeTaken: number;

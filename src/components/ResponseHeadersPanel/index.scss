@@ -1,24 +1,25 @@
 @use '../../styles/variables/colors';
 
-.request-headers-panel {
+.response-headers-panel {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0.2rem 1rem;
   .headers-table {
     border-collapse: collapse;
-    width: 100%;
+    width: 45vw;
 
     tr:nth-child(even) {
       background-color: colors.$primary-light-color;
       td {
-        input {
+        p {
           background-color: colors.$primary-light-color;
         }
       }
     }
 
     tr {
+      width: 100%;
       td,
       th {
         border: 1px solid colors.$divider-dark-color;
@@ -31,59 +32,29 @@
 
       td {
         padding: 0 8px;
-        input {
+        width: 35%;
+        p {
           font-family:
             Roboto Condensed,
             sans-serif;
           flex: 1;
-          width: 100%;
           font-size: 14px;
-          line-height: 20px;
           padding: 10px 0;
+          line-height: 20px;
+          margin: 0;
           outline: none;
           background-color: colors.$primary-color;
           border: none;
         }
-        &:last-child {
-          width: 60px;
-          padding: 0;
-        }
       }
-    }
-  }
 
-  .button {
-    font-family:
-      Roboto Condensed,
-      sans-serif;
-    width: 110px;
-    font-size: 14px;
-    padding: 10px;
-    margin: 20px 0;
-    outline: none;
-    background-color: colors.$accent-color;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+      .header-key {
+        width: 35%;
+      }
 
-  .button:hover {
-    background-color: colors.$accent-dark-color;
-  }
-
-  .delete-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-
-    svg {
-      color: colors.$accent-dark-color;
+      .header-value {
+        width: 65%;
+      }
     }
   }
 
