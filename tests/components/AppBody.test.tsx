@@ -180,9 +180,27 @@ describe(`AppBody`, () => {
     expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('delete response', null, 2));
   });
 
+  it('should handle missing statusText in successful response', async () => {
+    const { get } = await import('../../src/api/rest.ts');
+    (get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({ status: 200, data: 'accepted response' });
+    act(() => {
+      mockedComponents.urlPanel?.onMethodChange('GET');
+      mockedComponents.urlPanel?.onUrlChange('https://example.com/accepted');
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onSend();
+    });
+    await waitFor(() => {
+      expect(mockedComponents.responsePanel?.isLoading).toBe(false);
+    });
+    expect(mockedComponents.responsePanel?.statusCode).toBe(200);
+    expect(mockedComponents.responsePanel?.statusText).toBe('OK');
+    expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('accepted response', null, 2));
+  });
+
   it(`should update ResponsePanel props on API error`, async () => {
     const { get } = await import('../../src/api/rest.ts');
-    (get as any).mockRejectedValueOnce({
+    (get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
       response: {
         status: 404,
         statusText: 'Not Found',
@@ -208,9 +226,31 @@ describe(`AppBody`, () => {
     expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify({ message: 'Resource not found' }, null, 2));
   });
 
+  it(`should handle missing statusText, body and statusCode in API error response`, async () => {
+    const { get } = await import('../../src/api/rest.ts');
+    (get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
+      response: {
+        //response missing statusText, data and statusCode
+      },
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onMethodChange('GET');
+      mockedComponents.urlPanel?.onUrlChange('https://example.com/error');
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onSend();
+    });
+    await waitFor(() => {
+      expect(mockedComponents.responsePanel?.isLoading).toBe(false);
+    });
+    expect(mockedComponents.responsePanel?.statusCode).toBe(0);
+    expect(mockedComponents.responsePanel?.statusText).toBe('Unknown');
+    expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify({}, null, 2));
+  });
+
   it(`should update ResponsePanel props on network error`, async () => {
     const { get } = await import('../../src/api/rest.ts');
-    (get as any).mockRejectedValueOnce({
+    (get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
       message: 'Network Error',
       code: 'ERR_NETWORK',
     });
@@ -231,6 +271,27 @@ describe(`AppBody`, () => {
     expect(mockedComponents.responsePanel?.statusCode).toBe(0);
     expect(mockedComponents.responsePanel?.statusText).toBe('ERROR: NETWORK_FAILURE');
     expect(mockedComponents.responsePanel?.response).toBe('Error: Network Error');
+  });
+
+  it(`should handle missing error.code in network error`, async () => {
+    const { get } = await import('../../src/api/rest.ts');
+    (get as ReturnType<typeof vi.fn>).mockRejectedValueOnce({
+      message: 'Some random error',
+      //code missing
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onMethodChange('GET');
+      mockedComponents.urlPanel?.onUrlChange('https://example.com');
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onSend();
+    });
+    await waitFor(() => {
+      expect(mockedComponents.responsePanel?.isLoading).toBe(false);
+    });
+    expect(mockedComponents.responsePanel?.statusCode).toBe(0);
+    expect(mockedComponents.responsePanel?.statusText).toBe('ERROR: UNKNOWN');
+    expect(mockedComponents.responsePanel?.response).toBe('Error: Some random error');
   });
 
   it('should use updated data from RequestPanel callbacks in API calls', async () => {
