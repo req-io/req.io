@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Header } from '../components/RequestPanel/types.ts';
 import { HeadersMapping, JSONValue } from './types.ts';
+const { ipcRenderer } = window.require('electron');
 
 const restructureHeaders = (headers: Header[]) => {
   const formattedHeaders: HeadersMapping = {};
@@ -10,10 +11,13 @@ const restructureHeaders = (headers: Header[]) => {
   return formattedHeaders;
 };
 
-export const get = async (url: string, headers: Header[] = []) => {
-  return axios.get(url, {
-    headers: restructureHeaders(headers),
-  });
+export const get = async (url: string, _headers: Header[] = []) => {
+  const result = await ipcRenderer.invoke('rest-get', { url });
+  console.log({ result });
+  return JSON.parse(result);
+  // return axios.get(url, {
+  //   headers: restructureHeaders(headers),
+  // });
 };
 
 export const post = async (url: string, body: JSONValue, headers: Header[] = []) => {

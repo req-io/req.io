@@ -23,6 +23,8 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'reqio.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: false,
+      nodeIntegration: true,
     },
     width: 1450,
     height: 900,
@@ -57,6 +59,19 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
-})
+});
+
+ipcMain.handle('rest-get', async (_ev, { url }) => {
+  console.log({ url });
+  const {
+    data,
+    status,
+    statusText,
+    headers: responseHeaders,
+    config,
+    // request,
+  } = await axios.get(url);
+  return JSON.stringify({ data, status, statusText, headers: responseHeaders, config });
+});
 
 app.whenReady().then(createWindow)
