@@ -1,11 +1,9 @@
-// Home.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import Home from '../../src/pages/Home';
 import { describe, it, expect, vi } from 'vitest';
 import CollectionsBookmarkRoundedIcon from '@mui/icons-material/CollectionsBookmarkRounded';
 import DataObjectRoundedIcon from '@mui/icons-material/DataObjectRounded';
 
-// Mock child components
 vi.mock('../../src/components/Header', () => ({
   default: () => <div data-testid="header">Header</div>,
 }));
@@ -72,7 +70,6 @@ describe('Home Component (9)', () => {
     const firstAction = vi.fn();
     const secondAction = vi.fn();
 
-    // Render Sidebar with custom actions
     render(
       <div data-testid="sidebar">
         <div data-testid="sidebar-item-0" onClick={firstAction}>Item1</div>
