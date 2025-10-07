@@ -39,7 +39,7 @@ const AppBody = () => {
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
     setResponseHeaders(
-      Object.entries(response.headers).map(([key, value]) => ({
+      Object.entries(response?.headers || {}).map(([key, value]) => ({
         key,
         value: Array.isArray(value) ? value.join(', ') : value,
       }))
