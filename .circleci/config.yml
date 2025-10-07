@@ -3,27 +3,27 @@ version: 2.1
 jobs:
   lint:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:22.12.0
     steps:
       - checkout
-      - run: npm install --dev
-      - run: npm run lint
+      - run: yarn install --dev
+      - run: yarn run lint
 
   typecheck:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:22.12.0
     steps:
       - checkout
-      - run: npm install --dev
-      - run: npm run typecheck
+      - run: yarn install --dev
+      - run: yarn run typecheck
 
   test:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:22.12.0
     steps:
       - checkout
-      - run: npm install --dev
-      - run: npm run test:coverage
+      - run: yarn install --dev
+      - run: yarn run test:coverage
 
 workflows:
   version: 2
