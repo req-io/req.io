@@ -1,0 +1,41 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        arch: [x64]  # build for Intel and Apple Silicon
+    runs-on: macos-latest
+
+    steps:
+      # 1. Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # 4. Build Electron app for the specific architecture
+      - name: Build Electron app
+        run: yarn dist -- --mac --${{ matrix.arch }}
+
+      # 5. Create GitHub release and upload artifacts
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+          name: "req.io-${{ matrix.arch }}-${{ github.ref_name }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
