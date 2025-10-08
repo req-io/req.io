@@ -26,6 +26,14 @@
     border: 1px solid colors.$divider-color;
     border-radius: 5px;
     cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:disabled {
+      background-color: colors.$accent-color;
+      color:colors.$accent-contrast-color;
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   }
 
   .send-button {
