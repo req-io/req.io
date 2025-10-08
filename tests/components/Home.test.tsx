@@ -1,8 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Home from '../../src/pages/Home';
 import { describe, it, expect, vi } from 'vitest';
-import CollectionsBookmarkRoundedIcon from '@mui/icons-material/CollectionsBookmarkRounded';
-import DataObjectRoundedIcon from '@mui/icons-material/DataObjectRounded';
 
 vi.mock('../../src/components/Header', () => ({
   default: () => <div data-testid="header">Header</div>,
