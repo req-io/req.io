@@ -33,7 +33,11 @@ const UrlPanel = ({ url, onMethodChange, onSend, onUrlChange }: UrlPanelProps) =
         onChange={onUrlUpdate}
         onKeyDown={onUrlKeyDown}
       />
-      <button className="send-button" onClick={onSendButtonClick}>
+      <button
+        className="send-button"
+        onClick={onSendButtonClick}
+        disabled={url.trim() === ''}
+      >
         Send
       </button>
     </div>
