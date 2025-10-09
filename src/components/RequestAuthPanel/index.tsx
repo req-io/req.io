@@ -14,33 +14,30 @@ const RequestAuthPanel = (props: RequestAuthProps) => {
       id: 'NoAuth',
       name: 'NO AUTH',
       onSelect: () => setAuthType(AuthType.NoAuth),
-      color: '#a3a3a3',
+      color: '#fafafa',
     },
     {
       id: 'BasicAuth',
       name: 'BASIC AUTH',
       onSelect: () => setAuthType(AuthType.BasicAuth),
-      color: '#a3a3a3',
+      color: '#fafafa',
     },
     {
       id: 'ApiKey',
       name: 'API KEY',
       onSelect: () => setAuthType(AuthType.ApiKey),
-      color: '#a3a3a3',
+      color: '#fafafa',
     },
   ];
 
   const onCredentialsChange = (credentials: object) => {
-    props.onCredentialsChange({...credentials, authType})
-  }
+    props.onCredentialsChange({ ...credentials, authType });
+  };
 
   return (
     <div className="request-auth-panel">
       <Dropdown items={items} />
-      <AuthenticationForm
-        authType={authType}
-        onCredentialsChange={onCredentialsChange}
-      />
+      <AuthenticationForm authType={authType} onCredentialsChange={onCredentialsChange} />
     </div>
   );
 };
