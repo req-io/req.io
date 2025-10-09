@@ -61,9 +61,7 @@ describe(`ResponsePanel`, () => {
 
   describe(`Default Rendering components`, () => {
     it(
-      'should render Navbar and EmptyPlaceholder when' +
-        'and isLoading is false' +
-        'and isNoRequestTriggered is true',
+      'should render Navbar and EmptyPlaceholder when and isLoading is false and isNoRequestTriggered is true',
       () => {
         const props = {
           isLoading: false,
@@ -79,8 +77,7 @@ describe(`ResponsePanel`, () => {
       }
     );
 
-    it(`should render Navbar and Spinner when 
-  isLoading is true`, () => {
+    it(`should render Navbar and Spinner when isLoading is true`, () => {
       const props = {
         isLoading: true,
       };
@@ -94,8 +91,7 @@ describe(`ResponsePanel`, () => {
     });
 
     it(
-      'should render Navbar and Editor when ' +
-        'response is string and not loading or no request triggered',
+      'should render Navbar and Editor when response is string and not loading or no request triggered',
       () => {
         const props = {
           isLoading: false,
