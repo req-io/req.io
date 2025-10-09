@@ -11,7 +11,7 @@ import PaneSplitter from '../PaneSplitter';
 import UrlPanel from '../UrlPanel';
 
 import { useState } from 'react';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse, AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
 import { AuthType, Credentials } from '../RequestAuthPanel/types.ts';
 
 const AppBody = () => {
@@ -31,8 +31,8 @@ const AppBody = () => {
   const [statusText, setStatusText] = useState('');
   const [timeTaken, setTimeTaken] = useState(0);
 
-  function parseResponseHeader(response: AxiosResponse<any, any>) {
-    return Object.entries(response?.headers || {}).map(([key, value]) => ({
+  function parseResponseHeader(header: RawAxiosResponseHeaders | AxiosResponseHeaders) {
+    return Object.entries(header || {}).map(([key, value]) => ({
       key,
       value: Array.isArray(value) ? value.join(', ') : value,
     }));
@@ -45,9 +45,7 @@ const AppBody = () => {
 
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
-    setResponseHeaders(
-      parseResponseHeader(response)
-    );
+    setResponseHeaders(parseResponseHeader(response.headers));
     setStatusCode(response.status);
     setStatusText(response.statusText || getHttpStatusText(response.status));
   };
@@ -56,9 +54,7 @@ const AppBody = () => {
     setIsLoading(false);
     if (error.response) {
       setResponse(JSON.stringify(error.response?.data || {}, null, 2));
-      setResponseHeaders(
-        parseResponseHeader(error.response)
-      );
+      setResponseHeaders(parseResponseHeader(error.response.headers));
       setStatusCode(error.response?.status || 0);
       setStatusText(error.response?.statusText || getHttpStatusText(statusCode));
     } else {
