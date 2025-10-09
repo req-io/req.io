@@ -24,10 +24,10 @@ const getStatusClassName = (statusCode: number) => {
   }
 };
 
-const EmptyPlaceholder = () => <div className="empty-placeholder">No response yet!</div>;
+const EmptyPlaceholder = () => <div className="empty-placeholder" data-testid={"empty-placeholder"}>No response yet!</div>;
 
 const RawResponseViewer = (props: RawResponseViewerProps) => {
-  return <div className="raw-response">{props.response}</div>;
+  return <div className="raw-response" data-testid={"raw-response"}>{props.response}</div>;
 };
 
 const Status = (props: StatusProps) => {
@@ -37,7 +37,7 @@ const Status = (props: StatusProps) => {
   if (props.statusCode === 0) statusMessage = `${props.statusText}  ${timeInSeconds}s`;
   else statusMessage = `${props.statusCode} ${props.statusText}  ${timeInSeconds}s`;
 
-  return <div className={statusClassName}>{statusMessage}</div>;
+  return <div className={statusClassName} data-testid={'status-bar'}>{statusMessage}</div>;
 };
 
 function formatSize(bytes: number): string {
@@ -111,7 +111,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
               statusText={props.statusText}
               statusTime={props.timeTaken}
             />
-            <span className="response-size" style={{ marginLeft: 12 }}>
+            <span className="response-size" style={{ marginLeft: 12 }} data-testid="response-size">
               {formatSize(responseSize)}
             </span>
             <ContentCopyIcon fontSize="small" onClick={copyToClipboard} className="copyIcon" />
