@@ -31,6 +31,13 @@ const AppBody = () => {
   const [statusText, setStatusText] = useState('');
   const [timeTaken, setTimeTaken] = useState(0);
 
+  function parseResponseHeader(response: AxiosResponse<any, any>) {
+    return Object.entries(response?.headers || {}).map(([key, value]) => ({
+      key,
+      value: Array.isArray(value) ? value.join(', ') : value,
+    }));
+  }
+
   const onSuccessResponse = (response: AxiosResponse, startTime: number) => {
     const endTime = performance.now();
     const duration = endTime - startTime;
@@ -39,10 +46,7 @@ const AppBody = () => {
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
     setResponseHeaders(
-      Object.entries(response?.headers || {}).map(([key, value]) => ({
-        key,
-        value: Array.isArray(value) ? value.join(', ') : value,
-      }))
+      parseResponseHeader(response)
     );
     setStatusCode(response.status);
     setStatusText(response.statusText || getHttpStatusText(response.status));
@@ -53,10 +57,7 @@ const AppBody = () => {
     if (error.response) {
       setResponse(JSON.stringify(error.response?.data || {}, null, 2));
       setResponseHeaders(
-        Object.entries(error.response?.headers || {}).map(([key, value]) => ({
-          key,
-          value: Array.isArray(value) ? value.join(', ') : value,
-        }))
+        parseResponseHeader(error.response)
       );
       setStatusCode(error.response?.status || 0);
       setStatusText(error.response?.statusText || getHttpStatusText(statusCode));

@@ -179,6 +179,40 @@ describe(`AppBody`, () => {
     expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('delete response', null, 2));
   });
 
+  it('should pass correct response headers to ResponsePanel when response contains headers', async () => {
+    const { get } = await import('../../src/api/rest.ts');
+    (get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      status: 200,
+      statusText: 'OK',
+      data: 'response with headers',
+      headers: {
+        'content-type': 'application/json',
+        'x-custom-header': 'custom-value',
+        'cache-control': ['public', 'max-age=3600'],
+      },
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onMethodChange('GET');
+      mockedComponents.urlPanel?.onUrlChange('https://example.com/with-headers');
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onSend();
+    });
+    await waitFor(() => {
+      expect(mockedComponents.responsePanel?.isLoading).toBe(false);
+    }).then(() => {
+      expect(mockedComponents.responsePanel?.statusCode).toBe(200);
+      expect(mockedComponents.responsePanel?.statusText).toBe('OK');
+      expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('response with headers', null, 2));
+      expect(mockedComponents.responsePanel?.headers).toEqual([
+        { key: 'content-type', value: 'application/json' },
+        { key: 'x-custom-header', value: 'custom-value' },
+        { key: 'cache-control', value: 'public, max-age=3600' },
+      ]);
+    });
+  });
+
+
   it('should handle missing statusText in successful response', async () => {
     const { get } = await import('../../src/api/rest.ts');
     (get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({ status: 200, data: 'accepted response' });
@@ -292,6 +326,40 @@ describe(`AppBody`, () => {
     expect(mockedComponents.responsePanel?.statusText).toBe('ERROR: UNKNOWN');
     expect(mockedComponents.responsePanel?.response).toBe('Error: Some random error');
   });
+
+  it('should handle response header pars', async () => {
+    const { get } = await import('../../src/api/rest.ts');
+    (get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      status: 200,
+      statusText: 'OK',
+      data: 'response with headers',
+      headers: {
+        'content-type': 'application/json',
+        'x-custom-header': 'custom-value',
+        'cache-control': ['public', 'max-age=3600'],
+      },
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onMethodChange('GET');
+      mockedComponents.urlPanel?.onUrlChange('https://example.com/with-headers');
+    });
+    act(() => {
+      mockedComponents.urlPanel?.onSend();
+    });
+    await waitFor(() => {
+      expect(mockedComponents.responsePanel?.isLoading).toBe(false);
+    }).then(() => {
+      expect(mockedComponents.responsePanel?.statusCode).toBe(200);
+      expect(mockedComponents.responsePanel?.statusText).toBe('OK');
+      expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('response with headers', null, 2));
+      expect(mockedComponents.responsePanel?.headers).toEqual([
+        { key: 'content-type', value: 'application/json' },
+        { key: 'x-custom-header', value: 'custom-value' },
+        { key: 'cache-control', value: 'public, max-age=3600' },
+      ]);
+    });
+  });
+
 
   it('should use updated data from RequestPanel callbacks in API calls', async () => {
     const { post } = await import('../../src/api/rest.ts');
