@@ -2,7 +2,7 @@ import './index.scss';
 import { AuthType, RequestAuthProps } from './types';
 
 import Dropdown from '../Dropdown';
-import AuthenticationForm from '../RequestAuthForm';
+import RequestAuthForm from '../RequestAuthForm';
 
 import { useState } from 'react';
 
@@ -31,16 +31,13 @@ const RequestAuthPanel = (props: RequestAuthProps) => {
   ];
 
   const onCredentialsChange = (credentials: object) => {
-    props.onCredentialsChange({...credentials, authType})
-  }
+    props.onCredentialsChange({ ...credentials, authType });
+  };
 
   return (
     <div className="request-auth-panel">
       <Dropdown items={items} />
-      <AuthenticationForm
-        authType={authType}
-        onCredentialsChange={onCredentialsChange}
-      />
+      <RequestAuthForm authType={authType} onCredentialsChange={onCredentialsChange} />
     </div>
   );
 };

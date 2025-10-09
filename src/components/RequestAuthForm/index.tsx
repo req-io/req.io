@@ -1,5 +1,5 @@
 import './index.scss';
-import { AuthenticationFormProps, BasicAuthFormProps } from './types';
+import { AuthenticationFormProps as RequestAuthFormProps, BasicAuthFormProps } from './types';
 
 import { AuthType } from '../RequestAuthPanel/types';
 import { useState } from 'react';
@@ -35,7 +35,7 @@ const BasicAuthForm = (props: BasicAuthFormProps) => {
   );
 };
 
-const AuthenticationForm = (props: AuthenticationFormProps) => {
+const RequestAuthForm = (props: RequestAuthFormProps) => {
   if (props.authType == AuthType.NoAuth) {
     return <div className="auth-placeholder">Select authentication type!</div>;
   }
@@ -45,4 +45,4 @@ const AuthenticationForm = (props: AuthenticationFormProps) => {
   return <div className="auth-placeholder">Selected authentication type is not supported yet!</div>;
 };
 
-export default AuthenticationForm;
+export default RequestAuthForm;
