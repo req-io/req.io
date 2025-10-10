@@ -62,9 +62,6 @@ export default defineConfig({
         'src/**/*.jpeg',
         'src/**/*.gif',
         'src/**/*.ico',
-
-        // types files
-        'src/**/types.ts',
       ],
       all: true,
       thresholds: {
