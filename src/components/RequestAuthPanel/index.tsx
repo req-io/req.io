@@ -14,19 +14,19 @@ const RequestAuthPanel = (props: RequestAuthProps) => {
       id: 'NoAuth',
       name: 'NO AUTH',
       onSelect: () => setAuthType(AuthType.NoAuth),
-      color: '#a3a3a3',
+      color: '#fafafa',
     },
     {
       id: 'BasicAuth',
       name: 'BASIC AUTH',
       onSelect: () => setAuthType(AuthType.BasicAuth),
-      color: '#a3a3a3',
+      color: '#fafafa',
     },
     {
       id: 'ApiKey',
       name: 'API KEY',
       onSelect: () => setAuthType(AuthType.ApiKey),
-      color: '#a3a3a3',
+      color: '#fafafa',
     },
   ];
 
