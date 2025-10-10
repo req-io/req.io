@@ -1,16 +1,36 @@
-npm run dev
-npm run build
-npm run dist
-npm run preview
-npm run lint
-npm run typecheck
-npm run test
-npm run test:run
-npm run test:coverage
-npm run test:coverage:ui
-npm run test:coverage:ci
-npm run test:watch
-npm run format
-npm run format:check
-npm run prepare
-npx lint-staged
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "COMMAND                    STATUS"
+echo "--------------------------------"
+
+# List all commands you want to run
+commands=(
+  "npm run lint"
+  "npm run typecheck"
+  "npm run format:check"
+  "npm run test:coverage"
+)
+
+# Track failure
+any_failed=0
+
+# Run commands one by one and print status
+for cmd in "${commands[@]}"; do
+  $cmd
+  if [ $? -eq 0 ]; then
+    status="✅"
+  else
+    status="❌"
+    any_failed=1
+  fi
+  printf "%-25s %s\n" "$cmd" "$status"
+done
+
+# Stop commit if any command failed
+if [ $any_failed -eq 1 ]; then
+  echo "❌ Some pre-commit checks failed. Commit aborted."
+  exit 1
+fi
+
+echo "✅ All pre-commit checks passed!"
