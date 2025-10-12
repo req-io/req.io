@@ -86,4 +86,8 @@
       color: colors.$accent-dark-color;
     }
   }
+  .delete-button:focus-visible,
+  .delete-button:focus {
+    outline: none !important;
+  }
 }
