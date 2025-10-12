@@ -1,55 +1,38 @@
 #!/bin/bash
-# .husky/pre-commit
+set +e  # disable immediate exit on error (important for Husky)
 
+echo "COMMAND                    STATUS"
 echo "--------------------------------"
-echo "Running pre-commit checks"
-echo "--------------------------------"
+
+commands=(
+  "npm run lint"
+  "npm run typecheck"
+  "npm run format:check"
+  "npm run test:coverage"
+)
 
 any_failed=0
 
-run_check() {
-  local name="$1"
-  shift
-  local cmd=("$@")
+for cmd in "${commands[@]}"; do
+  echo "Running: $cmd"
+  eval "$cmd"
+  exit_code=$?
 
-  echo "▶️ Running: $name"
-  echo "--------------------------------"
-
-  # Run the command live and capture all output
-  "${cmd[@]}" 2>&1 | tee /tmp/husky_output.log
-  exit_code=${PIPESTATUS[0]}  # actual exit code
-
-  # Filter real '[warn] <file>' warnings (exclude everything else)
-  warnings=$(grep -E "^\[warn\] .*" /tmp/husky_output.log || true)
-
-  # Determine status
-  if [ $exit_code -ne 0 ] || [ -n "$warnings" ]; then
+  if [ $exit_code -eq 0 ]; then
+    status="✅"
+  else
     status="❌"
     any_failed=1
-    if [ -n "$warnings" ]; then
-      echo "⚠️  Code warnings detected:"
-      echo "$warnings"
-      echo "--------------------------------"
-    fi
-  else
-    status="✅"
   fi
 
-  printf "%-25s %s\n" "$name" "$status"
+  printf "%-25s %s\n" "$cmd" "$status"
   echo "--------------------------------"
-}
+done
 
-# Run all checks
-run_check "yarn run lint" yarn run lint
-run_check "yarn run typecheck" yarn run typecheck
-run_check "yarn run format:check" yarn run format:check
-run_check "yarn run test:coverage" yarn run test:coverage
-
-# Final result
-if [ $any_failed -eq 0 ]; then
-  echo "✅ All pre-commit checks passed successfully!"
-  exit 0
-else
-  echo "❌ Some pre-commit checks failed. Fix them before committing."
+if [ $any_failed -eq 1 ]; then
+  echo "❌ Some pre-commit checks failed. Commit aborted."
   exit 1
+else
+  echo "✅ All pre-commit checks passed!"
+  exit 0
 fi
