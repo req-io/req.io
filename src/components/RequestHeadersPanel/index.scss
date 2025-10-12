@@ -90,4 +90,8 @@
   .placeholder-msg {
     color: colors.$secondary-light-color;
   }
+  .delete-button:focus-visible,
+  .delete-button:focus {
+    outline: none !important;
+  }
 }
