@@ -18,6 +18,11 @@ const RequestParamsPanel = (props: RequestParamPanelProps) => {
   const onParamDelete = (index: number) => {
     const updatedParams = props.params.filter((_, paramIndex) => paramIndex !== index);
     props.onParamsChange(updatedParams);
+
+    // Clear focus to prevent focus persistence on delete buttons
+    if (document.activeElement && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   const paramRows = props.params.map((param: QueryParam, index) => {
