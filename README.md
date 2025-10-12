@@ -53,6 +53,32 @@ To run the unit tests for the application, run the following command:
 yarn test
 ```
 
+### Trivy Vulnerability Scanning
+This project uses [Trivy](https://github.com/aquasecurity/trivy) integrated into the CircleCI pipeline to ensure dependency and container security.
+
+#### CI Integration
+
+- The CircleCI pipeline automatically runs a Trivy vulnerability scan on each commit.
+- The scan fails the CI build if **High** or **Critical** vulnerabilities are detected.
+- Scan results are visible directly in the CI job logs and stored as artifacts (`trivy-report.json`).
+- Trivy Ignore (.trivyignore) support:
+  - Certain vulnerabilities that are acknowledged but not relevant can be ignored using a .trivyignore file at the project root. 
+  - Example: add the CVE IDs you want to ignore, one per line:
+    - CVE-2023-1234 
+    - CVE-2023-5678
+
+#### Local Testing
+
+You can also run Trivy locally before committing:
+
+```bash
+# Install Trivy
+curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
+
+# Run a local filesystem scan
+trivy fs --severity HIGH,CRITICAL .
+```
+
 ### Interested to contribute?
 Please see our  [Contribution Guide](./CONTRIBUTING.md) on how you can get started. Thank you for your valuable time and interest to contribute to this project.
 
