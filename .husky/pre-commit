@@ -1,36 +1,55 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/bin/bash
+# .husky/pre-commit
 
-echo "COMMAND                    STATUS"
+echo "--------------------------------"
+echo "Running pre-commit checks"
 echo "--------------------------------"
 
-# List all commands you want to run
-commands=(
-  "npm run lint"
-  "npm run typecheck"
-  "npm run format:check"
-  "npm run test:coverage"
-)
-
-# Track failure
 any_failed=0
 
-# Run commands one by one and print status
-for cmd in "${commands[@]}"; do
-  $cmd
-  if [ $? -eq 0 ]; then
-    status="✅"
-  else
+run_check() {
+  local name="$1"
+  shift
+  local cmd=("$@")
+
+  echo "▶️ Running: $name"
+  echo "--------------------------------"
+
+  # Run the command live and capture all output
+  "${cmd[@]}" 2>&1 | tee /tmp/husky_output.log
+  exit_code=${PIPESTATUS[0]}  # actual exit code
+
+  # Filter real '[warn] <file>' warnings (exclude everything else)
+  warnings=$(grep -E "^\[warn\] .*" /tmp/husky_output.log || true)
+
+  # Determine status
+  if [ $exit_code -ne 0 ] || [ -n "$warnings" ]; then
     status="❌"
     any_failed=1
+    if [ -n "$warnings" ]; then
+      echo "⚠️  Code warnings detected:"
+      echo "$warnings"
+      echo "--------------------------------"
+    fi
+  else
+    status="✅"
   fi
-  printf "%-25s %s\n" "$cmd" "$status"
-done
 
-# Stop commit if any command failed
-if [ $any_failed -eq 1 ]; then
-  echo "❌ Some pre-commit checks failed. Commit aborted."
+  printf "%-25s %s\n" "$name" "$status"
+  echo "--------------------------------"
+}
+
+# Run all checks
+run_check "yarn run lint" yarn run lint
+run_check "yarn run typecheck" yarn run typecheck
+run_check "yarn run format:check" yarn run format:check
+run_check "yarn run test:coverage" yarn run test:coverage
+
+# Final result
+if [ $any_failed -eq 0 ]; then
+  echo "✅ All pre-commit checks passed successfully!"
+  exit 0
+else
+  echo "❌ Some pre-commit checks failed. Fix them before committing."
   exit 1
 fi
-
-echo "✅ All pre-commit checks passed!"

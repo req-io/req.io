@@ -40,8 +40,7 @@ const Dropdown = ({ items }: DropdownProps) => {
               key={index}
               className="dropdown-item"
               onClick={() => handleItemClick(item)}
-              style={{ color: item.color || 'black' }}
-            >
+              style={{ color: item.color || 'black' }}>
               {item.name}
             </div>
           ))}

@@ -1,10 +1,10 @@
-import { AuthType } from "../RequestAuthPanel/types"
+import { AuthType } from '../RequestAuthPanel/types';
 
 export type AuthenticationFormProps = {
-  authType: AuthType,
-  onCredentialsChange: (credentials: object) => void
-}
+  authType: AuthType;
+  onCredentialsChange: (credentials: object) => void;
+};
 
 export type BasicAuthFormProps = {
-  onCredentialsChange: (credentials: object) => void
-}
+  onCredentialsChange: (credentials: object) => void;
+};
