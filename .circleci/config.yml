@@ -25,6 +25,26 @@ jobs:
       - run: yarn install --dev
       - run: yarn run test:coverage
 
+  trivy_scan:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Install trivy
+          command: |
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
+      - run:
+          name: Run Trivy vulnerability scan
+          command: |
+            echo "Running Trivy vulnerability scan..."
+            trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+      - run:
+          name: Generate Trivy Report
+          command: trivy fs --format json --output trivy-report.json .
+      - store_artifacts:
+          path: trivy-report.json
+
 workflows:
   version: 2
   main:
@@ -32,3 +52,8 @@ workflows:
       - lint
       - typecheck
       - test
+      - trivy_scan:
+          requires:
+            - lint
+            - typecheck
+            - test
