@@ -1,10 +1,10 @@
 import './index.scss';
-import { AuthenticationFormProps as RequestAuthFormProps, BasicAuthFormProps } from './types';
+import { RequestAuthFormProps, AuthForms } from './types';
 
 import { AuthType } from '../RequestAuthPanel/types';
 import { useState } from 'react';
 
-const BasicAuthForm = (props: BasicAuthFormProps) => {
+const BasicAuthForm = (props: AuthForms) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,6 +35,36 @@ const BasicAuthForm = (props: BasicAuthFormProps) => {
   );
 };
 
+const ApiKeyAuthForm = (props: AuthForms) => {
+  const [authKey, setAuthKey] = useState('');
+  const [authValue, setAuthValue] = useState('');
+
+  const onAuthKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthKey(event.target.value);
+    props.onCredentialsChange({key: event.target.value, value: authValue});
+  }
+
+  const onAuthValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthValue(event.target.value);
+    props.onCredentialsChange({key: authKey, value: event.target.value});
+  }
+  return <div className="authentication-form horizontal">
+    <input
+      value={authKey}
+      className="input"
+      placeholder="Key"
+      onChange={onAuthKeyChange}
+    />
+    <span className="keyValueSeparator">:</span>
+    <input
+      value={authValue}
+      className="input"
+      placeholder="Value"
+      onChange={onAuthValueChange}
+    />
+  </div>;
+}
+
 const RequestAuthForm = (props: RequestAuthFormProps) => {
   if (props.authType == AuthType.NoAuth) {
     return <div className="auth-placeholder">Select authentication type!</div>;
@@ -42,7 +72,7 @@ const RequestAuthForm = (props: RequestAuthFormProps) => {
   if (props.authType == AuthType.BasicAuth) {
     return <BasicAuthForm onCredentialsChange={props.onCredentialsChange} />;
   }
-  return <div className="auth-placeholder">Selected authentication type is not supported yet!</div>;
+  return <ApiKeyAuthForm onCredentialsChange={props.onCredentialsChange}/>
 };
 
 export default RequestAuthForm;
