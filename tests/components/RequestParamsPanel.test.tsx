@@ -77,4 +77,18 @@ describe('RequestParamsPanel', () => {
 
     expect(mockOnParamsChange).toHaveBeenCalledWith([{ key: 'param2', value: 'value2' }]);
   });
+
+  it('should display a placeholder message when there are no parameters', () => {
+    render(
+      <RequestParamsPanel
+        params={[]}
+        onParamsChange={mockOnParamsChange}
+        onNewParamAddition={mockOnNewParamAddition}
+      />
+    );
+
+    expect(
+      screen.getByText('No params added yet. Click "Add Param" to create one.')
+    ).toBeInTheDocument();
+  });
 });

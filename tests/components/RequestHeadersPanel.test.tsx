@@ -77,4 +77,18 @@ describe('RequestHeadersPanel', () => {
 
     expect(mockOnHeadersChange).toHaveBeenCalledWith([{ key: 'header2', value: 'value2' }]);
   });
+
+  it('should render no headers when the headers prop is an empty array', () => {
+    render(
+      <RequestHeadersPanel
+        headers={[]}
+        onHeadersChange={mockOnHeadersChange}
+        onNewHeaderAddition={mockOnNewHeaderAddition}
+      />
+    );
+
+    expect(screen.queryByPlaceholderText('Key')).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Value')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('delete-icon')).not.toBeInTheDocument();
+  });
 });
