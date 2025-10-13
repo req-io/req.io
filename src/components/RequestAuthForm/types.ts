@@ -5,6 +5,6 @@ export type RequestAuthFormProps = {
   onCredentialsChange: (credentials: object) => void;
 };
 
-export type AuthForms = {
+export type AuthFormsProps = {
   onCredentialsChange: (credentials: object) => void;
 };

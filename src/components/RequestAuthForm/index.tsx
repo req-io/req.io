@@ -1,10 +1,10 @@
 import './index.scss';
-import { RequestAuthFormProps, AuthForms } from './types';
+import { RequestAuthFormProps, AuthFormsProps } from './types';
 
 import { AuthType } from '../RequestAuthPanel/types';
 import { useState } from 'react';
 
-const BasicAuthForm = (props: AuthForms) => {
+const BasicAuthForm = (props: AuthFormsProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,7 +35,7 @@ const BasicAuthForm = (props: AuthForms) => {
   );
 };
 
-const ApiKeyAuthForm = (props: AuthForms) => {
+const ApiKeyAuthForm = (props: AuthFormsProps) => {
   const [authKey, setAuthKey] = useState('');
   const [authValue, setAuthValue] = useState('');
 
