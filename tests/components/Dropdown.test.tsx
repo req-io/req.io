@@ -70,4 +70,28 @@ describe('Dropdown Component', () => {
     fireEvent.mouseDown(screen.getByTestId('outside'));
     expect(screen.queryByText('Item 2')).not.toBeInTheDocument();
   });
+
+  it('should render with black color if no color is provided', () => {
+    const itemsWithoutColor = [
+      { id: 'item-1', name: 'Item 1', onSelect: vi.fn() },
+      { id: 'item-2', name: 'Item 2', onSelect: vi.fn() },
+    ];
+    render(<Dropdown items={itemsWithoutColor} />);
+    const selectedItem = screen.getByText('Item 1');
+    expect(selectedItem).toHaveStyle({ color: '#000000' });
+  });
+
+  it('should render the dropdown content with black color if no color is provided', () => {
+    const itemsWithoutColor = [
+      { id: 'item-1', name: 'Item 1', onSelect: vi.fn() },
+      { id: 'item-2', name: 'Item 2', onSelect: vi.fn() },
+    ];
+    render(<Dropdown items={itemsWithoutColor} />);
+    const selectedItem = screen.getByText('Item 1');
+
+    // Open the dropdown
+    fireEvent.click(selectedItem);
+    const dropdownItem = screen.getByText('Item 2');
+    expect(dropdownItem).toHaveStyle({ color: '#000000' });
+  });
 });
