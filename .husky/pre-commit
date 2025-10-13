@@ -5,10 +5,10 @@ echo "COMMAND                    STATUS"
 echo "--------------------------------"
 
 commands=(
-  "npm run lint"
-  "npm run typecheck"
-  "npm run format:check"
-  "npm run test:coverage"
+  "yarn run lint"
+  "yarn run typecheck"
+  "yarn run format:check"
+  "yarn run test:coverage"
 )
 
 any_failed=0
