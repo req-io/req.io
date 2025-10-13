@@ -51,19 +51,6 @@ describe('RequestAuthPanel', () => {
     });
   });
 
-  it('should call onCredentialsChange with ApiKey', () => {
-    render(<RequestAuthPanel {...defaultProps} />);
-    const dropdown = screen.getByText('NO AUTH');
-    fireEvent.click(dropdown);
-
-    const apiKeyOption = screen.getByText('API KEY');
-    fireEvent.click(apiKeyOption);
-
-    expect(
-      screen.getByText('Selected authentication type is not supported yet!')
-    ).toBeInTheDocument();
-  });
-
   it('should reset to no auth when No Auth is selected', () => {
     render(<RequestAuthPanel {...defaultProps} />);
     const dropdown = screen.getByText('NO AUTH');

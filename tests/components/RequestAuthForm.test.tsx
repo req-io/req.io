@@ -1,6 +1,5 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import RequestAuthForm from '../../src/components/RequestAuthForm';
 import { AuthType } from '../../src/components/RequestAuthPanel/types';
 import '@testing-library/jest-dom';
@@ -16,13 +15,6 @@ describe('RequestAuthForm', () => {
   it('should render no auth message when auth type is NoAuth', () => {
     render(<RequestAuthForm {...defaultProps} />);
     expect(screen.getByText('Select authentication type!')).toBeInTheDocument();
-  });
-
-  it('should render unsupported message for unsupported auth types', () => {
-    render(<RequestAuthForm {...defaultProps} authType={AuthType.ApiKey} />);
-    expect(
-      screen.getByText('Selected authentication type is not supported yet!')
-    ).toBeInTheDocument();
   });
 
   describe('BasicAuth Form', () => {
@@ -75,6 +67,50 @@ describe('RequestAuthForm', () => {
         username: 'testuser',
         password: 'testpass',
       });
+    });
+  });
+
+  describe('ApiKey Form', () => {
+    const apiKeyAuthProps = {
+      ...defaultProps,
+      authType: AuthType.ApiKey,
+    };
+
+    it('should render key and value input area when Api auth is selected', () => {
+      render(<RequestAuthForm {...apiKeyAuthProps} />);
+
+      expect(screen.getByPlaceholderText('Key')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('Value')).toBeInTheDocument();
+    });
+
+    it('should call onCredentialsChange when key is changed', () => {
+      render(<RequestAuthForm {...apiKeyAuthProps} />);
+
+      const keyInput = screen.getByPlaceholderText('Key');
+      fireEvent.change(keyInput, { target: { value: 'apiKey' } });
+
+      expect(mockOnCredentialsChange).toHaveBeenCalledWith({ key: 'apiKey', value: '' });
+    });
+
+    it('should call onCredentialsChange when value is changed', () => {
+      render(<RequestAuthForm {...apiKeyAuthProps} />);
+
+      const valueInput = screen.getByPlaceholderText('Value');
+      fireEvent.change(valueInput, { target: { value: 'apiValue' } });
+
+      expect(mockOnCredentialsChange).toHaveBeenCalledWith({ key: '', value: 'apiValue' });
+    });
+
+    it('should maintain both key and value state when either is changed', () => {
+      render(<RequestAuthForm {...apiKeyAuthProps} />);
+
+      const keyInput = screen.getByPlaceholderText('Key');
+      const valueInput = screen.getByPlaceholderText('Value');
+
+      fireEvent.change(keyInput, { target: { value: 'apiKey' } });
+      fireEvent.change(valueInput, { target: { value: 'apiValue' } });
+
+      expect(mockOnCredentialsChange).toHaveBeenCalledWith({ key: 'apiKey', value: 'apiValue' });
     });
   });
 });
