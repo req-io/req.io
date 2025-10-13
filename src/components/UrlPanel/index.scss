@@ -30,7 +30,7 @@
 
     &:disabled {
       background-color: colors.$accent-color;
-      color:colors.$accent-contrast-color;
+      color: colors.$accent-contrast-color;
       opacity: 0.6;
       cursor: not-allowed;
     }

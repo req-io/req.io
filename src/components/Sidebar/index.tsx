@@ -17,8 +17,7 @@ const Sidebar = (props: SidebarProps) => {
         className={itemConfig.active ? 'item active' : 'item'}
         key={itemConfig.label}
         data-testid={itemConfig.label}
-        onClick={itemConfig.action}
-      >
+        onClick={itemConfig.action}>
         {itemConfig.icon}
       </li>
     );

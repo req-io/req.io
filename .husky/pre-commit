@@ -1,1 +1,38 @@
-npx lint-staged
+#!/bin/bash
+set +e  # disable immediate exit on error (important for Husky)
+
+echo "COMMAND                    STATUS"
+echo "--------------------------------"
+
+commands=(
+  "yarn run lint"
+  "yarn run typecheck"
+  "yarn run format:check"
+  "yarn run test:coverage"
+)
+
+any_failed=0
+
+for cmd in "${commands[@]}"; do
+  echo "Running: $cmd"
+  eval "$cmd"
+  exit_code=$?
+
+  if [ $exit_code -eq 0 ]; then
+    status="✅"
+  else
+    status="❌"
+    any_failed=1
+  fi
+
+  printf "%-25s %s\n" "$cmd" "$status"
+  echo "--------------------------------"
+done
+
+if [ $any_failed -eq 1 ]; then
+  echo "❌ Some pre-commit checks failed. Commit aborted."
+  exit 1
+else
+  echo "✅ All pre-commit checks passed!"
+  exit 0
+fi
