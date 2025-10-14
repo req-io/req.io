@@ -235,7 +235,7 @@ describe(`ResponsePanel`, () => {
       const statusBar = screen.getByTestId('status-bar');
 
       expect(navbar).toBeInTheDocument();
-      expect(statusBar).toHaveTextContent(/^200 OK 0.12s$/);
+      expect(statusBar).toHaveTextContent(/^200 OK0.12s$/);
     });
 
     it('should status text and time taken when status code is 0', () => {
@@ -252,7 +252,7 @@ describe(`ResponsePanel`, () => {
       const statusBar = screen.getByTestId('status-bar');
 
       expect(navbar).toBeInTheDocument();
-      expect(statusBar).toHaveTextContent(/^Network Error 0.46s$/);
+      expect(statusBar).toHaveTextContent(/^Network Error0.46s$/);
     });
 
     it('should have "success" in the class name when status code is between 200 and 300', () => {
@@ -266,8 +266,9 @@ describe(`ResponsePanel`, () => {
       };
       render(<ResponsePanel {...defaultProps} {...props} />);
       const statusBar = screen.getByTestId('status-bar');
+      const statusElement = statusBar.querySelector('.status');
 
-      expect(statusBar).toHaveClass('success');
+      expect(statusElement).toHaveClass('success');
     });
 
     it('should have "redirect" in the class name when status code is between 300 and 400', () => {
@@ -281,8 +282,9 @@ describe(`ResponsePanel`, () => {
       };
       render(<ResponsePanel {...defaultProps} {...props} />);
       const statusBar = screen.getByTestId('status-bar');
+      const statusElement = statusBar.querySelector('.status');
 
-      expect(statusBar).toHaveClass('redirect');
+      expect(statusElement).toHaveClass('redirect');
     });
 
     it('should have "client-error" in the class name when status code is between 400 and 500', () => {
@@ -296,8 +298,9 @@ describe(`ResponsePanel`, () => {
       };
       render(<ResponsePanel {...defaultProps} {...props} />);
       const statusBar = screen.getByTestId('status-bar');
+      const statusElement = statusBar.querySelector('.status');
 
-      expect(statusBar).toHaveClass('client-error');
+      expect(statusElement).toHaveClass('client-error');
     });
 
     it('should have "server-error" in the class name when status code is between 500 and 600', () => {
@@ -311,8 +314,9 @@ describe(`ResponsePanel`, () => {
       };
       render(<ResponsePanel {...defaultProps} {...props} />);
       const statusBar = screen.getByTestId('status-bar');
+      const statusElement = statusBar.querySelector('.status');
 
-      expect(statusBar).toHaveClass('server-error');
+      expect(statusElement).toHaveClass('server-error');
     });
   });
 
