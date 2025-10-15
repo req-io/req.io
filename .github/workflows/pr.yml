@@ -6,9 +6,9 @@ on:
 
 jobs:
   lint:
-    uses: ./.github/workflows/templates/lint-job.yml
+    uses: ./.github/workflows/lint-job.yml
   typecheck:
-    uses: ./.github/workflows/templates/typecheck-job.yml
+    uses: ./.github/workflows/typecheck-job.yml
   test:
     needs: [lint, typecheck]
-    uses: ./.github/workflows/templates/test-job.yml
+    uses: ./.github/workflows/test-job.yml
