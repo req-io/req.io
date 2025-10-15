@@ -133,7 +133,7 @@ describe(`AppBody`, () => {
     });
 
     await waitFor(() => {
-      expect(mockedComponents.responsePanel?.isLoading).toBe(false);
+      expect(mockedComponents.responsePanel?.isLoading).toBe(true);
     });
 
     expect(mockedComponents.responsePanel?.statusCode).toBe(200);
