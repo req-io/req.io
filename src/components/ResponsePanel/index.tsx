@@ -40,14 +40,14 @@ const RawResponseViewer = (props: RawResponseViewerProps) => {
 
 const Status = (props: StatusProps) => {
   const statusClassName = `status ${getStatusClassName(props.statusCode)}`;
-  let statusMessage;
   const timeInSeconds = (props.statusTime / 1000).toFixed(2);
-  if (props.statusCode === 0) statusMessage = `${props.statusText}  ${timeInSeconds}s`;
-  else statusMessage = `${props.statusCode} ${props.statusText}  ${timeInSeconds}s`;
+  const statusMessage =
+    props.statusCode === 0 ? props.statusText : `${props.statusCode} ${props.statusText}`;
 
   return (
-    <div className={statusClassName} data-testid={'status-bar'}>
-      {statusMessage}
+    <div className="status-container" data-testid={'status-bar'}>
+      <span className={statusClassName}>{statusMessage}</span>
+      <span className="time-taken">{timeInSeconds}s</span>
     </div>
   );
 };
@@ -123,7 +123,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
               statusText={props.statusText}
               statusTime={props.timeTaken}
             />
-            <span className="response-size" style={{ marginLeft: 12 }} data-testid="response-size">
+            <span className="response-size" data-testid="response-size">
               {formatSize(responseSize)}
             </span>
             <ContentCopyIcon fontSize="small" onClick={copyToClipboard} className="copyIcon" />
