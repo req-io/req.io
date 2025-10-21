@@ -233,9 +233,12 @@ describe(`ResponsePanel`, () => {
       render(<ResponsePanel {...defaultProps} {...props} />);
       const navbar = screen.queryByTestId('navbar');
       const statusBar = screen.getByTestId('status-bar');
+      const statusElement = statusBar.querySelector('.status');
+      const timeElement = statusBar.querySelector('.time-taken');
 
       expect(navbar).toBeInTheDocument();
-      expect(statusBar).toHaveTextContent(/^200 OK0.12s$/);
+      expect(statusElement).toHaveTextContent('200 OK');
+      expect(timeElement).toHaveTextContent('0.12s');
     });
 
     it('should status text and time taken when status code is 0', () => {
@@ -250,9 +253,12 @@ describe(`ResponsePanel`, () => {
       render(<ResponsePanel {...defaultProps} {...props} />);
       const navbar = screen.queryByTestId('navbar');
       const statusBar = screen.getByTestId('status-bar');
+      const statusElement = statusBar.querySelector('.status');
+      const timeElement = statusBar.querySelector('.time-taken');
 
       expect(navbar).toBeInTheDocument();
-      expect(statusBar).toHaveTextContent(/^Network Error0.46s$/);
+      expect(statusElement).toHaveTextContent('Network Error');
+      expect(timeElement).toHaveTextContent('0.46s');
     });
 
     it('should have "success" in the class name when status code is between 200 and 300', () => {
