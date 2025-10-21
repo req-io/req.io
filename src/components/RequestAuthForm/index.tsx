@@ -41,29 +41,21 @@ const ApiKeyAuthForm = (props: AuthFormsProps) => {
 
   const onAuthKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthKey(event.target.value);
-    props.onCredentialsChange({key: event.target.value, value: authValue});
-  }
+    props.onCredentialsChange({ key: event.target.value, value: authValue });
+  };
 
   const onAuthValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthValue(event.target.value);
-    props.onCredentialsChange({key: authKey, value: event.target.value});
-  }
-  return <div className="authentication-form horizontal">
-    <input
-      value={authKey}
-      className="input"
-      placeholder="Key"
-      onChange={onAuthKeyChange}
-    />
-    <span className="keyValueSeparator">:</span>
-    <input
-      value={authValue}
-      className="input"
-      placeholder="Value"
-      onChange={onAuthValueChange}
-    />
-  </div>;
-}
+    props.onCredentialsChange({ key: authKey, value: event.target.value });
+  };
+  return (
+    <div className="authentication-form horizontal">
+      <input value={authKey} className="input" placeholder="Key" onChange={onAuthKeyChange} />
+      <span className="keyValueSeparator">:</span>
+      <input value={authValue} className="input" placeholder="Value" onChange={onAuthValueChange} />
+    </div>
+  );
+};
 
 const RequestAuthForm = (props: RequestAuthFormProps) => {
   if (props.authType == AuthType.NoAuth) {
@@ -72,7 +64,7 @@ const RequestAuthForm = (props: RequestAuthFormProps) => {
   if (props.authType == AuthType.BasicAuth) {
     return <BasicAuthForm onCredentialsChange={props.onCredentialsChange} />;
   }
-  return <ApiKeyAuthForm onCredentialsChange={props.onCredentialsChange}/>
+  return <ApiKeyAuthForm onCredentialsChange={props.onCredentialsChange} />;
 };
 
 export default RequestAuthForm;
