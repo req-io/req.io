@@ -54,17 +54,21 @@
       width: 70%;
     }
 
-    .status {
+    .status-container {
       display: flex;
       align-items: center;
-      font-size: 15px;
+      gap: 12px;
       white-space: nowrap;
+    }
+
+    .status {
+      font-size: 15px;
     }
 
     .response-header-right {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
       padding-right: 2px;
       white-space: nowrap;
     }
@@ -96,8 +100,7 @@
   }
 
   .time-taken {
-    font-size: 14px;
-    margin-left: 10px;
-    color: #333;
+    font-size: 15px;
+    color: colors.$secondary-dark-color;
   }
 }
