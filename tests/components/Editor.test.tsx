@@ -4,6 +4,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Editor from '../../src/components/Editor';
 import '@testing-library/jest-dom';
 
+vi.spyOn(console, 'log').mockImplementation(() => {});
+
 vi.mock('react-ace', () => ({
   default: ({
     className,
@@ -112,23 +114,21 @@ describe('Editor Component', () => {
     });
 
     it('should render JsonViewer when readOnly is true and log correct message', () => {
-      const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+      vi.clearAllMocks();
       render(<Editor readOnly={true} initialValue={mockJsonValue} />);
 
-      expect(consoleSpy).toHaveBeenCalledWith('Read only Editor loaded!');
-      consoleSpy.mockRestore();
+      expect(console.log).toHaveBeenCalledWith('Read only Editor loaded!');
     });
   });
 
   describe('JsonEditor (Editable mode)', () => {
     it('should render JsonEditor when readOnly is false and log correct message', () => {
-      const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+      vi.clearAllMocks();
       render(
         <Editor readOnly={false} initialValue={mockJsonValue} onValueChange={mockOnValueChange} />
       );
 
-      expect(consoleSpy).toHaveBeenCalledWith('Editor loaded!');
-      consoleSpy.mockRestore();
+      expect(console.log).toHaveBeenCalledWith('Editor loaded!');
     });
 
     it('should display the initial value in editable mode', () => {
