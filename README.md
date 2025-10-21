@@ -54,11 +54,11 @@ yarn test
 ```
 
 ### Trivy Vulnerability Scanning
-This project uses [Trivy](https://github.com/aquasecurity/trivy) integrated into the CircleCI pipeline to ensure dependency and container security.
+This project uses [Trivy](https://github.com/aquasecurity/trivy) integrated into the Github Actions pipeline to ensure dependency and container security.
 
 #### CI Integration
 
-- The CircleCI pipeline automatically runs a Trivy vulnerability scan on each commit.
+- The Github Actions pipeline automatically runs a Trivy vulnerability scan on each commit.
 - The scan fails the CI build if **High** or **Critical** vulnerabilities are detected.
 - Scan results are visible directly in the CI job logs and stored as artifacts (`trivy-report.json`).
 - Trivy Ignore (.trivyignore) support:
