@@ -7,9 +7,7 @@ const Navbar = ({ items }: NavbarProps) => {
     return (
       <li className={className} key={itemConfig.label} onClick={itemConfig.onClick}>
         {itemConfig.label}
-        {itemConfig.badge !== undefined && itemConfig.badge > 0 && (
-          <span className="badge">{itemConfig.badge}</span>
-        )}
+        {itemConfig.badge && <span className="badge">{itemConfig.badge}</span>}
       </li>
     );
   });

@@ -139,7 +139,7 @@ describe(`ResponsePanel`, () => {
       
       expect(mockedComponents.navbar.items).toBeDefined();
       const headersItem = mockedComponents.navbar.items.find(item => item.name === 'headers');
-      expect(headersItem?.badge).toBeUndefined();
+      expect(headersItem?.badge).toBeNull();
     });
   });
 
