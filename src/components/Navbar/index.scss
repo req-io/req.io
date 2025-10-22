@@ -31,5 +31,19 @@
       color: colors.$secondary-dark-color;
       border-bottom: colors.$accent-color 0.1rem solid;
     }
+
+    .badge {
+      display: inline-block;
+      border: 1px solid #232323;
+      border-radius: 8px;
+      padding: 3px 3px;
+      font-size: 11px;
+      font-weight: normal;
+      margin-left: 6px;
+      margin-bottom: 15px;
+      min-width: 18px;
+      text-align: center;
+      line-height: 1.2;
+    }
   }
 }
