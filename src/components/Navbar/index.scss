@@ -34,14 +34,15 @@
 
     .badge {
       display: inline-block;
-      border: 1px solid #232323;
-      border-radius: 8px;
-      padding: 3px 3px;
-      font-size: 11px;
+      border: 0.1rem solid colors.$divider-color;
+      color: colors.$accent-contrast-color;
+      border-radius: 0.5rem;
+      padding: 0.2rem 0.2rem;
+      font-size: 0.7rem;
       font-weight: normal;
-      margin-left: 6px;
-      margin-bottom: 15px;
-      min-width: 18px;
+      margin-left: 0.4rem;
+      margin-bottom: 1rem;
+      min-width: 1.2rem;
       text-align: center;
       line-height: 1.2;
     }
