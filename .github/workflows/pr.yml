@@ -12,3 +12,6 @@ jobs:
   test:
     needs: [lint, typecheck]
     uses: ./.github/workflows/test-job.yml
+  trivy-scan:
+    needs: [ lint, typecheck, test]
+    uses: ./.github/workflows/trivy-scan-job.yml
