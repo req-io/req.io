@@ -1,0 +1,22 @@
+name: Trivy Scan Job
+
+on:
+  workflow_call:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
+          echo "$(pwd)/bin" >> $GITHUB_PATH
+
+      - name: Run Trivy vulnerability scan
+        run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+
+      - name: Generate Trivy Report
+        run: trivy fs --format json --output trivy-report.json .
