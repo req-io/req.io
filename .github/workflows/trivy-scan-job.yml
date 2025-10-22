@@ -15,8 +15,5 @@ jobs:
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
           echo "$(pwd)/bin" >> $GITHUB_PATH
 
-      - name: Run Trivy vulnerability scan
-        run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
-
-      - name: Generate Trivy Report
-        run: trivy fs --format json --output trivy-report.json .
+      - name: Run Trivy vulnerability scan and generate report
+        run: trivy fs --format json --output trivy-report.json --exit-code 1 --severity HIGH,CRITICAL .
