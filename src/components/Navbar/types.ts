@@ -5,6 +5,7 @@ type NavBarItemConfig = {
   label: string;
   onClick: () => void;
   isActive: boolean;
+  badge?: number;
 };
 
 type NavBarItemsConfig = NavBarItemConfig[];

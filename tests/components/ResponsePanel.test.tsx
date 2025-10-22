@@ -108,6 +108,41 @@ describe(`ResponsePanel`, () => {
     );
   });
 
+  describe(`Testing badge functionality`, () => {
+    it('should pass header count as badge to Headers tab when headers are present', () => {
+      const props = {
+        isLoading: false,
+        isNoRequestTriggered: false,
+        response: 'Test response',
+        headers: [
+          { key: 'Content-Type', value: 'application/json' },
+          { key: 'Cache-Control', value: 'no-cache' },
+        ],
+      };
+
+      render(<ResponsePanel {...defaultProps} {...props} />);
+      
+      expect(mockedComponents.navbar.items).toBeDefined();
+      const headersItem = mockedComponents.navbar.items.find(item => item.name === 'headers');
+      expect(headersItem?.badge).toBe(2);
+    });
+
+    it('should not show badge when no headers are present', () => {
+      const props = {
+        isLoading: false,
+        isNoRequestTriggered: false,
+        response: 'Test response',
+        headers: [],
+      };
+
+      render(<ResponsePanel {...defaultProps} {...props} />);
+      
+      expect(mockedComponents.navbar.items).toBeDefined();
+      const headersItem = mockedComponents.navbar.items.find(item => item.name === 'headers');
+      expect(headersItem?.badge).toBeUndefined();
+    });
+  });
+
   describe(`Testing special Cases`, () => {
     it(`should handle when response is an blob`, () => {
       const blob = new Blob(['This is a test blob'], { type: 'text/plain' });
