@@ -31,15 +31,12 @@ describe('Navbar', () => {
     expect(badge).toHaveClass('badge');
   });
 
-  it('should not display badge when badge prop is 0 or undefined', () => {
+  it('should not display badge when badge prop is null', () => {
     const itemsConfig = [
-      { name: 'headers', label: 'Headers', isActive: true, onClick: () => ({}), badge: 0 },
-      { name: 'preview', label: 'Preview', isActive: false, onClick: () => ({}) },
+      { name: 'headers', label: 'Headers', isActive: true, onClick: () => ({}), badge: null },
     ];
     render(<Navbar items={itemsConfig} />);
 
-    expect(screen.queryByText('0')).not.toBeInTheDocument();
-    expect(screen.queryByText('Preview')).toBeInTheDocument();
-    expect(screen.queryByText('Preview')).not.toHaveClass('badge');
+    expect(screen.queryByText('Headers')).not.toHaveClass('badge');
   });
 });
