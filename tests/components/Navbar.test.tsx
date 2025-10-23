@@ -19,4 +19,24 @@ describe('Navbar', () => {
     expect(navItems[1]).toHaveTextContent('Headers');
     expect(navItems[1]).toHaveClass('active');
   });
+
+  it('should display badge when badge prop is provided and greater than 0', () => {
+    const itemsConfig = [
+      { name: 'headers', label: 'Headers', isActive: true, onClick: () => ({}), badge: 3 },
+    ];
+    render(<Navbar items={itemsConfig} />);
+
+    const badge = screen.getByText('3');
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveClass('badge');
+  });
+
+  it('should not display badge when badge prop is null', () => {
+    const itemsConfig = [
+      { name: 'headers', label: 'Headers', isActive: true, onClick: () => ({}), badge: null },
+    ];
+    render(<Navbar items={itemsConfig} />);
+
+    expect(screen.queryByText('Headers')).not.toHaveClass('badge');
+  });
 });

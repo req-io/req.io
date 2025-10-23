@@ -31,5 +31,20 @@
       color: colors.$secondary-dark-color;
       border-bottom: colors.$accent-color 0.1rem solid;
     }
+
+    .badge {
+      display: inline-block;
+      border: 0.1rem solid colors.$divider-color;
+      color: colors.$accent-contrast-color;
+      border-radius: 0.5rem;
+      padding: 0.2rem 0.2rem;
+      font-size: 0.7rem;
+      font-weight: normal;
+      margin-left: 0.4rem;
+      margin-bottom: 1rem;
+      min-width: 1.2rem;
+      text-align: center;
+      line-height: 1.2;
+    }
   }
 }
