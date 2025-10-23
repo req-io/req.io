@@ -29,6 +29,9 @@ export default defineConfig({
         'src/App.tsx',
         'src/main.tsx',
 
+        // Simple presentational components (tested through integration)
+        'src/components/PaneSplitter/**/*',
+
         // Electron files
         'electron/**/*',
 
