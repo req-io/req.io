@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
+import { ApiResponse } from '../src/api/types'
 
 // The built directory structure
 //
@@ -13,19 +14,18 @@ import path from 'node:path'
 process.env.DIST = path.join(__dirname, '../dist')
 process.env.VITE_PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.DIST, '../public')
 
-
-let win: BrowserWindow | null
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
 function createWindow() {
-  win = new BrowserWindow({
+  const win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'reqio.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: false,
-      nodeIntegration: true,
+      nodeIntegration: false,
+      contextIsolation: true
     },
+
     width: 1450,
     height: 900,
   })
@@ -49,7 +49,6 @@ function createWindow() {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
-    win = null
   }
 })
 
@@ -61,17 +60,47 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.handle('rest-get', async (_ev, { url }) => {
-  console.log({ url });
-  const {
-    data,
-    status,
-    statusText,
-    headers: responseHeaders,
-    config,
-    // request,
-  } = await axios.get(url);
-  return JSON.stringify({ data, status, statusText, headers: responseHeaders, config });
+ipcMain.handle("rest", async (_event: any, url: string, options?: RequestInit): Promise<ApiResponse> => {
+  try {
+    const response = await fetch(url, options);
+    
+    const headers: Record<string, string> = {};
+    response.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+    
+    const contentType = response.headers.get('content-type') || '';
+    let data: any;
+
+    if (contentType.includes('application/json')) {
+      data = await response.json();
+    } else if (contentType.includes('application/xml') || contentType.includes('text/xml')) {
+      data = await response.text();
+    } else if (contentType.includes('text/html')) {
+      data = await response.text();
+    } else if (contentType.includes('text/')) {
+      data = await response.text();
+    } else if (contentType.includes('application/octet-stream') || 
+               contentType.includes('image/') || 
+               contentType.includes('application/pdf')) {
+      const buffer = await response.arrayBuffer();
+      data = Buffer.from(buffer).toString('base64');
+    } else {
+      data = await response.text();
+    }
+    
+    return { 
+      ok: response.ok,
+      data,
+      status: response.status,
+      statusText: response.statusText,
+      headers
+    };
+  } catch (err) {
+    const error = err instanceof Error ? err.message : String(err);
+    console.error('IPC Handler - Error:', error);
+    return { ok: false, error };
+  }
 });
 
 app.whenReady().then(createWindow)
