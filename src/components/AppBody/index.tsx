@@ -149,7 +149,7 @@ const AppBody = () => {
           onNewHeaderAddition={onNewHeaderAddition}
           onParamsChange={onParamsChange}
           onNewParamAddition={onNewParamAddition}
-          onCredentialsChange={onCredentialsChange}
+          onAuthChange={onCredentialsChange}
         />
         <PaneSplitter direction="horizontal" />
         <ResponsePanel

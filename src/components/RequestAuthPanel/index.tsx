@@ -31,7 +31,7 @@ const RequestAuthPanel = (props: RequestAuthProps) => {
   ];
 
   const onCredentialsChange = (credentials: object) => {
-    props.onCredentialsChange({ ...credentials, authType });
+    props.onAuthChange({ ...credentials, authType });
   };
 
   return (
