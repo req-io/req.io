@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { Header } from '../components/RequestPanel/types.ts';
 import { HeadersMapping, JSONValue } from './types.ts';
-const { ipcRenderer } = window.require('electron');
 
 const restructureHeaders = (headers: Header[]) => {
   const formattedHeaders: HeadersMapping = {};
@@ -11,34 +9,63 @@ const restructureHeaders = (headers: Header[]) => {
   return formattedHeaders;
 };
 
-export const get = async (url: string, _headers: Header[] = []) => {
-  const result = await ipcRenderer.invoke('rest-get', { url });
-  console.log({ result });
-  return JSON.parse(result);
-  // return axios.get(url, {
-  //   headers: restructureHeaders(headers),
-  // });
+declare global {
+  interface Window {
+    api: {
+      fetch<T = unknown>(
+        url: string,
+        options?: RequestInit
+      ): Promise<{
+        ok: boolean;
+        data?: T;
+        error?: string;
+        status?: number;
+        statusText?: string;
+        headers?: Record<string, string>;
+      }>;
+    };
+  }
+}
+
+export const get = async (url: string, headers: Header[] = []) => {
+  const options: RequestInit = {
+    headers: restructureHeaders(headers),
+    method: 'GET',
+  };
+  return window.api.fetch(url, options);
 };
 
 export const post = async (url: string, body: JSONValue, headers: Header[] = []) => {
-  return axios.post(url, body, {
+  const options: RequestInit = {
     headers: restructureHeaders(headers),
-  });
+    method: 'POST',
+    body: JSON.stringify(body),
+  };
+  return window.api.fetch(url, options);
 };
 
 export const patch = async (url: string, body: JSONValue, headers: Header[] = []) => {
-  return axios.patch(url, body, {
+  const options: RequestInit = {
     headers: restructureHeaders(headers),
-  });
+    method: 'PATCH',
+    body: JSON.stringify(body),
+  };
+  return window.api.fetch(url, options);
 };
 
 export const put = async (url: string, body: JSONValue, headers: Header[] = []) => {
-  return axios.put(url, body, {
+  const options: RequestInit = {
     headers: restructureHeaders(headers),
-  });
+    method: 'PUT',
+    body: JSON.stringify(body),
+  };
+  return window.api.fetch(url, options);
 };
+
 export const delete_req = async (url: string, headers: Header[] = []) => {
-  return axios.delete(url, {
+  const options: RequestInit = {
     headers: restructureHeaders(headers),
-  });
+    method: 'DELETE',
+  };
+  return window.api.fetch(url, options);
 };
