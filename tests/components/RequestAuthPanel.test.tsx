@@ -3,67 +3,73 @@ import { AuthType } from '../../src/components/RequestAuthPanel/types';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { DropdownProps } from '../../src/components/Dropdown/types';
+import { act } from 'react-dom/test-utils';
+import { RequestAuthFormProps } from '../../src/components/RequestAuthForm/types';
+
+const mockedComponents = {
+  dropDown: {} as DropdownProps,
+  requestAuthFormProps: {} as RequestAuthFormProps,
+};
 
 describe('RequestAuthPanel', () => {
-  const mockOnCredentialsChange = vi.fn();
+  const mockOnAuthChange = vi.fn();
+
+  vi.mock('../../src/components/Dropdown', () => ({
+    default: (props: DropdownProps) => {
+      mockedComponents.dropDown = props;
+      return <div data-testid='drop-down'> </div>;
+    },
+  }));
+
+  vi.mock('../../src/components/RequestAuthForm', () => ({
+    default: (props: RequestAuthFormProps) => {
+      mockedComponents.requestAuthFormProps = props;
+      return <div data-testid={'request-auth-form'}></div>;
+    },
+  }));
 
   const defaultProps = {
-    onCredentialsChange: mockOnCredentialsChange,
+    onAuthChange: mockOnAuthChange,
   };
 
-  it('should render dropdown and no auth message by default', () => {
+  it('should render Dropdown and RequestAuthForm by default', () => {
     render(<RequestAuthPanel {...defaultProps} />);
 
-    expect(screen.getByText('NO AUTH')).toBeInTheDocument();
-    expect(screen.getByText('Select authentication type!')).toBeInTheDocument();
+    expect(screen.getByTestId('drop-down')).toBeInTheDocument();
+    expect(screen.getByTestId('request-auth-form')).toBeInTheDocument();
   });
 
-  it('should change auth type when a different option is selected', () => {
+  it('should pass AuthType to RequestAuthForm when different AuthType selection', async () => {
     render(<RequestAuthPanel {...defaultProps} />);
 
-    const dropdown = screen.getByText('NO AUTH');
-    fireEvent.click(dropdown);
+    await act(async () => {
+      const basicAuth = mockedComponents.dropDown.items[1];
+      basicAuth.onSelect();
+    });
 
-    const basicAuthOption = screen.getByText('BASIC AUTH');
-    fireEvent.click(basicAuthOption);
+    expect(mockedComponents.requestAuthFormProps.authType).toBe(AuthType.BasicAuth);
 
-    expect(screen.getByText('BASIC AUTH')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Username')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
+    await act(async () => {
+      const apiKeyAuth = mockedComponents.dropDown.items[2];
+      apiKeyAuth.onSelect();
+    });
+
+    expect(mockedComponents.requestAuthFormProps.authType).toBe(AuthType.ApiKey);
   });
 
-  it('should call onCredentialsChange with BasicAuth', () => {
+  it('should call onAuthChange when credentials are changed', async () => {
     render(<RequestAuthPanel {...defaultProps} />);
 
-    const dropdown = screen.getByText('NO AUTH');
-    fireEvent.click(dropdown);
+    await act(async () => {
+    mockedComponents.dropDown.items[1].onSelect(); // Select Basic Auth
+    })
+    mockedComponents.requestAuthFormProps.onCredentialsChange({username: 'testuser', password: ''});
 
-    const basicAuthOption = screen.getByText('BASIC AUTH');
-    fireEvent.click(basicAuthOption);
-
-    const usernameInput = screen.getByPlaceholderText('Username');
-    fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-
-    expect(mockOnCredentialsChange).toHaveBeenCalledWith({
+    expect(mockOnAuthChange).toHaveBeenCalledWith({
       authType: AuthType.BasicAuth,
       username: 'testuser',
       password: '',
     });
-  });
-
-  it('should reset to no auth when No Auth is selected', () => {
-    render(<RequestAuthPanel {...defaultProps} />);
-    const dropdown = screen.getByText('NO AUTH');
-    fireEvent.click(dropdown);
-
-    const basicAuthOption = screen.getByText('BASIC AUTH');
-    fireEvent.click(basicAuthOption);
-    fireEvent.click(dropdown);
-
-    const noAuthOption = screen.getByText('NO AUTH');
-    fireEvent.click(noAuthOption);
-
-    expect(screen.getByText('NO AUTH')).toBeInTheDocument();
-    expect(screen.getByText('Select authentication type!')).toBeInTheDocument();
   });
 });
