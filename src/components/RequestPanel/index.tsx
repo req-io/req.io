@@ -30,6 +30,7 @@ const RequestPanel = (props: RequestPanelProps) => {
     ...item,
     isActive: item.name === activeItem,
     onClick: () => setActiveItem(item.name),
+    badge: item.name === 'headers' && props.headers.length > 0 ? props.headers.length : null,
   }));
 
   const requestBody =
