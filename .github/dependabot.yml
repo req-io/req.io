@@ -8,5 +8,6 @@ updates:
     labels:
       - "dependencies"
     ignore:
-      - update-types:
+      - dependency-name: "*"
+        update-types:
           - "version-update:semver-major"
