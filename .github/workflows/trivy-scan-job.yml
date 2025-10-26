@@ -3,6 +3,9 @@ name: Trivy Scan Job
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   trivy-scan:
     runs-on: ubuntu-latest
