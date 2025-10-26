@@ -82,4 +82,31 @@ describe('RequestPanel', () => {
     fireEvent.click(screen.getByText('Body'));
     expect(screen.getByTestId('editor')).toBeInTheDocument();
   });
+
+  it('should render with header count badge when headers are present', () => {
+    const propsWithHeaders = {
+      ...mockProps,
+      headers: [
+        { key: 'Content-Type', value: 'application/json' },
+        { key: 'Authorization', value: 'Bearer token' },
+      ],
+    };
+
+    render(<RequestPanel {...propsWithHeaders} />);
+    
+    expect(screen.getByTestId('navbar')).toBeInTheDocument();
+    expect(screen.getByTestId('editor')).toBeInTheDocument();
+  });
+
+  it('should render without badge when no headers are present', () => {
+    const propsWithNoHeaders = {
+      ...mockProps,
+      headers: [],
+    };
+
+    render(<RequestPanel {...propsWithNoHeaders} />);
+    
+    expect(screen.getByTestId('navbar')).toBeInTheDocument();
+    expect(screen.getByTestId('editor')).toBeInTheDocument();
+  });
 });
