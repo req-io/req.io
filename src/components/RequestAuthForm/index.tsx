@@ -64,7 +64,9 @@ const RequestAuthForm = (props: RequestAuthFormProps) => {
   if (props.authType == AuthType.BasicAuth) {
     return <BasicAuthForm onCredentialsChange={props.onCredentialsChange} />;
   }
-  return <ApiKeyAuthForm onCredentialsChange={props.onCredentialsChange} />;
+  if (props.authType == AuthType.ApiKey) {
+    return <ApiKeyAuthForm onCredentialsChange={props.onCredentialsChange} />;
+  }
 };
 
 export default RequestAuthForm;
