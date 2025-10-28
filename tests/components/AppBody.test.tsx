@@ -389,7 +389,7 @@ describe(`AppBody`, () => {
 
       mockedComponents.requestPanel?.onParamsChange([{ key: 'param1', value: 'value1' }]);
 
-      mockedComponents.requestPanel?.onCredentialsChange({
+      mockedComponents.requestPanel?.onAuthChange({
         authType: AuthType.BasicAuth,
         username: 'testuser',
         password: 'testpassword',

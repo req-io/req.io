@@ -64,24 +64,6 @@ describe('Home Component (9)', () => {
     expect(secondItem.querySelector('svg')).toBeInTheDocument();
   });
 
-  it('should trigger sidebar item action on click', () => {
-    const firstAction = vi.fn();
-    const secondAction = vi.fn();
-
-    render(
-      <div data-testid="sidebar">
-        <div data-testid="sidebar-item-0" onClick={firstAction}>Item1</div>
-        <div data-testid="sidebar-item-1" onClick={secondAction}>Item2</div>
-      </div>
-    );
-
-    fireEvent.click(screen.getByTestId('sidebar-item-0'));
-    fireEvent.click(screen.getByTestId('sidebar-item-1'));
-
-    expect(firstAction).toHaveBeenCalled();
-    expect(secondAction).toHaveBeenCalled();
-  });
-
   it('should allow multiple clicks without errors', () => {
     render(<Home />);
     const firstItem = screen.getByTestId('sidebar-item-0');

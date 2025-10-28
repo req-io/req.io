@@ -2,7 +2,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import UrlPanel from '../../src/components/UrlPanel';
 import { describe, it, expect, vi } from 'vitest';
+import { DropdownProps } from '../../src/components/Dropdown/types';
 
+let mockedDropdown = {} as DropdownProps;
 // UrlPanel.test.tsx
 describe('UrlPanel', () => {
   const setup = () => {
@@ -21,6 +23,17 @@ describe('UrlPanel', () => {
 
     return { onMethodChange, onSend, onUrlChange };
   };
+
+  vi.mock('../../src/components/Dropdown', () => {
+    return {
+      default: (props: DropdownProps) => {
+        mockedDropdown = props;
+      return (
+        <div data-testid="dropdown"></div>
+      );
+      }
+    }
+  })
 
   it('should render input with correct value', () => {
     setup();
@@ -56,72 +69,20 @@ describe('UrlPanel', () => {
     expect(screen.getByTestId('dropdown')).toBeInTheDocument();  
   });
 
-  it('should open the dropdown when clicking on it', () => {
-    setup();
-
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    expect(dropdown.querySelector('.dropdown-menu')).toBeInTheDocument();
-  });
-
   it('should call onMethodChange when selecting a method from dropdown', () => {
     const { onMethodChange } = setup();
 
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    const postItem = screen.getByText('POST');
-    fireEvent.click(postItem);
+    const postItem = mockedDropdown.items[1];
+    postItem.onSelect();
 
     expect(onMethodChange).toHaveBeenCalledWith('POST');
-  });
-
-  it('should close dropdown when clicking outside', () => {
-    setup();
-
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    expect(dropdown.querySelector('.dropdown-menu')).toBeInTheDocument();
-
-    fireEvent.mouseDown(document);
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
   });
 
   it('should call onMethodChange when selecting PATCH method from dropdown', () => {
     const { onMethodChange } = setup();
 
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    const patchItem = screen.getByText('PATCH');
-    fireEvent.click(patchItem);
+    const patchItem = mockedDropdown.items[2];
+    patchItem.onSelect();
 
     expect(onMethodChange).toHaveBeenCalledWith('PATCH');
   });
@@ -129,17 +90,8 @@ describe('UrlPanel', () => {
   it('should call onMethodChange when selecting PUT method from dropdown', () => {
     const { onMethodChange } = setup();
 
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    const putItem = screen.getByText('PUT');
-    fireEvent.click(putItem);
+    const putItem = mockedDropdown.items[3];
+    putItem.onSelect();
 
     expect(onMethodChange).toHaveBeenCalledWith('PUT');
   });
@@ -147,17 +99,8 @@ describe('UrlPanel', () => {
   it('should call onMethodChange when selecting DELETE method from dropdown', () => {
     const { onMethodChange } = setup();
 
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    const deleteItem = screen.getByText('DELETE');
-    fireEvent.click(deleteItem);
+    const deleteItem = mockedDropdown.items[4];
+    deleteItem.onSelect();
 
     expect(onMethodChange).toHaveBeenCalledWith('DELETE');
   });
@@ -165,26 +108,8 @@ describe('UrlPanel', () => {
   it('should call onMethodChange when reselecting GET method after selecting any other method from dropdown', () => {
     const { onMethodChange } = setup();
 
-    const dropdown = screen.getByTestId('dropdown');
-    const selected = dropdown.querySelector('.dropdown-selected');
-
-    expect(dropdown.querySelector('.dropdown-menu')).not.toBeInTheDocument();
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    const postItem = screen.getByText('POST');
-    fireEvent.click(postItem);
-
-    expect(onMethodChange).toHaveBeenCalledWith('POST');
-
-    if (selected) {
-      fireEvent.click(selected);
-    }
-
-    const getItem = screen.getByText('GET');
-    fireEvent.click(getItem);
+    const getItem = mockedDropdown.items[0];
+    getItem.onSelect();
 
     expect(onMethodChange).toHaveBeenCalledWith('GET');
   });

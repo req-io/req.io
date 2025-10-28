@@ -13,5 +13,5 @@ export type Credentials = {
 };
 
 export type RequestAuthProps = {
-  onCredentialsChange: (credentials: Credentials) => void;
+  onAuthChange: (credentials: Credentials) => void;
 };
