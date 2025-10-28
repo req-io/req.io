@@ -3,6 +3,9 @@ name: Typecheck Job
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   typecheck:
     runs-on: ubuntu-latest
