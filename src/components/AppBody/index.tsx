@@ -86,6 +86,10 @@ const AppBody = () => {
       consolidatedHeaders.push({ key: 'Authorization', value: encodedHeaderValue });
     }
 
+    if (credentials.authType == AuthType.ApiKey && credentials.key && credentials.value) {
+      consolidatedHeaders.push({ key: credentials.key, value: credentials.value });
+    }
+
     const startTime = performance.now();
 
     if (method === Method.Get && url !== '') {

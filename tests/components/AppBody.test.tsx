@@ -157,7 +157,9 @@ describe(`AppBody`, () => {
 
     expect(mockedComponents.responsePanel?.statusCode).toBe(200);
     expect(mockedComponents.responsePanel?.statusText).toBe('OK');
-    expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('patch response', null, 2));
+    expect(mockedComponents.responsePanel?.response).toBe(
+      JSON.stringify('patch response', null, 2)
+    );
   });
 
   it('should update ResponsePanel props on DELETE request', async () => {
@@ -176,7 +178,9 @@ describe(`AppBody`, () => {
 
     expect(mockedComponents.responsePanel?.statusCode).toBe(204);
     expect(mockedComponents.responsePanel?.statusText).toBe('No Content');
-    expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('delete response', null, 2));
+    expect(mockedComponents.responsePanel?.response).toBe(
+      JSON.stringify('delete response', null, 2)
+    );
   });
 
   it('should pass correct response headers to ResponsePanel when response contains headers', async () => {
@@ -203,7 +207,9 @@ describe(`AppBody`, () => {
     }).then(() => {
       expect(mockedComponents.responsePanel?.statusCode).toBe(200);
       expect(mockedComponents.responsePanel?.statusText).toBe('OK');
-      expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('response with headers', null, 2));
+      expect(mockedComponents.responsePanel?.response).toBe(
+        JSON.stringify('response with headers', null, 2)
+      );
       expect(mockedComponents.responsePanel?.headers).toEqual([
         { key: 'content-type', value: 'application/json' },
         { key: 'x-custom-header', value: 'custom-value' },
@@ -212,10 +218,12 @@ describe(`AppBody`, () => {
     });
   });
 
-
   it('should handle missing statusText in successful response', async () => {
     const { get } = await import('../../src/api/rest.ts');
-    (get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({ status: 200, data: 'accepted response' });
+    (get as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      status: 200,
+      data: 'accepted response',
+    });
     act(() => {
       mockedComponents.urlPanel?.onMethodChange('GET');
       mockedComponents.urlPanel?.onUrlChange('https://example.com/accepted');
@@ -228,7 +236,9 @@ describe(`AppBody`, () => {
     });
     expect(mockedComponents.responsePanel?.statusCode).toBe(200);
     expect(mockedComponents.responsePanel?.statusText).toBe('OK');
-    expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('accepted response', null, 2));
+    expect(mockedComponents.responsePanel?.response).toBe(
+      JSON.stringify('accepted response', null, 2)
+    );
   });
 
   it(`should update ResponsePanel props on API error`, async () => {
@@ -256,7 +266,9 @@ describe(`AppBody`, () => {
 
     expect(mockedComponents.responsePanel?.statusCode).toBe(404);
     expect(mockedComponents.responsePanel?.statusText).toBe('Not Found');
-    expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify({ message: 'Resource not found' }, null, 2));
+    expect(mockedComponents.responsePanel?.response).toBe(
+      JSON.stringify({ message: 'Resource not found' }, null, 2)
+    );
   });
 
   it(`should handle missing statusText, body and statusCode in API error response`, async () => {
@@ -351,7 +363,9 @@ describe(`AppBody`, () => {
     }).then(() => {
       expect(mockedComponents.responsePanel?.statusCode).toBe(200);
       expect(mockedComponents.responsePanel?.statusText).toBe('OK');
-      expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('response with headers', null, 2));
+      expect(mockedComponents.responsePanel?.response).toBe(
+        JSON.stringify('response with headers', null, 2)
+      );
       expect(mockedComponents.responsePanel?.headers).toEqual([
         { key: 'content-type', value: 'application/json' },
         { key: 'x-custom-header', value: 'custom-value' },
@@ -359,7 +373,6 @@ describe(`AppBody`, () => {
       ]);
     });
   });
-
 
   it('should use updated data from RequestPanel callbacks in API calls', async () => {
     const { post } = await import('../../src/api/rest.ts');
@@ -374,9 +387,7 @@ describe(`AppBody`, () => {
         { key: 'X-Custom-Header', value: 'header-value' },
       ]);
 
-      mockedComponents.requestPanel?.onParamsChange([
-        { key: 'param1', value: 'value1' },
-      ]);
+      mockedComponents.requestPanel?.onParamsChange([{ key: 'param1', value: 'value1' }]);
 
       mockedComponents.requestPanel?.onCredentialsChange({
         authType: AuthType.BasicAuth,
@@ -401,6 +412,44 @@ describe(`AppBody`, () => {
     });
   });
 
+  it('should use API key data from RequestPanel callbacks in API calls', async () => {
+    const { post } = await import('../../src/api/rest.ts');
+
+    act(() => {
+      mockedComponents.urlPanel?.onMethodChange('POST');
+      mockedComponents.urlPanel?.onUrlChange('https://example.com');
+
+      mockedComponents.requestPanel?.onBodyChange('{"my_key":"my_value"}');
+
+      mockedComponents.requestPanel?.onHeadersChange([
+        { key: 'X-Custom-Header', value: 'header-value' },
+      ]);
+
+      mockedComponents.requestPanel?.onParamsChange([{ key: 'param1', value: 'value1' }]);
+
+      mockedComponents.requestPanel?.onCredentialsChange({
+        authType: AuthType.ApiKey,
+        key: 'my_value',
+        value: 'api_key_value',
+      });
+    });
+
+    act(() => {
+      mockedComponents.urlPanel?.onSend();
+    });
+
+    await waitFor(() => {
+      const expectedUrl = 'https://example.com?param1=value1';
+      const expectedBody = { my_key: 'my_value' };
+      const expectedHeaders = expect.arrayContaining([
+        { key: 'X-Custom-Header', value: 'header-value' },
+        { key: 'my_value', value: 'api_key_value' },
+      ]);
+
+      expect(post).toHaveBeenCalledWith(expectedUrl, expectedBody, expectedHeaders);
+    });
+  });
+
   it('should add new header and parameter via RequestPanel callbacks', async () => {
     const { get } = await import('../../src/api/rest.ts');
 
@@ -408,7 +457,10 @@ describe(`AppBody`, () => {
       mockedComponents.urlPanel?.onMethodChange('GET');
       mockedComponents.urlPanel?.onUrlChange('https://example.com');
 
-      mockedComponents.requestPanel?.onNewHeaderAddition({ key: 'X-New-Header', value: 'new-value' });
+      mockedComponents.requestPanel?.onNewHeaderAddition({
+        key: 'X-New-Header',
+        value: 'new-value',
+      });
 
       mockedComponents.requestPanel?.onNewParamAddition({ key: 'newParam', value: 'newValue' });
     });
@@ -419,9 +471,7 @@ describe(`AppBody`, () => {
 
     await waitFor(() => {
       const expectedUrl = 'https://example.com?newParam=newValue';
-      const expectedHeaders = expect.arrayContaining([
-        { key: 'X-New-Header', value: 'new-value' },
-      ]);
+      const expectedHeaders = expect.arrayContaining([{ key: 'X-New-Header', value: 'new-value' }]);
 
       expect(get).toHaveBeenCalledWith(expectedUrl, expectedHeaders);
     });
