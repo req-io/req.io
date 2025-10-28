@@ -3,11 +3,13 @@
 .response-headers-panel {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: wrap;
   align-items: flex-start;
   padding: 0.2rem 1rem;
   .headers-table {
     border-collapse: collapse;
-    width: 45vw;
+    width: 100%;
 
     tr:nth-child(even) {
       background-color: colors.$primary-light-color;
@@ -61,4 +63,21 @@
   .placeholder-msg {
     color: colors.$secondary-light-color;
   }
+}
+
+.response-headers-panel::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+.response-headers-panel::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #272822; /* Matches ace monokai */
+  border-radius: 10px;
+}
+
+.response-headers-panel::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
 }
