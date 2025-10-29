@@ -427,7 +427,7 @@ describe(`AppBody`, () => {
 
       mockedComponents.requestPanel?.onParamsChange([{ key: 'param1', value: 'value1' }]);
 
-      mockedComponents.requestPanel?.onCredentialsChange({
+      mockedComponents.requestPanel?.onAuthChange({
         authType: AuthType.ApiKey,
         key: 'my_value',
         value: 'api_key_value',
