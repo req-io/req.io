@@ -1,5 +1,5 @@
 name: "Feature Request"
-description: "Suggest a new feature or functionality for req.io"
+description: Suggest a new feature or functionality for req.io
 labels: ["feature"]
 body:
   - type: markdown
