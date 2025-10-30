@@ -1,0 +1,58 @@
+name: "Bug Report"
+description: Report a bug or unexpected behavior
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        Please fill out all required sections so we can reproduce and fix the issue quickly.
+  - type: input
+    id: summary
+    attributes:
+      label: "Bug Summary"
+      description: "A short description of the issue."
+      placeholder: "Example: Error when submitting login form"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "List clear steps to reproduce the issue."
+      placeholder: "1. Go to...\n2. Click on...\n3. See error..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected Behavior"
+      placeholder: "Describe the behavior you expected to see."
+    validations:
+      required: true
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: "Actual Behavior"
+      placeholder: "Describe the behavior you observed."
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment Details"
+      description: "Provide details like OS, browser, version, or environment variables."
+      placeholder: "e.g. macOS 14.1 / Chrome 118 / Node 20.5"
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or Logs"
+      description: "Paste any relevant screenshots or error logs."
+      placeholder: "Attach images or paste error logs here."
+  - type: textarea
+    id: additional_information
+    attributes:
+      label: "Additional Information"
+      description: "Additional information, if any"

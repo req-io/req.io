@@ -1,0 +1,44 @@
+name: "Enhancement"
+description: Suggest improvements to existing features or UI/UX
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to propose an enhancement. Use this form to suggest refinements or optimizations to existing functionality.
+  - type: input
+    id: area
+    attributes:
+      label: "Area of Improvement"
+      description: "Which part of the project is this related to?"
+      placeholder: "Example: Dashboard UI / API Response Speed"
+    validations:
+      required: true
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: "Current Behavior"
+      description: "Describe the current experience or limitation."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: "Proposed Improvement"
+      description: "Explain your proposed change and its benefits."
+      placeholder: "Describe how this change improves performance, UX, or maintainability."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance Criteria"
+      description: "List specific conditions that must be met for the enhancement to be considered complete."
+      placeholder: "- [ ] Improvement criteria 1\n- [ ] Improvement criteria 2"
+    validations:
+      required: true
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "Additional Notes / References"
+      description: "Add any supporting details, links, or screenshots."
