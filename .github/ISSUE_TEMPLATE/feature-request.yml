@@ -1,0 +1,37 @@
+name: "Feature Request"
+description: "Suggest a new feature or functionality for req.io"
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to propose a new feature! Please fill out the details below to help us understand your idea better.
+  - type: input
+    id: summary
+    attributes:
+      label: "Feature Summary"
+      description: "Briefly describe the feature you’d like to see."
+      placeholder: "Add a clear, concise summary..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Detailed Description"
+      description: "Explain what the feature does and why it’s needed."
+      placeholder: "Explain the motivation and expected outcome..."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance Criteria"
+      description: "List measurable outcomes or conditions that define feature completion."
+      placeholder: "- [ ] Criteria 1\n- [ ] Criteria 2"
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: "References / Mockups / Screenshots"
+      description: "Attach any screenshots, sketches, or external references."
