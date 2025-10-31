@@ -2,8 +2,9 @@ import './index.scss';
 import { Method } from './types.ts';
 
 import { delete_req, get, patch, post, put } from '../../api/rest.ts';
-import { getErrorCode, getHttpStatusText } from '../../api/statusCodes.ts';
+import { getHttpStatusText } from '../../api/statusCodes.ts';
 import { Header, QueryParam } from '../RequestPanel/types.ts';
+import { ApiResponse } from '../../api/types.ts';
 
 import RequestPanel from '../RequestPanel';
 import ResponsePanel from '../ResponsePanel';
@@ -11,7 +12,6 @@ import PaneSplitter from '../PaneSplitter';
 import UrlPanel from '../UrlPanel';
 
 import { useState } from 'react';
-import { AxiosError, AxiosResponse, AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
 import { AuthType, Credentials } from '../RequestAuthPanel/types.ts';
 
 const AppBody = () => {
@@ -31,14 +31,14 @@ const AppBody = () => {
   const [statusText, setStatusText] = useState('');
   const [timeTaken, setTimeTaken] = useState(0);
 
-  function parseResponseHeader(header: RawAxiosResponseHeaders | AxiosResponseHeaders) {
-    return Object.entries(header || {}).map(([key, value]) => ({
+  function parseResponseHeader(header: Record<string, string> = {}) {
+    return Object.entries(header).map(([key, value]) => ({
       key,
-      value: Array.isArray(value) ? value.join(', ') : value,
+      value: Array.isArray(value) ? value.join(', ') : String(value),
     }));
   }
 
-  const onSuccessResponse = (response: AxiosResponse, startTime: number) => {
+  const onSuccessResponse = (response: ApiResponse, startTime: number) => {
     const endTime = performance.now();
     const duration = endTime - startTime;
     setTimeTaken(duration);
@@ -46,20 +46,27 @@ const AppBody = () => {
     setIsLoading(false);
     setResponse(JSON.stringify(response.data, null, 2));
     setResponseHeaders(parseResponseHeader(response.headers));
-    setStatusCode(response.status);
-    setStatusText(response.statusText || getHttpStatusText(response.status));
+    setStatusCode(response.status || 0);
+    setStatusText(response.statusText || getHttpStatusText(response.status || 0));
   };
 
-  const onFailureResponse = (error: AxiosError) => {
+  const onFailureResponse = (error: ApiResponse | Error) => {
     setIsLoading(false);
-    if (error.response) {
-      setResponse(JSON.stringify(error.response?.data || {}, null, 2));
-      setResponseHeaders(parseResponseHeader(error.response.headers));
-      setStatusCode(error.response?.status || 0);
-      setStatusText(error.response?.statusText || getHttpStatusText(statusCode));
-    } else {
+    if ('status' in error && error.status) {
+      // ApiResponse with error
+      setResponse(error.error || JSON.stringify(error.data || {}, null, 2));
+      setResponseHeaders(parseResponseHeader(error.headers));
+      setStatusCode(error.status);
+      setStatusText(error.statusText || getHttpStatusText(error.status));
+    } else if (error instanceof Error) {
+      // JavaScript Error (network error, etc.)
       setResponse(`Error: ${error.message}`);
-      setStatusText(`ERROR: ${getErrorCode(error?.code || '')}`);
+      setStatusText('ERROR: NETWORK_FAILURE');
+      setStatusCode(0);
+    } else {
+      // Generic error
+      setResponse('Unknown error occurred');
+      setStatusText('ERROR: UNKNOWN');
       setStatusCode(0);
     }
   };
