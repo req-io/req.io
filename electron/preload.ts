@@ -3,6 +3,18 @@ import { contextBridge, ipcRenderer } from 'electron'
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 
+contextBridge.exposeInMainWorld("api", {
+  fetch: <T = unknown>(url: string, options?: RequestInit) =>
+    ipcRenderer.invoke("rest", url, options) as Promise<{
+      ok: boolean;
+      data?: T;
+      error?: string;
+      status?: number;
+      statusText?: string;
+      headers?: Record<string, string>;
+    }>,
+});
+
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.
 function withPrototype(obj: Record<string, any>) {
   const protos = Object.getPrototypeOf(obj)
