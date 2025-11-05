@@ -61,7 +61,7 @@ describe(`ResponsePanel`, () => {
 
   describe(`Default Rendering components`, () => {
     it(
-      'should render Navbar and EmptyPlaceholder when and isLoading is false and isNoRequestTriggered is true',
+      'should render EmptyPlaceholder and not Navbar when isLoading is false and isNoRequestTriggered is true',
       () => {
         const props = {
           isLoading: false,
@@ -72,12 +72,12 @@ describe(`ResponsePanel`, () => {
         const navbar = screen.queryByTestId('navbar');
         const emptyPlaceholder = screen.queryByTestId('empty-placeholder');
 
-        expect(navbar).toBeInTheDocument();
+        expect(navbar).not.toBeInTheDocument();
         expect(emptyPlaceholder).toBeInTheDocument();
       }
     );
 
-    it(`should render Navbar and Spinner when isLoading is true`, () => {
+    it(`should render Spinner and not Navbar when isLoading is true`, () => {
       const props = {
         isLoading: true,
       };
@@ -86,7 +86,7 @@ describe(`ResponsePanel`, () => {
       const spinner = screen.queryByTestId('spinner');
       const navbar = screen.queryByTestId('navbar');
 
-      expect(navbar).toBeInTheDocument();
+      expect(navbar).not.toBeInTheDocument();
       expect(spinner).toBeInTheDocument();
     });
 

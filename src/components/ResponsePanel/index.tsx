@@ -116,7 +116,7 @@ const ResponsePanel = (props: ResponsePanelProps) => {
   return (
     <div className="response-panel" data-testid={'response-panel'}>
       <div className="response-panel-header">
-        <Navbar items={itemsConfig} />
+        {isRequestCompleted && <Navbar items={itemsConfig} />}
         {isRequestCompleted && (
           <div className="response-header-right">
             <Status
